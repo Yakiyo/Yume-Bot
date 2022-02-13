@@ -2,6 +2,6 @@ module.exports = {
     name: 'ping',
     description: 'replies with pong',
     async execute(message, args) {
-        await message.reply('Pong! :ping_pong:')
+        await message.channel.send(`Pong! :ping_pong:\nWebsocket heartbeat: ${<client>.ws.ping}ms.`)
     }
 }
