@@ -3,7 +3,7 @@ const { Client, Intents, Collection } = require('discord.js');
 const { prefix } = require('./config.json');
 require('dotenv').config()
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS] });
 client.commands = new Collection();
 
 const commandFolders = fs.readdirSync('./commands');
@@ -22,7 +22,7 @@ client.once('ready', () => {
 	client.user.setActivity(`Mizuto in the bath`, { type: 'WATCHING' });
 	client.user.setStatus('online');
 	console.log(`Ready! Logged in as ${client.user.tag} with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
-	client.channels.cache.get('844103225183043636').send('Yume Bot on! <:corporalmizuto:845137729729462302> ');
+	client.channels.cache.get('844632108831342679').send('Yume Bot on! <:corporalmizuto:845137729729462302> ');
 });
 
 // Creates an event listener, it will run when a message has been sent in the server.
@@ -40,7 +40,7 @@ client.on('messageCreate', message => {
 		return message.reply('That is a guild only command. Cannot execute in DMs!'); // guild only command
 	}
 
-	if (command.permissions) {
+	if (command.perms) {
 	const authorPerms = message.channel.permissionsFor(message.author);
 	if (!authorPerms || !authorPerms.has(command.perms)) {
 		return message.reply('You do not have the permissions to run this command.');

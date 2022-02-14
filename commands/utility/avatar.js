@@ -1,6 +1,3 @@
-const { Embed } = require("@discordjs/builders")
-
-
 module.exports = {
     name: 'avatar',
     aliases: ['icon', 'pfp', 'av'],

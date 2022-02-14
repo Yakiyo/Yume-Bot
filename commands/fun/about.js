@@ -26,11 +26,16 @@ module.exports = {
                   name: "Framework",
                   value: "[Discord.js](https://discord.js.org/)",
                   inline: true
+                },
+                {
+                  name: "Github",
+                  value: "[Link](https://github.com/Yakiyo/Yume-Bot)",
+                  inline: true
                 }
               ],
               color: 5814783,
               type: "rich",
-              description: `Yume bot is a discord bot dedicated to the Tsurekano discord server. Made by Yakiyo#1206. Thanks to Tenknown & Rim for the help in making the bot.\n\nMy prefix is \`${prefix}\`. For a list of my commands do \`${prefix}help\`.\n\nDiscord: https://discord.gg/q2zDU5bGnh\nSubreddit: [r/MamahahaTsurego](https://www.reddit.com/r/MamahahaTsurego/)\nFandom: https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki `,
+              description: `Yume bot is a discord bot dedicated to the Tsurekano discord server. Made by Yakiyo#1206. Thanks to Tenknown & Rim for the help in making the bot.\n\nMy prefix is \`${prefix}\`. For a list of my commands do \`${prefix}help\`.\n\nDiscord: https://discord.gg/q2zDU5bGnh\nSubreddit: [r/MamahahaTsurego](https://www.reddit.com/r/MamahahaTsurego/)\nFandom: [Motokano Fandom](https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki) `,
               title: "Yume Bot"
             }
         message.channel.send({ embeds: [aboutObj] });
