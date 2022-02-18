@@ -3,7 +3,7 @@ module.exports = {
     description: 'Kicks a mentioned user, duh',
     args: true,
     guildOnly: true,
-    usage: '<user mention/id>',
+    usage: '[user mention/id] <reason>',
     perms: 'KICK_MEMBERS',
     async execute(message, args) {
         let taggedUser, id, author, client;
@@ -15,16 +15,16 @@ module.exports = {
         await message.guild.members.fetch(message.client).then(member => client = member )
         if (!taggedUser) return message.channel.send('User is either not in this server or you gave an invalid argument.');
         
-        if (taggedUser.user.id == message.author.id || taggedUser.user.id == '941217579584851979') return message.channel.send('Cannot execute kick on this user.');
+        if (!client.permissions.has('KICK_MEMBERS')) return message.channel.send('I do not have the required permissions to kick a user.')
+        if (taggedUser.user.id == message.author.id || taggedUser.user.id == message.client.user.id) return message.channel.send('Cannot execute kick on this user.');
 
-        const numero = message.guild.roles.comparePositions(author.roles.highest, taggedUser.roles.highest);
-        if (numero != 1) return message.channel.send('This user is higher then you. You cannot kick him.');
-        if ( message.guild.roles.comparePositions(client.roles.highest, taggedUser.roles.highest) != 1) return message.channel.send('Target user is higher then me in hierarchy. Please give me a higher role to execute it.');
+        if (message.guild.roles.comparePositions(author.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('This user is higher then you. You cannot kick him.');
+        if (message.guild.roles.comparePositions(client.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('Target user is higher then me in hierarchy. Please give me a higher role to execute it.');
 
         const reason = args.slice(1).join(' ');
         const dmEmb = {
             color: 'RANDOM',
-            description: `You have been kicked from ${message.guild.name} \n`,
+            description: `You have been kicked from ${message.guild.name} \n**Reason:** ${reason || 'No reason provided'}`,
             timestamp: new Date(),
             footer: {
                 text: `Triggered by ${message.author.id}`,
@@ -34,16 +34,13 @@ module.exports = {
         const modlog = {
             title: 'Kick Case',
             color: 'GREEN',
-            description: `**Offender:** <@!${taggedUser.user.id}>\n**Moderator:** ${message.author.tag}\n`,
+            description: `**Offender:** <@!${taggedUser.user.id}>\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason || 'No reason provided'}`,
             timestamp: new Date(),
             footer: {
                 text: `ID: ${taggedUser.user.id}`
             }
         }
-        if(reason != ''){
-            dmEmb.description += `**Reason:** ${reason}`;
-            modlog.description += `**Reason:** ${reason}`;
-        }
+        
         console.log(reason);
         try {
             taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));

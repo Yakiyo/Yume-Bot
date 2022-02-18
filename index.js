@@ -16,16 +16,17 @@ for (const folder of commandFolders) {
 	}
 }
 
-
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
 	client.user.setActivity(`Mizuto in the bath`, { type: 'WATCHING' });
 	client.user.setStatus('online');
 	console.log(`Ready! Logged in as ${client.user.tag} with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
-	client.channels.cache.get('844632108831342679').send('Yume Bot on! <:corporalmizuto:845137729729462302> ');
+	client.channels.cache.get('844253443510239262').send('Yume Bot on! <:corporalmizuto:845137729729462302> ');
 });
 
-// Creates an event listener, it will run when a message has been sent in the server.
+const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// When the client is ready, run this code (only once)
 client.on('messageCreate', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return; // Checking if message starts with prefix and it wasnt posted by a bot
 
