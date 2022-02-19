@@ -1,10 +1,12 @@
+<div align="center"><a href="https://discord.gg/q2zDU5bGnh"><img alt="Discord" src="https://img.shields.io/discord/844103224528076801?color=blue&label=Tsurekano%20Discord&logo=discord&logoColor=white&style=plastic"></a> <a href="https://www.reddit.com/r/MamahahaTsurego/"><img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/MamahahaTsurego?color=orange&label=r%2FMamahahaTsurego&logo=reddit&logoColor=orange&style=plastic"></a></div>
+
 # Yume Bot
 
 Yume bot is a discord bot dedicated to the Tsurekano discord server. Made by Yakiyo#1206. Thanks to [Tenknown](https://github.com/Tenknown) & [Rim](https://github.com/R-Rim) for the help in making the bot.
 
 My prefix is ```.``` For a list of commands do ```.help```.
 
-**Discord:** [https://discord.gg/q2zDU5bGnh](https://discord.gg/q2zDU5bGnh)
+**Discord:** [https://discord.gg/q2zDU5bGnh](https://discord.gg/q2zDU5bGnh) 
 
 **Subreddit:** [r/MamahahaTsurego](https://www.reddit.com/r/MamahahaTsurego/)
 
