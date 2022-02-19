@@ -9,7 +9,7 @@ module.exports = {
 	execute(message, args) {
 		const helpEmbed = {
 			title: 'Help Menu',
-			color: 'RANDOM',
+			color: '#e91e63',
 			timestamp: new Date(),
 			footer: {
 				text: `Triggered by ${message.author.tag}.`,

@@ -24,7 +24,6 @@ client.once('ready', () => {
 	client.channels.cache.get('844253443510239262').send('Yume Bot on! <:corporalmizuto:845137729729462302> ');
 });
 
-const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 // When the client is ready, run this code (only once)
 client.on('messageCreate', message => {

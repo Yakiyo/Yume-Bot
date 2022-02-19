@@ -17,7 +17,7 @@ module.exports = {
 		}
 		try {
 			message.channel.bulkDelete(amount, true).then(
-				message.channel.send(`Successfully deleted ${amount - 1} number of messages.`).then(msg => msg.delete({ timeout: 7000 }))
+				message.channel.send(`Successfully deleted ${amount - 1} number of messages.`).then(msg => msg.delete({ timeout: 15000 }))
 			)
 			
 		} catch (error) {
