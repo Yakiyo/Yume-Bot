@@ -25,7 +25,7 @@ module.exports = {
 			const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 			if (!command){ return message.channel.send('No such command found!');}
 			let cmdAliase = 'None', cmdDesc = 'No description provided', cmdUsage = '' ;
-			if (command.aliases) {cmdAliase = command.aliases;}
+			if (command.aliases) {cmdAliase = command.aliases.join(', ');}
 			if (command.usage) {cmdUsage = command.usage;}
 			if (command.description){cmdDesc = command.description;}
 			helpEmbed.description = `**${prefix}${command.name} ${cmdUsage}**\n **Aliases:** ${cmdAliase} \n**Description:** ${cmdDesc} `;
