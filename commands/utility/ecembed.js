@@ -3,6 +3,7 @@ module.exports = {
     description: 'Ecembed denotes edit custom embed. Takes JSON as argument to edit a prev sent message by the bot.',
     aliases: ['ece','editcustomembed'],
     args: true,
+    category: 'utility',
     guildOnly: true,
     perms: 'MANAGE_MESSAGES',
     usage: '[message ID] <channel> [JSON]',

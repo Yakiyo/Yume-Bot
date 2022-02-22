@@ -5,6 +5,7 @@ module.exports = {
     name: 'urban',
     description: 'Returns a search from [Urban Dictionary](https://www.urbandictionary.com/)',
     guildOnly: true,
+    category: 'fun',
     args: true,
     aliases: [],
     async execute(message, args) {

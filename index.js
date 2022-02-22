@@ -1,9 +1,11 @@
+const { time } = require('@discordjs/builders');
 const fs = require('fs');
+const dayjs = require('dayjs');
 const { Client, Intents, Collection } = require('discord.js');
 const { prefix } = require('./config.json');
 require('dotenv').config()
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.commands = new Collection();
 
 const commandFolders = fs.readdirSync('./commands');
@@ -17,11 +19,12 @@ for (const folder of commandFolders) {
 }
 
 // When the client is ready, run this code (only once)
-client.once('ready', () => {
+client.once('ready', async () => {
 	client.user.setActivity(`Mizuto in the bath`, { type: 'WATCHING' });
 	client.user.setStatus('online');
+	await client.users;
 	console.log(`Ready! Logged in as ${client.user.tag} with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
-	client.channels.cache.get('844253443510239262').send('Yume Bot on! <:corporalmizuto:845137729729462302> ');
+	client.channels.cache.get('844253443510239262').send(`Yume Bot on! <:corporalmizuto:845137729729462302>.\nReady at ${time(client.readyAt)} `);
 });
 
 

@@ -3,6 +3,7 @@ module.exports = {
     description: '',
     args: true,
     guildOnly: true,
+    category: 'moderation',
     usage: '[user id]',
     pers: 'BAN_MEMBERS',
     async execute(message, args) {

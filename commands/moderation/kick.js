@@ -5,6 +5,7 @@ module.exports = {
     guildOnly: true,
     usage: '[user mention/id] <reason>',
     perms: 'KICK_MEMBERS',
+    category: 'moderation',
     async execute(message, args) {
         let taggedUser, id, author, client;
         if(args[0]){

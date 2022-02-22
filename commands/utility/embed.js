@@ -4,6 +4,7 @@ module.exports = {
     name: 'embed',
     description: 'Creates an embed with JSON as arguments. Dont use this if u dont know what you\'re doing. ',
     args: true,
+    category: 'utility',
     guildOnly: true,
     usage: '<title> | <description>',
     async execute(message, args) {

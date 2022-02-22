@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 let query = `
 query ($search: String) {
-  Media(search: $search, type: MANGA, format: NOVEL) {
+  Media(search: $search, type: MANGA) {
     id
     type
     format
@@ -30,15 +30,14 @@ query ($search: String) {
 `;
 
 module.exports = {
-    name: 'ln',
-    description: 'Searches the anilist database for the novel with the provided name',
+    name: 'manga',
+    description: 'Searches the anilist database for the manga with the provided name',
     guildOnly: true,
     args: true,
     category: 'fun',
-    usage: '[ln name to search]',
-    aliases: ['novel', 'light-novel','ranobe'],
+    usage: '[manga name to search]',
     async execute(message, args) {
-      	let url = 'https://graphql.anilist.co', novel,
+      	let url = 'https://graphql.anilist.co', manga,
       	variables = {
       		search: args.join(" ")
       	}
@@ -59,7 +58,7 @@ module.exports = {
 try {
 	await fetch(url, options).then(handleResponse).then(handleData);
 } catch (error) {
-  return message.channel.send(`Couldn't find any light novel with the name **${args.join(' ')}**`);
+  return message.channel.send(`Couldn't find any manga with the name **${args.join(' ')}**`);
 }
 
 		function handleResponse(response) {
@@ -69,35 +68,35 @@ try {
 		}
 
 		function handleData(data) {
-			novel = data.data.Media;
+			manga = data.data.Media;
 		}
 
 		function handleError(error) {
-		    return message.channel.send(`Couldn't find any light novel with the name **${args.join(' ')}**`)
+		    return message.channel.send(`Couldn't find any manga with the name **${args.join(' ')}**`)
 		    console.error(error);
 		}
         
 				const titles = [];
-				for (const name in novel.title) {
-					if (novel.title[name]) {
-						titles.push(novel.title[name]);
+				for (const name in manga.title) {
+					if (manga.title[name]) {
+						titles.push(manga.title[name]);
 					}
 				}
-        const genre = novel.genres.join(', ') || '??';
+        const genre = manga.genres.join(', ') || '??';
 
         const responseEmb = {
         	color: [26, 178, 207],
         	author: {
-        		name: `${novel.title.romaji}`,
+        		name: `${manga.title.romaji}`,
         		icon_url: `https://anilist.co/img/logo_al.png`,
-        		url: `https://anilist.co/manga/${novel.id}`
+        		url: `https://anilist.co/manga/${manga.id}`
         	},
         	thumbnail: {
-        		url: `${novel.coverImage.extraLarge}`
+        		url: `${manga.coverImage.extraLarge}`
         	},
-        	description: `${shorten(novel.description).replace(/[\r\n ]{2,}/gm, "\n").replace(/\\\\n/g, "\r\n")}`,
+        	description: `${shorten(manga.description).replace(/[\r\n ]{2,}/gm, "\n").replace(/\\\\n/g, "\r\n")}`,
         	footer: {
-        		text: `Licensed: ${novel.isLicensed ? 'Yes' : 'No'}`,
+        		text: `Licensed: ${manga.isLicensed ? 'Yes' : 'No'}`,
         	},
         	fields: [
         	{
@@ -107,32 +106,32 @@ try {
         	},
         	{
         		name: 'Type',
-        		value: `${capitalize(novel.type)}`,
+        		value: `${capitalize(manga.type)}`,
         		inline: true
         	},
         	{
         		name: 'Format',
-        		value: `${capitalize(novel.format)}`,
+        		value: `${capitalize(manga.format)}`,
         		inline: true,
         	},
         	{
         		name: 'Status',
-        		value: `${capitalize(novel.status)}`,
+        		value: `${capitalize(manga.status)}`,
         		inline: true
         	},
         	{
         		name: 'Ratings',
-        		value: `${novel.meanScore+'%' || '??'}`,
+        		value: `${manga.meanScore+'%' || '??'}`,
         		inline: true
         	},
         	{
         		name: 'Volumes',
-        		value: `${novel.volumes || '??'}`,
+        		value: `${manga.volumes || '??'}`,
         		inline: true
         	},
         	{
         		name: 'Chapters',
-        		value: `${novel.chapters || '??'}`,
+        		value: `${manga.chapters || '??'}`,
         		inline: true
         	},
         	{

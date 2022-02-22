@@ -5,6 +5,7 @@ module.exports = {
     description: 'A general description of the bot.',
     guildOnly: true,
     args: false,
+    category: 'misc',
     aliases: ['botinfo'],
     async execute(message, args) {
         const aboutObj = {

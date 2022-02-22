@@ -3,6 +3,7 @@ module.exports = {
     description: 'Fetches the json source of an embed.',
     guildOnly: true,
     args: true,
+    category: 'utility',
     aliases: ['esc'],
     usage: '[message ID] <channel>',
     async execute(message, args) {

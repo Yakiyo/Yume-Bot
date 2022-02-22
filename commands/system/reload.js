@@ -5,6 +5,7 @@ module.exports = {
     description: 'Reloads ur code to detect changes for commands. **Bot Owner** Only.',
     args: true,
     aliases: ['rld', 'rl'],
+    category: 'system',
     usage: '<command>',
     async execute(message, args) {
         if (message.author.id !== '695307292815654963'){

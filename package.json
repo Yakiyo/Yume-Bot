@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
@@ -12,13 +13,16 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
+    "dayjs": "^1.10.7",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "nekos-best.js": "^4.1.0",
+    "pino": "^7.0.0-rc.9",
+    "sourcebin": "^4.3.5",
     "turndown": "^7.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.7.0"
+    "dev": "eslint"
   }
 }

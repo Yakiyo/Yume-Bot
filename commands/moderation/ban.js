@@ -3,6 +3,7 @@ module.exports = {
     description: 'bans the user with the mention/id.',
     args: true,
     guildOnly: true,
+    category: 'moderation',
     usage: '[user id/mention] <reason>',
     perms: 'BAN_MEMBERS',
     async execute(message, args) {

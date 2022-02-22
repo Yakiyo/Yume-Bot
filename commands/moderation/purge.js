@@ -3,6 +3,7 @@ module.exports = {
     name: 'purge',
     description: 'Deletes a specified number of messages in the channel the command was used in. Can**not** delete messages older then 2 weeks due to discord limitations. Purging limit is between 2 to 100 inclusive.',
 	aliases: ['prune'],
+	category: 'moderation',
 	args: true,
 	usage: '<amount to delete>',
 	guildOnly: true,

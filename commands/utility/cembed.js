@@ -3,6 +3,7 @@ module.exports = {
     description: 'Creates an embed with JSON as arguments. Dont use this if u dont know what you\'re doing. ',
     guildOnly: true,
     args: true,
+    category: 'utility',
     usage: '<raw JSON>',
     async execute(message, args) {
         try {
