@@ -1,4 +1,6 @@
+const Discord = require('discord.js');
 const sourcebin = require('sourcebin');
+const Canvas = require('canvas');
 
 function mapToObj(map){
   const obj = {}
@@ -18,11 +20,7 @@ module.exports = {
         if (message.author.id != '695307292815654963'){
             return message.channel.send('This command is only usable by the bot owner.');
         }
-        id = args[0].replace('<@','').replace('!','').replace('>','');
-        const member = message.guild.members.cache.find(us => us.user.username.toLowerCase() == args[0].toLowerCase()) // ||  message.guild.members.fetch(`${id}`).then(user => user).catch(error => error) ;
-
-        console.log(member);
-        //message.channel.send(`Fetched user: ${member.user.username}`)
+        
         message.channel.send('Code execution complete!')
     }
 }
