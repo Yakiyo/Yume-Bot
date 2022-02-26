@@ -1,27 +1,38 @@
-const Discord = require('discord.js');
 const sourcebin = require('sourcebin');
-const Canvas = require('canvas');
+const Discord = require("discord.js")
+const fs = require('fs');
+const getUser = require('../../modules/getUser.js');
 
-function mapToObj(map){
-  const obj = {}
-  for (let [k,v] of map)
-    obj[k] = v
-  return obj
-}
+const capitalize = require('../../modules/capitalize.js');
 
 module.exports = {
     name: 'test',
     description: 'Owner only test running command',
     guildOnly: true,
     category: 'system',
-    aliases: [],
-    perms: '',
+    args: true,
+    aliases: ['demo'],
     async execute(message, args) {
         if (message.author.id != '695307292815654963'){
             return message.channel.send('This command is only usable by the bot owner.');
         }
+        //member = await getUser(args[0], message);
+        const list = [];
+        if(args) {
+            for ( let i = 0; i < args.length; i++){
+                await getUser(args[i], message).then(trgt => {
+                    if (trgt != undefined){
+                        list.push(trgt.user.tag);
+                    }
+                }).catch(err => console.log(err));
+            }
+        }
+
+        console.log(list);
         
-        message.channel.send('Code execution complete!')
+
+        
+        return message.channel.send(`Code execution complete, ${list.join(', ')}`);
     }
 }
 
@@ -49,3 +60,51 @@ module.exports = {
         }
 
 */
+
+/*
+const embed = {
+            description: `List of my commands`,
+            fields: new Array,
+        }
+        const { commands } = message.client;
+        //const cmdList = commands.map(command => `\`${command.name}\`- ${command.category}`).join('\n');
+        const sorted = commands.sort((p, c) => p.category == c.category ? 1 : -1); //p.name > c.name && p.category === c.category ? 1 : -1 )
+        let output = 'List \n';
+        let currentCategory = '';
+        let arr = [ {} ];
+        sorted.forEach( c => {
+            let i = 0;
+            const cat = c.category;
+            if (currentCategory !== cat) {
+            i++;
+            currentCategory = cat;
+            arr.push({
+                name: `${cat}`,
+                value: '',
+                })
+            }
+        arr[i].value += `\`${c.name}\``;
+        });
+        //console.log(output)
+        embed.fields = arr;
+        message.channel.send({ embeds: [embed] });
+        */
+
+        /*
+        let catg = [];
+        fs.readdirSync('./commands').forEach(dir => {
+            const comands = fs.readdirSync(`./commands/${dir}`).filter(file => file.endsWith('.js'));
+            const cmds = comands.map(comand => {
+                let cmnd = require(`./commands/${dir}/${comand}`);
+
+                return `\`${cmnd.name}\``;
+            })
+            let data = new Object();
+            date = {
+                name: dir,
+                value: cmds.join(', ')
+            }
+            catg.push(data);
+
+        })
+        */

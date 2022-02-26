@@ -1,29 +1,31 @@
 const { fetchNeko } = require("nekos-best.js");
+const getUser = require('../../modules/getUser.js');
 
 module.exports = {
-    name: 'hug',
-    description: 'Gives a hug gif',
+    name: 'baka',
+    description: 'Gives a baka gif',
     usage: '<optional user id/mention>',
     category: 'fun',
     guildOnly: true,
-    aliases: ['hugs'],
+    aliases: [],
     async execute(message, args) {
         let hug, target;
-        await fetchNeko('hug').then(obj => hug = obj).catch(error => console.log(error));
+        await fetchNeko('baka').then(obj => hug = obj).catch(error => console.log(error));
         if(!hug) return message.channel.send('API request failure.');
-        if (Boolean(args[0]) && args[0] != '') {
-            id = args[0].replace('<@','').replace('!','').replace('>','');
-            try {
-                await message.guild.members.fetch(id).then(dude => target = dude);
-            } catch(error) {
-                target = null;
-                console.log(error);
+        const list = [];
+        if(args) {
+            for ( let i = 0; i < args.length; i++){
+                await getUser(args[i], message).then(trgt => {
+                    if (trgt != undefined){
+                        list.push(`<@!${trgt.id}>`);
+                    }
+                }).catch(err => console.log(err));
             }
         }
         const emb = {
         	color: 15277667,
-        	title: 'Hugs',
-        	description: `Lonely <@!${message.author.id}> is hugging himself`,
+        	title: 'Baka',
+        	description: `<@!${message.author.id}> is calling himself baka`,
         	image: {
         		url: `${hug.url}`
         	},
@@ -36,8 +38,8 @@ module.exports = {
         if(Boolean(hug.anime_name)) {
             emb.fields[0] = { name: 'Source', value: `${hug.anime_name}`}
         }
-        if (Boolean(target)) {
-            emb.description = `<@!${message.author.id}> hugs <@!${target.user.id}>.`
+        if (list.length) {
+            emb.description = `<@!${message.author.id}> calls ${list.join(', ')} baka.`
         }
         try {
         	message.channel.send({embeds:[emb]});

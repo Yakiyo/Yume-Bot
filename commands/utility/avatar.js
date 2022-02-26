@@ -23,7 +23,7 @@ module.exports = {
                 }
             ],
             image: {
-                url: `${taggedUser.avatarURL({ format: 'png', dynamic: true })}?size=1024`,
+                url: `${taggedUser.avatarURL({ format: 'png', dynamic: true, size: 1024 })}`,
             },
             timestamp: new Date(),
             footer: {

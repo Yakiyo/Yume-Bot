@@ -1,3 +1,5 @@
+const modlog = require('../../modules/modlog.js');
+
 module.exports = {
     name: 'ban',
     description: 'bans the user with the mention/id.',
@@ -44,9 +46,9 @@ module.exports = {
         
         console.log(reason);
         try {
-            taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
-            await taggedUser.ban({ days: 3, reason: `${reason || 'No reason provided'}` });
-            message.client.channels.cache.get('853524796213690369').send({ embeds: [modlog] });
+            await taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
+            await message.guild.members.ban(taggedUser.user, { days: 3, reason: `${reason || 'No reason provided'}` });
+            modlog(modlog, message).catch(error => error);
             message.channel.send(`Successfully banned ${taggedUser.user.tag}`);
         } catch (error) {
             console.log(error), message.channel.send('Couldnt ban the user. Something went wrong!')

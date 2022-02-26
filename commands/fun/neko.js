@@ -14,7 +14,7 @@ module.exports = {
         const emb = {
         	title: 'Here\'s a neko for you.',
         	color: 15277667,
-        	description: `Image Source: [link](${neko.source_url} 'Source') || Artist: [${neko.artist_name}](${neko.artist_href} 'Artist')`,
+        	description: `Image Source: [link](${neko.source_url || 'https://nekos.best'} 'Source') || Artist: [${neko.artist_name}](${neko.artist_href} 'Artist')`,
         	image: {
         		url: `${neko.url}`
         	},

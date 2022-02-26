@@ -1,4 +1,5 @@
 const { prefix } = require('../../config.json');
+const { version } = require('../../package.json');
 
 module.exports = {
     name: 'about',
@@ -10,7 +11,7 @@ module.exports = {
     async execute(message, args) {
         const aboutObj = {
               footer: {
-                text: "Made with 💖 with discord.js",
+                text: "Made with 💖 & discord.js",
                 icon_url: "https://i.imgur.com/U4U2cPU.png",
                 proxy_icon_url: "https://images-ext-1.discordapp.net/external/CMaZlkTJ__mjsFwpDAFFiJen1GnEd7SI56dOcgoAXu8/https/i.imgur.com/U4U2cPU.png"
               },
@@ -36,7 +37,7 @@ module.exports = {
               ],
               color: 5814783,
               type: "rich",
-              description: `Yume bot is a discord bot dedicated to the Tsurekano discord server. Made by Yakiyo#1206. Thanks to Tenknown & Rim for the help in making the bot.\n\nMy prefix is \`${prefix}\`. For a list of my commands do \`${prefix}help\`.\n\nDiscord: https://discord.gg/q2zDU5bGnh\nSubreddit: [r/MamahahaTsurego](https://www.reddit.com/r/MamahahaTsurego/)\nFandom: [Motokano Fandom](https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki) `,
+              description: `Yume bot is a discord bot dedicated to the Tsurekano discord server. Made by Yakiyo#1206. Thanks to Tenknown & Rim for the help in making the bot.\n**Current Version:** ${version}\n\nMy prefix is \`${prefix}\`. For a list of my commands do \`${prefix}help\`.\n\nDiscord: https://discord.gg/q2zDU5bGnh\nSubreddit: [r/MamahahaTsurego](https://www.reddit.com/r/MamahahaTsurego/)\nFandom: [Motokano Fandom](https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki) `,
               title: "Yume Bot"
             }
         message.channel.send({ embeds: [aboutObj] });

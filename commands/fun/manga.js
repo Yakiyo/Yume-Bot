@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 let query = `
 query ($search: String) {
-  Media(search: $search, type: MANGA) {
+  Media(search: $search, type: MANGA, format_not: NOVEL) {
     id
     type
     format
@@ -96,7 +96,7 @@ try {
         	},
         	description: `${shorten(manga.description).replace(/[\r\n ]{2,}/gm, "\n").replace(/\\\\n/g, "\r\n")}`,
         	footer: {
-        		text: `Licensed: ${manga.isLicensed ? 'Yes' : 'No'}`,
+        		text: `Licensed: ${manga.isLicensed == true ? 'Yes' : 'No'}`,
         	},
         	fields: [
         	{
@@ -142,7 +142,7 @@ try {
         	],
         	timestamp: new Date()
         }
-
+        console.log(manga.isLicensed)
         try {
         	return message.channel.send({embeds: [responseEmb]});
         } catch (error) {

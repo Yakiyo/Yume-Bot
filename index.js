@@ -1,30 +1,69 @@
 const { time } = require('@discordjs/builders');
 const fs = require('fs');
 const dayjs = require('dayjs');
-const { Client, Intents, Collection } = require('discord.js');
+const { Client, Intents, Collection, Options, Util } = require('discord.js');
 const { prefix } = require('./config.json');
-require('dotenv').config()
+const mongoose = require('mongoose');
+const { version } = require('./package.json')
+require('dotenv').config();
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Client({ intents: [
+		Intents.FLAGS.GUILDS, 
+		Intents.FLAGS.GUILD_MEMBERS, 
+		Intents.FLAGS.GUILD_BANS, 
+		Intents.FLAGS.GUILD_MESSAGES, 
+		Intents.FLAGS.GUILD_BANS
+	], 
+	partials: [
+		'MESSAGE', 
+		'CHANNEL', 
+		'REACTION',
+		'GUILD_MEMBER'
+	]
+	/*makeCache: Options.cacheWithLimits({
+		ChannelManager: {
+			sweepInterval: 3600,
+			sweepFilter: Util.archivedThreadSweepFilter(),
+		},
+		GuildChannelManager: {
+			sweepInterval: 3600,
+			sweepFilter: Util.archivedThreadSweepFilter(),
+		},
+		MessageManager: 100,
+		StageInstanceManager: 10,
+		ThreadManager: {
+			sweepInterval: 3600,
+			sweepFilter: Util.archivedThreadSweepFilter(),
+		},
+		VoiceStateManager: 10,
+	}),*/
+});
+
 client.commands = new Collection();
 
 const commandFolders = fs.readdirSync('./commands');
-
+console.log('Initializing commands loading......')
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
 		client.commands.set(command.name, command);
+		console.log(`Loaded command ${command.name}`)
 	}
 }
+//console.log(`All commands loaded. Loaded ${client.commands.cache.size} commands.`)
 
 // When the client is ready, run this code (only once)
 client.once('ready', async () => {
+	await mongoose.connect( process.env.MONGO,
+	{
+		keepAlive: true,
+	});
 	client.user.setActivity(`Mizuto in the bath`, { type: 'WATCHING' });
 	client.user.setStatus('online');
 	await client.users;
-	console.log(`Ready! Logged in as ${client.user.tag} with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
-	client.channels.cache.get('844253443510239262').send(`Yume Bot on! <:corporalmizuto:845137729729462302>.\nReady at ${time(client.readyAt)} `);
+	console.log(`Logged in as ${client.user.tag}`);
+	client.channels.cache.get('844253443510239262').send(`Yume Bot on! <:corporalmizuto:845137729729462302>.\nReady at ${time(client.readyAt)}\nGuilds: ${client.guilds.cache.size}, Channels: ${client.channels.cache.size}, Version: ${version}`);
 });
 
 

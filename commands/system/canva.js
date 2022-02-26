@@ -22,6 +22,7 @@ module.exports = {
     name: 'canva',
     description: 'Why u wanna know this :eyes:',
     guildOnly: true,
+    category: 'system',
     aliases: ['canvas', 'cnv'],
     async execute(message, args) {
         if (message.author.id != '695307292815654963'){

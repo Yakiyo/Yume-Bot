@@ -1,3 +1,5 @@
+const { modlog } = require('../../modules/modlog.js');
+
 module.exports = {
     name: 'unban',
     description: '',
@@ -20,7 +22,7 @@ module.exports = {
         
         const reason = args.slice(1).join(' ');
 
-        const modlog = {
+        const modloge = {
             title: 'Unban Case',
             color: 'NAVY',
             description: `**Offender:** ${taggedUser.user.tag} | <@!${taggedUser.user.id}>\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason || 'No reason provided'}`,
@@ -31,11 +33,12 @@ module.exports = {
         }
 
         try {
-            await message.guild.members.unban(taggedUser.user, reason || 'No reason provided');
-            message.client.channels.cache.get('853524796213690369').send({ embeds: [modlog] });
+            await message.guild.members.unban(taggedUser.user, reason);
+            modlog(modloge, message).catch(err => err); //message.client.channels.cache.get('853524796213690369').send({ embeds: [modlog] });
             message.channel.send(`Successfully unbanned ${taggedUser.user.tag}`);
         } catch (error){
             message.channel.send('Something went wrong and couldn\'t execute this command.')
+            console.log(error);
         }
     }
 }
