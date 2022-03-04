@@ -1,4 +1,5 @@
 const modlog = require('../../modules/modlog.js');
+const getUser = require('../../modules/getUser.js');
 
 module.exports = {
     name: 'ban',
@@ -10,13 +11,10 @@ module.exports = {
     perms: 'BAN_MEMBERS',
     async execute(message, args) {
         let taggedUser, id, author, client;
-        if(args[0]){
-            id = args[0].replace('<@','').replace('!','').replace('>','');
-        }
-        await message.guild.members.fetch(id).then(member => taggedUser = member ).catch((error) => console.log(error));
+        taggedUser = getUser(args[0], message);
         await message.guild.members.fetch(message.author).then(member => author = member )
         await message.guild.members.fetch(message.client).then(member => client = member )
-        if (!taggedUser) return message.channel.send('User is either not in this server or you gave an invalid argument.');
+        if (taggedUser == undefined) return message.channel.send('User is either not in this server or you gave an invalid argument.');
         
         if (!client.permissions.has('BAN_MEMBERS')) return message.channel.send('I do not have the required permissions to ban a user.')
         if (taggedUser.user.id == message.author.id || taggedUser.user.id == message.client.user.id) return message.channel.send('Cannot execute kick on this user.');
@@ -44,14 +42,12 @@ module.exports = {
             }
         }
         
-        console.log(reason);
-        try {
-            await taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
-            await message.guild.members.ban(taggedUser.user, { days: 3, reason: `${reason || 'No reason provided'}` });
-            modlog(modlog, message).catch(error => error);
-            message.channel.send(`Successfully banned ${taggedUser.user.tag}`);
-        } catch (error) {
-            console.log(error), message.channel.send('Couldnt ban the user. Something went wrong!')
-        }
+        await taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
+        await message.guild.members.ban(taggedUser.user, { days: 3, reason: `${reason || 'No reason provided'}` }).catch(err => {
+            console.log(err);
+            message.channel.send('Couldnt ban the user. Something went wrong!');
+        });
+        modlog(modlog, message).catch(error => error);
+        message.channel.send(`Successfully banned ${taggedUser.user.tag}`);
     }
 }

@@ -19,7 +19,7 @@
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "mongoose": "^6.2.3",
-    "nekos-best.js": "^4.1.0",
+    "nekos-best.js": "^5.0.0",
     "pino": "^7.0.0-rc.9",
     "sourcebin": "^4.3.5",
     "turndown": "^7.1.1"

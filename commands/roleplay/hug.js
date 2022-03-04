@@ -1,4 +1,4 @@
-const { fetchNeko } = require("nekos-best.js");
+const { fetchRandom } = require("nekos-best.js");
 const getUser = require('../../modules/getUser.js');
 
 module.exports = {
@@ -10,13 +10,13 @@ module.exports = {
     aliases: ['hugs'],
     async execute(message, args) {
         let hug, target;
-        await fetchNeko('hug').then(obj => hug = obj).catch(error => console.log(error));
+        await fetchRandom('hug').then(obj => hug = obj.results[0]).catch(error => console.log(error));
         if(!hug) return message.channel.send('API request failure.');
         const list = [];
         if(args) {
             for ( let i = 0; i < args.length; i++){
                 await getUser(args[i], message).then(trgt => {
-                    if (trgt != undefined){
+                    if (trgt){
                         list.push(`<@!${trgt.id}>`);
                     }
                 }).catch(err => console.log(err));

@@ -2,22 +2,22 @@ const { fetchRandom } = require('nekos-best.js');
 
 
 module.exports = {
-    name: 'neko',
-    description: 'Gives a neko image',
+    name: 'kitsune',
+    description: 'Gives a kitsune/fox-girl image',
     guildOnly: true,
     category: 'fun',
-    aliases: ['cat'],
+    aliases: ['fox'],
     async execute(message, args) {
-        let neko;
-        await fetchRandom('neko').then(res => neko = res.results[0]).catch(error => console.log(error));
-        if(!neko) return message.channel.send('API request failure.'); 
+        let fox;
+        await fetchRandom('kitsune').then(res => fox = res.results[0]).catch(error => console.log(error));
+        if(!fox) return message.channel.send('API request failure.'); 
 
         const emb = {
-        	title: 'Here\'s a neko for you.',
+        	title: 'Here\'s a fox for you.',
         	color: 15277667,
-        	description: `Image Source: [link](${neko.source_url || 'https://nekos.best'} 'Source') || Artist: [${neko.artist_name}](${neko.artist_href} 'Artist')`,
+        	description: `Image Source: [link](${fox.source_url || 'https://nekos.best'} 'Source') || Artist: [${fox.artist_name}](${fox.artist_href} 'Artist')`,
         	image: {
-        		url: `${neko.url}`
+        		url: `${fox.url}`
         	},
         	footer: {
         		text: `Powered by nekos.best`,

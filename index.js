@@ -1,6 +1,5 @@
 const { time } = require('@discordjs/builders');
 const fs = require('fs');
-const dayjs = require('dayjs');
 const { Client, Intents, Collection, Options, Util } = require('discord.js');
 const { prefix } = require('./config.json');
 const mongoose = require('mongoose');
@@ -53,6 +52,18 @@ for (const folder of commandFolders) {
 }
 //console.log(`All commands loaded. Loaded ${client.commands.cache.size} commands.`)
 
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args, client));
+	}
+}
+
+/*
 // When the client is ready, run this code (only once)
 client.once('ready', async () => {
 	await mongoose.connect( process.env.MONGO,
@@ -67,7 +78,7 @@ client.once('ready', async () => {
 });
 
 
-// When the client is ready, run this code (only once)
+
 client.on('messageCreate', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return; // Checking if message starts with prefix and it wasnt posted by a bot
 
@@ -104,6 +115,6 @@ client.on('messageCreate', message => {
 		message.reply('There was an error trying to execute that command!'); // Error with the command handler itself
 	}
 });
-
+*/
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);

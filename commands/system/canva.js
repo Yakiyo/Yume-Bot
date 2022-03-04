@@ -45,7 +45,7 @@ module.exports = {
         //Puts user name
         context.font = applyText(canvas, member.displayName);
         context.fillStyle = '#00b9bd';
-        context.fillText(member.user.tag, 90, 470);
+        context.fillText(member.user.tag, 60, 470);
 
         //Circle stand for avatar
         context.beginPath();

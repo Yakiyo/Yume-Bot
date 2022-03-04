@@ -17,22 +17,24 @@ module.exports = {
             return message.channel.send('This command is only usable by the bot owner.');
         }
         //member = await getUser(args[0], message);
-        const list = [];
+        /*const list = [];
         if(args) {
             for ( let i = 0; i < args.length; i++){
                 await getUser(args[i], message).then(trgt => {
-                    if (trgt != undefined){
+                    console.log(trgt)
+                    if (!trgt){
                         list.push(trgt.user.tag);
                     }
                 }).catch(err => console.log(err));
             }
         }
-
-        console.log(list);
+        //message.channel.send(`${list.join(', ')}`)
+        console.log('the list is: || '+ list);*/
+        await message.guild.members.search({query: `${args[0].toLowerCase()}`}).then(dude => console.log(dude.first().id)).catch(error => error);
         
 
         
-        return message.channel.send(`Code execution complete, ${list.join(', ')}`);
+        return message.channel.send(`Code execution complete`);
     }
 }
 

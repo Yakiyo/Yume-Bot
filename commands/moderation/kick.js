@@ -42,18 +42,12 @@ module.exports = {
             }
         }
         
-        console.log(reason);
-        try {
-            taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
-            await taggedUser.kick();
-            message.client.channels.cache.get('853524796213690369').send({ embeds: [modlog] });
-            message.channel.send(`Successfully kicked ${taggedUser.user.tag}`);
-        } catch (error) {
-            console.log(error), message.channel.send('Couldnt kick the user. Something went wrong!')
-        }
-        
-       
-
-        
+        await taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
+        await message.guild.members.kick(taggedUser.user, { days: 3, reason: `${reason || 'No reason provided'}` }).catch(err => {
+            console.log(err);
+            message.channel.send('Couldnt ban the user. Something went wrong!');
+        });
+        modlog(modlog, message).catch(error => error);
+        message.channel.send(`Successfully kicked ${taggedUser.user.tag}`);
     }
 }
