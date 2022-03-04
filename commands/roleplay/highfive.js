@@ -5,7 +5,7 @@ module.exports = {
     name: 'highfive',
     description: 'Gives a highfive gif',
     usage: '<optional user id/mention>',
-    category: 'fun',
+    category: 'roleplay',
     guildOnly: true,
     aliases: ['high5'],
     async execute(message, args) {

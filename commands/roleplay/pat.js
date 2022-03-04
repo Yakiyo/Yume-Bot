@@ -5,7 +5,7 @@ module.exports = {
     name: 'pat',
     description: 'Gives a pat gif',
     usage: '<optional user id/mention>',
-    category: 'fun',
+    category: 'roleplay',
     guildOnly: true,
     aliases: ['headpat', 'headpats', 'pats'],
     async execute(message, args) {

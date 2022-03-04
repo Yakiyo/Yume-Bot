@@ -5,7 +5,7 @@ module.exports = {
     name: 'poke',
     description: 'Gives a poking gif',
     usage: '<optional user id/mention>',
-    category: 'fun',
+    category: 'roleplay',
     guildOnly: true,
     aliases: [],
     async execute(message, args) {

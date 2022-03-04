@@ -5,7 +5,7 @@ module.exports = {
     name: 'cuddle',
     description: 'Gives a cuddle gif',
     usage: '<optional user id/mention>',
-    category: 'fun',
+    category: 'roleplay',
     guildOnly: true,
     aliases: ['cuddles'],
     async execute(message, args) {

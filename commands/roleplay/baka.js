@@ -5,7 +5,7 @@ module.exports = {
     name: 'baka',
     description: 'Gives a baka gif',
     usage: '<optional user id/mention>',
-    category: 'fun',
+    category: 'roleplay',
     guildOnly: true,
     aliases: ['idiot'],
     async execute(message, args) {

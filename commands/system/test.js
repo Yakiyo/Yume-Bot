@@ -1,39 +1,50 @@
 const sourcebin = require('sourcebin');
-const Discord = require("discord.js")
-const fs = require('fs');
-const getUser = require('../../modules/getUser.js');
-
-const capitalize = require('../../modules/capitalize.js');
+const { Collection } = require("discord.js")
+const categories = new Collection()
 
 module.exports = {
     name: 'test',
     description: 'Owner only test running command',
     guildOnly: true,
     category: 'system',
-    args: true,
+    args: false,
     aliases: ['demo'],
     async execute(message, args) {
         if (message.author.id != '695307292815654963'){
             return message.channel.send('This command is only usable by the bot owner.');
         }
-        //member = await getUser(args[0], message);
-        /*const list = [];
-        if(args) {
-            for ( let i = 0; i < args.length; i++){
-                await getUser(args[i], message).then(trgt => {
-                    console.log(trgt)
-                    if (!trgt){
-                        list.push(trgt.user.tag);
-                    }
-                }).catch(err => console.log(err));
+        const { commands } = message.client;
+        commands.forEach(command => {
+            const category = categories.get(command.category)
+            if (category) {
+            category.set(command.name, command)
+            } else {
+            categories.set(command.category, new Collection().set(command.name, command))
             }
+        })
+        const arr = Array.from(categories);
+        let field =[] ;
+        for (let i = 0; i < arr.length ; i++){
+            let obj = new Object;
+            let listOEntries ='';
+            const comList = arr[i][1];
+            comList.forEach(com => {
+                listOEntries += `\`${com.name}\`,`
+            })
+            obj = {
+                name: `${arr[i][0]}`,
+                value: `${listOEntries}`//${Array.from((arr[i][1])).join(', ')}`
+            }
+            //arr[i][1].forEach(com => obj.value += `${com.name}` )
+            field.push(obj);
         }
-        //message.channel.send(`${list.join(', ')}`)
-        console.log('the list is: || '+ list);*/
-        await message.guild.members.search({query: `${args[0].toLowerCase()}`}).then(dude => console.log(dude.first().id)).catch(error => error);
-        
-
-        
+        console.log(field);
+        const demoemb = {
+            title: 'something here',
+            fields: field
+        }
+        message.channel.send({ embeds: [demoemb] }).catch(error => console.log(error));
+        //console.log(Array.from(categories));
         return message.channel.send(`Code execution complete`);
     }
 }

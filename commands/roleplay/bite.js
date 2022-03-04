@@ -5,7 +5,7 @@ module.exports = {
     name: 'bite',
     description: 'Gives a bite gif',
     usage: '<optional user id/mention>',
-    category: 'fun',
+    category: 'roleplay',
     guildOnly: true,
     aliases: [],
     async execute(message, args) {
