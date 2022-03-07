@@ -1,7 +1,7 @@
 module.exports = {
     name: 'serverunlock',
     description: '',
-    aliases: ['unlockdown'],
+    aliases: ['sunlockdown'],
     category: 'moderation',
     usage: '',
     async execute(message, args) {

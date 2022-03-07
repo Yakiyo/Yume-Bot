@@ -2,7 +2,7 @@ module.exports = {
     name: 'serverlock',
     description: '',
     category: 'moderation',
-    aliases: ['lockdown'],
+    aliases: ['alockdown'],
     usage: '',
     async execute(message, args) {
         

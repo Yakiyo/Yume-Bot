@@ -13,7 +13,7 @@ module.exports = {
         if (message.author.id != '695307292815654963'){
             return message.channel.send('This command is only usable by the bot owner.');
         }
-        const { commands } = message.client;
+        /*const { commands } = message.client;
         commands.forEach(command => {
             const category = categories.get(command.category)
             if (category) {
@@ -43,7 +43,8 @@ module.exports = {
             title: 'something here',
             fields: field
         }
-        message.channel.send({ embeds: [demoemb] }).catch(error => console.log(error));
+        message.channel.send({ embeds: [demoemb] }).catch(error => console.log(error));*/
+        console.log(message.channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS'))
         //console.log(Array.from(categories));
         return message.channel.send(`Code execution complete`);
     }

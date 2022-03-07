@@ -1,4 +1,6 @@
 const { prefix } = require('../../config.json');
+const { Collection } = require('discord.js')
+let categories = new Collection();
 
 module.exports = {
 	name: 'help',
@@ -19,8 +21,33 @@ module.exports = {
 		const { commands } = message.client;
 		
 		if (!args.length){
-			const cmdList = commands.map(command => `\`${command.name}\``).join(', ');
-			helpEmbed.description = `Here\'s a list of all of my commands. \n${cmdList}`;
+			commands.forEach(command => {
+	            const category = categories.get(command.category)
+	            if (category) {
+	            category.set(command.name, command)
+	            } else {
+	            categories.set(command.category, new Collection().set(command.name, command))
+	            }
+	        })
+	        const arr = Array.from(categories);
+	        let field =[] ;
+	        for (let i = 0; i < arr.length ; i++){
+	            let obj = new Object;
+	            let listOEntries = [];
+	            const comList = arr[i][1];
+	            comList.forEach(com => {
+	                listOEntries.push(`\`${com.name}\``);
+	            })
+	            obj = {
+	                name: `${arr[i][0]}`,
+	                value: `${listOEntries.join(', ')}`//${Array.from((arr[i][1])).join(', ')}`
+	            }
+	            //arr[i][1].forEach(com => obj.value += `${com.name}` )
+	            field.push(obj);
+	        };
+	        helpEmbed.fields = field;
+			/*const cmdList = commands.map(command => `\`${command.name}\``).join(', ');
+			helpEmbed.description = `Here\'s a list of all of my commands. \n${cmdList}`;*/
 		} else {
 			const name = args[0].toLowerCase();
 			const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
