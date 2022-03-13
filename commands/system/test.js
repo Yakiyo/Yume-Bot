@@ -1,6 +1,7 @@
 const sourcebin = require('sourcebin');
 const { Collection } = require("discord.js")
-const categories = new Collection()
+const categories = new Collection();
+const getUser = require('../../modules/getUser.js')
 
 module.exports = {
     name: 'test',
@@ -44,7 +45,8 @@ module.exports = {
             fields: field
         }
         message.channel.send({ embeds: [demoemb] }).catch(error => console.log(error));*/
-        console.log(message.channel.permissionsFor(message.guild.me).has('MANAGE_CHANNELS'))
+        const target = await getUser(`${args[0]}`, message);
+        console.log(target.communicationDisabledUntil)
         //console.log(Array.from(categories));
         return message.channel.send(`Code execution complete`);
     }

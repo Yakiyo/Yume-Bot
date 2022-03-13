@@ -19,7 +19,7 @@ module.exports = {
         if (!client.permissions.has('BAN_MEMBERS')) return message.channel.send('I do not have the required permissions to ban a user.')
         if (taggedUser.user.id == message.author.id || taggedUser.user.id == message.client.user.id) return message.channel.send('Cannot execute kick on this user.');
 
-        if (message.guild.roles.comparePositions(author.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('This user is higher then you. You cannot kick him.');
+        if (message.guild.roles.comparePositions(author.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('This user is higher then you. You cannot ban him.');
         if (message.guild.roles.comparePositions(client.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('Target user is higher then me in hierarchy. Please give me a higher role to execute it.');
 
         const reason = args.slice(1).join(' ');

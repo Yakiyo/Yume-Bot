@@ -43,10 +43,9 @@ for (const folder of commandFolders) {
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
 		client.commands.set(command.name, command);
-		console.log(`Loaded command ${command.name}`)
 	}
 }
-//console.log(`All commands loaded. Loaded ${client.commands.cache.size} commands.`)
+console.log(`All commands loaded.`)
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 

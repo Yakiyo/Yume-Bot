@@ -18,7 +18,8 @@ module.exports = {
         try {
                 trgtChannel.permissionOverwrites.edit(trgtChannel.guild.roles.everyone, {
                 SEND_MESSAGES: null,
-                ADD_REACTIONS: null
+                ADD_REACTIONS: null,
+                CREATE_PUBLIC_THREADS: null
             }).then(res => {
                 return message.channel.send(`Successfully unlocked <#${trgtChannel.id}> <:greenTick:946452985368690749>`)
             });

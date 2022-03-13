@@ -1,7 +1,7 @@
 const { modlogs } = require('../config.json');
 
 module.exports =  async (obj, msg) => {
-	const channel = await message.guild.channels.fetch(`${modlogs}`)
+	const channel = await msg.guild.channels.fetch(`${modlogs}`)
 		.then(chan => chan)
 		.catch(error => {
 			console.log(error);

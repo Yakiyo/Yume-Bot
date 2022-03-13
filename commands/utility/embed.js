@@ -1,20 +1,33 @@
-const { Embed } = require("@discordjs/builders");
-
 module.exports = {
     name: 'embed',
-    description: 'Creates an embed with JSON as arguments. Dont use this if u dont know what you\'re doing. ',
+    description: 'Send\'s a discord embed. Separate embed title and description with `|`. Description part is optional. ',
     args: true,
     category: 'utility',
+    aliases: ['emb'],
     guildOnly: true,
-    usage: '<title> | <description>',
+    usage: '[title] | [description]',
     async execute(message, args) {
-        const arr = args.join(' ').split('|');
-        const title = arr[0], desc = arr.slice(1).join('').trim();
-        const newEmbed = {
-            color: 3158326,
-            title: `${title}`,
-            description: `${desc}`
-        };
-        message.channel.send({ embeds: [newEmbed] });
+        let trgtChannel = message.channel, content = args.slice(0);
+        await message.guild.channels.fetch(args[0].replace('<#','').replace('>',''))
+            .then(chan => {
+                trgtChannel = chan;
+                content = args.slice(1);
+            })
+            .catch(error => {
+                console.log(error);
+                trgtChannel = message.channel;
+            })
+        if (!content.length) return message.channel.send('Please provide required arguments');
+        
+        contentNew = content.join(' ').split('|');
+        const emb = {
+            title: `${contentNew[0]}`,
+            description: `${contentNew.slice(1)}`,
+            color: 'RANDOM'
+        }
+        trgtChannel.send({ embeds: [emb] }).catch(err => {
+            console.log(err);
+            message.channel.send('Something went wrong!');
+        }).then( message.react('946452985368690749'));
     }
 }

@@ -32,7 +32,7 @@ module.exports = {
 		}
 
 		try {
-			command.execute(message, args);
+			await command.execute(message, args);
 		} catch (error) {
 			console.error(error);
 			message.reply('There was an error trying to execute that command!'); // Error with the command handler itself

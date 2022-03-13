@@ -11,7 +11,7 @@ const applyText = (canvas, text) => {
 		// Assign the font to the context and decrement it so it can be measured again
 		context.font = `${fontSize -= 5}px sans-serif`;
 		// Compare pixel width of the text to the canvas minus the approximate avatar size
-	} while (context.measureText(text).width > canvas.width / 3);
+	} while (context.measureText(text).width > canvas.width / 2.5);
 	console.log(canvas.width, context.measureText(text).width);
 	// Return the result to use in the actual canvas
 	return context.font;
@@ -45,7 +45,7 @@ module.exports = {
         //Puts user name
         context.font = applyText(canvas, member.displayName);
         context.fillStyle = '#00b9bd';
-        context.fillText(member.user.tag, 60, 470);
+        context.fillText(member.user.tag, 76, 465);
 
         //Circle stand for avatar
         context.beginPath();
