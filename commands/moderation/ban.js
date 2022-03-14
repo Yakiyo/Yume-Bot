@@ -11,7 +11,7 @@ module.exports = {
     perms: 'BAN_MEMBERS',
     async execute(message, args) {
         let taggedUser, id, author, client;
-        taggedUser = getUser(args[0], message);
+        taggedUser = await getUser(args[0], message);
         await message.guild.members.fetch(message.author).then(member => author = member )
         await message.guild.members.fetch(message.client).then(member => client = member )
         if (taggedUser == undefined) return message.channel.send('User is either not in this server or you gave an invalid argument.');
