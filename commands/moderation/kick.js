@@ -10,7 +10,7 @@ module.exports = {
     perms: 'KICK_MEMBERS',
     category: 'moderation',
     async execute(message, args) {
-        let taggedUser, id, author, client;
+        let id, author, client;
         const taggedUser = await getUser(args[0], message).catch(error => error);
         if (!taggedUser || taggedUser == undefined) return message.channel.send('Invalid user. Please provide a valid server member');
         

@@ -3,7 +3,7 @@ module.exports = {
 	name: 'error',
 	once: true,
 	async execute(error, client) {
-		const errChan = await client.channels.cache.get('844253443510239262').then(chan => chan);
+		const errChan = await client.channels.cache.get('844253443510239262').then(chan => chan).catch(err => console.log(err));
 
 		const errEmb = {
 			title: "Error Occurred during code execution",
@@ -11,5 +11,6 @@ module.exports = {
 			description: `\`\`\`${shorten(error)}\`\`\` `,
 			url: 'https://dashboard.heroku.com/apps/yume-bot-discord/logs'
 		}
+		errChan.send({ embeds: [errEmb] }).catch(err => console.log(error));
 	},
 };

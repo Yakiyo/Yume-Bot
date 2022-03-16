@@ -26,11 +26,11 @@ module.exports = {
 
         try {
           
-            const evaled = eval(args.join(" "));
+            const evaled = eval(args.join(" ")) || 'no return value';
 
-            const cleaned = await clean(evaled);
+            const cleaned = await clean(evaled) || 'Nothing to return here(?)';
 
-            message.channel.send(`\`\`\`js\n${cleaned || 'Code done (?)'}\n\`\`\``);
+            message.channel.send(`\`\`\`js\n${cleaned}\n\`\`\``);
         } catch (err) {
         
             message.channel.send(`\`ERROR\` \`\`\`xl\n${cleaned}\n\`\`\``);
