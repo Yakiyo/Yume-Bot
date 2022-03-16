@@ -1,3 +1,6 @@
+const modlog = require('../../modules/modlog.js');
+const getUser = require('../../modules/getUser.js');
+
 module.exports = {
     name: 'kick',
     description: 'Kicks a mentioned user, duh',
@@ -8,19 +11,13 @@ module.exports = {
     category: 'moderation',
     async execute(message, args) {
         let taggedUser, id, author, client;
-        if(args[0]){
-            id = args[0].replace('<@','').replace('!','').replace('>','');
-        }
-        await message.guild.members.fetch(id).then(member => taggedUser = member ).catch((error) => console.log(error));
-        await message.guild.members.fetch(message.author).then(member => author = member )
-        await message.guild.members.fetch(message.client).then(member => client = member )
-        if (!taggedUser) return message.channel.send('User is either not in this server or you gave an invalid argument.');
+        const taggedUser = await getUser(args[0], message).catch(error => error);
+        if (!taggedUser || taggedUser == undefined) return message.channel.send('Invalid user. Please provide a valid server member');
         
-        if (!client.permissions.has('KICK_MEMBERS')) return message.channel.send('I do not have the required permissions to kick a user.')
+        if (!message.guild.me.permissions.has('KICK_MEMBERS')) return message.channel.send('I do not have the required permissions to timeout a user.');
         if (taggedUser.user.id == message.author.id || taggedUser.user.id == message.client.user.id) return message.channel.send('Cannot execute kick on this user.');
-
-        if (message.guild.roles.comparePositions(author.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('This user is higher then you. You cannot kick him.');
-        if (message.guild.roles.comparePositions(client.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('Target user is higher then me in hierarchy. Please give me a higher role to execute it.');
+        if (message.guild.roles.comparePositions(message.member.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('This user is higher then you. You cannot kick him.');
+        if (message.guild.roles.comparePositions(message.guild.me.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('Target user is higher then me in hierarchy. Please give me a higher role to execute it.');
 
         const reason = args.slice(1).join(' ');
         const dmEmb = {
