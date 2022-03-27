@@ -5,6 +5,8 @@ const { welcomeChannel } = require('../config.json');
 module.exports = {
 	name: 'guildMemberAdd',
 	async execute(member, client) {
+        if (member.guild.id !== '844103224528076801') return;
+        
 		const wchan = await client.channels.fetch(`${welcomeChannel}`).then(chan => chan);
 
 		const canvas = Canvas.createCanvas(700, 500);

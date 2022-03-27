@@ -1,6 +1,6 @@
 {
   "name": "Yume Bot",
-  "version": "0.6.9",
+  "version": "1.0.0",
   "description": "A multi-purpose discord bot made for the tsurekano discord server.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
-    "mongoose": "^6.2.3",
     "nekos-best.js": "^5.0.0",
     "parse-duration": "^1.0.2",
     "sourcebin": "^4.3.5",
