@@ -1,4 +1,5 @@
-const { time } = require('@discordjs/builders')
+const { time } = require('@discordjs/builders');
+const getUser = require('../../modules/getUser.js');
 
 module.exports = {
     name: 'user',
@@ -8,16 +9,13 @@ module.exports = {
     category: 'utility',
     async execute(message, args) {
         let member, id;
-        id = message.author.id;
-        if(args[0]){
-            id = args[0].replace('<@','').replace('!','').replace('>','');
+        if (args[0]) {
+            member = await getUser(args[0], message)//.catch(error => error);
         }
-        try {
-            await message.guild.members.fetch(id).then(dude => member = dude);
-        } catch (error) {
-            await message.guild.members.fetch(message.author).then(dude => member = dude);
+        
+        if(!member || member == undefined) {
+            member = message.member
         }
-
         
         try {
             const roles = [];
@@ -58,11 +56,13 @@ module.exports = {
             } else if(roles.includes(`<@&844233565310812190>`)) {
                 embed.fields.splice(2, 0, { name: 'Server Moderator!',value: `<@&844233565310812190>`, inline: true})
             }
-            message.channel.send({ embeds: [embed] });
+            return message.channel.send({ embeds: [embed] });
         } catch (error) {
-            return message.channel.send('Some huge bombs busted and the command failed to ran. Pls report it to dev!');
             console.log(error);
+            return message.channel.send('Some huge bombs busted and the command failed to ran. Pls report it to dev!');
+            
         }
+        
 
     }
 }

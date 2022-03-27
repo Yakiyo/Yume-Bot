@@ -28,7 +28,7 @@ module.exports = {
           
             const evaled = eval(args.join(" ")) || 'no return value';
 
-            const cleaned = await clean(evaled) || 'Nothing to return here(?)';
+            let cleaned = await clean(evaled) || 'Nothing to return here(?)';
 
             message.channel.send(`\`\`\`js\n${cleaned}\n\`\`\``);
         } catch (err) {

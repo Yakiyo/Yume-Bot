@@ -36,6 +36,6 @@ module.exports = {
         }
         message.channel.send({ embeds: [sourceEmbed] });
 
-        // message.channel.send(`Message id: ${trgtMsg.id}, sent by ${trgtMsg.author.tag}, in channel <#${trgtChannel.id}>. Embeds: ${trgtMsg.embeds.length}`);
+        
     }
 }

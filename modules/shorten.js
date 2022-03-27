@@ -8,10 +8,10 @@ turndown.addRule('spoiler', {
 	}
 })
 
-function shorten(string) {
+function shorten(string, num = 1000) {
 	let str = turndown.turndown(string);
-	if (str.length > 1000) {
-		return str.substring(0, 1001) + '...';
+	if (str.length > num) {
+		return str.substring(0, num + 1) + '...';
 	} else {
 		return str;
 	}

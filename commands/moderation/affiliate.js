@@ -23,7 +23,7 @@ module.exports = {
         
         await message.client.channels.fetch('844148747343757342').then(chanel => pchan = chanel).catch(error => console.log(error));
         
-        let context = `:small_blue_diamond: **${invite.guild.name}** \n\ndiscord.gg/${invite.code} \n\n${blockQuote(description + '\n')}`;
+        let context = `:small_blue_diamond: **${invite.guild.name}** \n\nhttps://discord.gg/${invite.code} \n\n${blockQuote(description + '\n')}`;
         try {
             await pchan.send(`${context}`).then(message.channel.send('Affiliate added :white_check_mark:'))
         } catch (error){

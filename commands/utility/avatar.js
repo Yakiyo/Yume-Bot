@@ -1,3 +1,5 @@
+const getUser = require('../../modules/getUser.js');
+
 module.exports = {
     name: 'avatar',
     aliases: ['icon', 'pfp', 'av'],
@@ -7,29 +9,37 @@ module.exports = {
     guildOnly: true,
     async execute(message, args) {
         let taggedUser, id;
-        id = message.author.id;
-        if(args[0]){
-            id = args[0].replace('<@','').replace('!','').replace('>','');
+        if (args[0]) {
+            taggedUser = await getUser(args[0], message)//.catch(error => error);
         }
-        await message.guild.members.fetch(id).then(member => taggedUser = member.user ).catch((error) => taggedUser = message.author)
-
-        const avEmbed = {
-            color: 7506394,
-            title: `Avatar for ${taggedUser.tag}`,
-            fields: [
-                {
-                    name: 'Links as:',
-                    value: `[png](${taggedUser.avatarURL({ format: 'png', dynamic: false })}) | [jpg](${taggedUser.avatarURL({ format: 'jpg', dynamic: false })}) | [webp](${taggedUser.avatarURL({ format: 'webp', dynamic: false })})`
+        console.log(taggedUser)
+        if(!taggedUser || taggedUser == undefined) {
+            taggedUser = await getUser(`${message.author.id}`, message)
+        }
+        console.log(taggedUser)
+        try {
+            const avEmbed = {
+                color: 7506394,
+                title: `Avatar for ${taggedUser.user.tag}`,
+                fields: [
+                    {
+                        name: 'Links as:',
+                        value: `[png](${taggedUser.user.avatarURL({ format: 'png', dynamic: false })}) | [jpg](${taggedUser.user.avatarURL({ format: 'jpg', dynamic: false })}) | [webp](${taggedUser.user.avatarURL({ format: 'webp', dynamic: false })})`
+                    }
+                ],
+                image: {
+                    url: `${taggedUser.user.avatarURL({ format: 'png', dynamic: true, size: 1024 })}`,
+                },
+                timestamp: new Date(),
+                footer: {
+                    text: 'Generated on',
                 }
-            ],
-            image: {
-                url: `${taggedUser.avatarURL({ format: 'png', dynamic: true, size: 1024 })}`,
-            },
-            timestamp: new Date(),
-            footer: {
-                text: 'Generated on',
             }
+            return message.channel.send({ embeds: [avEmbed] });
+        } catch (error) {
+            console.log(error);
+            return message.channel.send('Error')
         }
-        message.channel.send({ embeds: [avEmbed] });
+        
     }
 }
