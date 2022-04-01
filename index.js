@@ -14,8 +14,8 @@ const client = new Client({ intents: [
 		'CHANNEL', 
 		'REACTION',
 		'GUILD_MEMBER'
-	]
-	/*makeCache: Options.cacheWithLimits({
+	],
+	makeCache: Options.cacheWithLimits({
 		ChannelManager: {
 			sweepInterval: 3600,
 			sweepFilter: Util.archivedThreadSweepFilter(),
@@ -31,7 +31,10 @@ const client = new Client({ intents: [
 			sweepFilter: Util.archivedThreadSweepFilter(),
 		},
 		VoiceStateManager: 10,
-	}),*/
+	}),
+	allowedMentions: {
+		parse: ['users','roles'],
+	},
 });
 
 client.commands = new Collection();

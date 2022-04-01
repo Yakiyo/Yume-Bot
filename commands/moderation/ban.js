@@ -10,7 +10,7 @@ module.exports = {
     usage: '[user id/mention] <reason>',
     perms: 'BAN_MEMBERS',
     async execute(message, args) {
-        let taggedUser, id, author, client;
+        let taggedUser;
         taggedUser = await getUser(args[0], message);
         if (taggedUser == undefined) return message.channel.send('User is either not in this server or you gave an invalid argument.');
         
@@ -29,7 +29,7 @@ module.exports = {
                 icon_url: `${message.guild.iconURL({ format: 'png', dynamic: true })}`
             }
         }
-        const modlog = {
+        const modlogEmb = {
             title: 'Ban Case',
             color: 'GOLD',
             description: `**Offender:** ${taggedUser.user.tag} | <@!${taggedUser.user.id}>\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason || 'No reason provided'}`,
@@ -44,7 +44,7 @@ module.exports = {
             console.log(err);
             message.channel.send('Couldnt ban the user. Something went wrong!');
         });
-        modlog(modlog, message).catch(error => error);
+        modlog(modlogEmb, message).catch(error => error);
         message.channel.send(`Successfully banned ${taggedUser.user.tag}`);
     }
 }
