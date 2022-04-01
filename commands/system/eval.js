@@ -1,3 +1,4 @@
+const shorten = require('../../modules/shorten.js');
 // command guide : https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/examples/making-an-eval-command.md
 const clean = async (text) => {
     if (text && text.constructor.name == "Promise") {
@@ -25,15 +26,21 @@ module.exports = {
         if (message.author.id !== '695307292815654963') return message.channel.send('Inaccessible command. <:redCross:946453057053544449>');
 
         try {
-          
-            const evaled = eval(args.join(" ")) || 'no return value';
-
-            let cleaned = await clean(evaled) || 'Nothing to return here(?)';
-
-            message.channel.send(`\`\`\`js\n${cleaned}\n\`\`\``);
-        } catch (err) {
-        
-            message.channel.send(`\`ERROR\` \`\`\`xl\n${cleaned}\n\`\`\``);
-        }
+            // Evaluate (execute) our input
+            const evaled = eval(args.join(" "));
+      
+            // Put our eval result through the function
+            // we defined above
+            const cleaned = await clean(evaled);
+      
+            // Reply in the channel with our result
+            message.channel.send(`\`\`\`js\n${shorten(cleaned, 1900)}\n\`\`\``);
+          } catch (err) {
+            // Reply in the channel with our error
+            message.channel.send(`\`ERROR\` \`\`\`xl\n${shorten(cleaned, 1900)}\n\`\`\``).catch(error => {
+                console.log(error);
+                message.channel.send('Something went wrong X')
+            });
+          }
     }
 }
