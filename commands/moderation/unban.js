@@ -1,4 +1,4 @@
-const { modlog } = require('../../modules/modlog.js');
+const modlog = require('../../modules/modlog.js');
 
 module.exports = {
     name: 'unban',

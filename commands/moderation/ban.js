@@ -1,4 +1,4 @@
-const { modlog } = require('../../modules/modlog.js');
+const modlog = require('../../modules/modlog.js');
 const getUser = require('../../modules/getUser.js');
 
 module.exports = {
