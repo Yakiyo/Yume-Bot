@@ -17,7 +17,7 @@ module.exports = {
         //Puts user name
         context.font = '50px sans-serif';
         context.fillStyle = '#00b9bd';
-        context.fillText(member.user.tag, 85, 465);
+        context.fillText(member.user.tag, 85, 465, 300);
 
         //Circle stand for avatar
         context.beginPath();
@@ -33,13 +33,14 @@ module.exports = {
         context.stroke();
 
         const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-        
+        const memCount = await member.guild.members.fetch().then(stuff => stuff.size);
         const wEmb = new Discord.MessageEmbed()
 				        .setTitle(`Welcome ${member.user.tag}!`)
 				        .setColor(`#e91e63`)
 				        .setThumbnail(`${member.displayAvatarURL({ format: 'png', dynamic: true })}`)
 				        .setImage(`attachment://${attachment.name}`)
-				        .setDescription(`Thanks for joining Tsurekano!\nPlease read rules-and-info and get some roles as a basic start. Feel free to ask <@&844136794977992705> or <@&844233565310812190> for any questions!\nDont forget to join our subreddit at:\n[https://www.reddit.com/r/MamahahaTsurego/](https://www.reddit.com/r/MamahahaTsurego/)`);
+				        .setDescription(`Thanks for joining Tsurekano!\nPlease read rules-and-info and get some roles as a basic start. Feel free to ask <@&844136794977992705> or <@&844233565310812190> for any questions!\nDont forget to join our subreddit at:\n[https://www.reddit.com/r/MamahahaTsurego/](https://www.reddit.com/r/MamahahaTsurego/)`)
+                        .setFooter({ text: `Member count: ${memCount}` });
 
         await wchan.send({
         	content: `Welcome <@!${member.user.id}>!`, 

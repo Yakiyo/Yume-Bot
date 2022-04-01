@@ -1,23 +1,6 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
 
-const applyText = (canvas, text) => {
-	const context = canvas.getContext('2d');
-
-	// Declare a base size of the font
-	let fontSize = 100;
-
-	do {
-		// Assign the font to the context and decrement it so it can be measured again
-		context.font = `${fontSize -= 5}px sans-serif`;
-		// Compare pixel width of the text to the canvas minus the approximate avatar size
-	} while (context.measureText(text).width > canvas.width / 2 );
-	console.log(canvas.width, context.measureText(text).width);
-	// Return the result to use in the actual canvas
-	return context.font;
-};
-
-
 module.exports = {
     name: 'canva',
     description: 'Why u wanna know this :eyes:',
@@ -41,11 +24,11 @@ module.exports = {
         const context = canvas.getContext('2d');
         const background = await Canvas.loadImage('./wallpaper.jpg');
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
-        
+        console.log(context.measureText(member.displayName).width)
         //Puts user name
-        context.font = '50px sans-serif' //applyText(canvas, member.displayName);
+        context.font = '50px sans-serif';
         context.fillStyle = '#00b9bd';
-        context.fillText(member.user.tag, 85, 465);
+        context.fillText(member.user.tag, 85, 465, 300);
 
         //Circle stand for avatar
         context.beginPath();
