@@ -13,7 +13,7 @@ module.exports = {
 
 		if (!command) return;
 
-		if (command.guildOnly && message.channel.type === 'dm') {
+		if (command.guildOnly === true && message.channel.type === 'DM') {
 			return message.reply('That is a guild only command. Cannot execute in DMs!'); // guild only command
 		}
 

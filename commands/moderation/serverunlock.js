@@ -4,6 +4,7 @@ module.exports = {
     aliases: ['sunlockdown'],
     category: 'moderation',
     perms: 'MANAGE_GUILD',
+    guildOnly: true,
     async execute(message) {
         return message.channel.send('This command isn\'t functional yet');
     },

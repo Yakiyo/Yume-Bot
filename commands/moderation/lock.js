@@ -5,6 +5,7 @@ module.exports = {
     usage: '[channel to lock]',
     perms: 'MODERATE_MEMBERS',
     aliases: ['lockdown'],
+    guildOnly: true,
     async execute(message, args) {
         let trgtChannel = message.channel;
         if (args[1]) {
