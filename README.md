@@ -40,8 +40,9 @@ git clone https://github.com/Yakiyo/Yume-Bot
 cd Yume-Bot
 npm install
 ```
-After that create a `.env` file and put your bot token in a variable named `TOKEN` and run `node index.js` in the directory through command line. 
+Edit the `.env.example` file with your token and then rename the file to `.env`. After that run `npm run start` or `node .` and youll have your bot started. 
 Optionally you can change the default prefix to ur preference from `config.json`. For a detailed guide on how to make a bot using discordjs please refer to their official guide. You can host the bot for free on [Heroku](https://www.heroku.com/). You can see this [video](https://youtu.be/OFearuMjI4s) for the steps.
 
+You'd have to change some minor spots over the project in some places too. Like system commands being restricted to bot owner had the owner id hardcoded in them so change them.
 ## License
 [GPL-3.0 License](https://fsf.org/)
