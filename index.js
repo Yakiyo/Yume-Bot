@@ -2,18 +2,19 @@ const fs = require('fs');
 const { Client, Intents, Collection, Options, Util } = require('discord.js');
 require('dotenv').config();
 
-const client = new Client({ intents: [
-		Intents.FLAGS.GUILDS, 
-		Intents.FLAGS.GUILD_MEMBERS, 
-		Intents.FLAGS.GUILD_BANS, 
-		Intents.FLAGS.GUILD_MESSAGES, 
-		Intents.FLAGS.GUILD_BANS
-	], 
+const client = new Client({
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_BANS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.DIRECT_MESSAGES,
+	],
 	partials: [
-		'MESSAGE', 
-		'CHANNEL', 
+		'MESSAGE',
+		'CHANNEL',
 		'REACTION',
-		'GUILD_MEMBER'
+		'GUILD_MEMBER',
 	],
 	makeCache: Options.cacheWithLimits({
 		ChannelManager: {
@@ -33,14 +34,14 @@ const client = new Client({ intents: [
 		VoiceStateManager: 10,
 	}),
 	allowedMentions: {
-		parse: ['users','roles'],
+		parse: ['users', 'roles'],
 	},
 });
 
 client.commands = new Collection();
 
 const commandFolders = fs.readdirSync('./commands');
-console.log('Initializing commands loading......')
+console.log('Initializing commands loading......');
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
@@ -48,7 +49,7 @@ for (const folder of commandFolders) {
 		client.commands.set(command.name, command);
 	}
 }
-console.log(`All commands loaded.`)
+console.log('All commands loaded.');
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 

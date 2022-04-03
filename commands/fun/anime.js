@@ -2,7 +2,7 @@ const shorten = require('../../modules/shorten.js');
 const capitalize = require('../../modules/capitalize.js');
 const fetch = require('node-fetch');
 
-let query = `
+const query = `
 query ($search: String) {
   Media(search: $search, type: ANIME) {
     id
@@ -38,12 +38,13 @@ module.exports = {
     category: 'fun',
     usage: '[anime name to search]',
     async execute(message, args) {
-      	let url = 'https://graphql.anilist.co', manga,
+      	let manga;
+		const url = 'https://graphql.anilist.co',
       	variables = {
-      		search: args.join(" ")
-      	}
+      		search: args.join(' '),
+      	};
 
-      	let options = {
+      	const options = {
         	method: 'POST',
         	headers: {
             	'Content-Type': 'application/json',
@@ -51,8 +52,8 @@ module.exports = {
         	},
         	body: JSON.stringify({
             	query: query,
-            	variables: variables
-        	})
+            	variables: variables,
+        	}),
     	};
 
 
@@ -63,7 +64,7 @@ try {
 }
 
 		function handleResponse(response) {
-		    return response.json().then(function (json) {
+		    return response.json().then(function(json) {
 		        return response.ok ? json : Promise.reject(json);
 		    });
 		}
@@ -72,11 +73,6 @@ try {
 			manga = data.data.Media;
 		}
 
-		function handleError(error) {
-		    return message.channel.send(`Couldn't find any manga with the name **${args.join(' ')}**`)
-		    console.error(error);
-		}
-        
 				const titles = [];
 				for (const name in manga.title) {
 					if (manga.title[name]) {
@@ -89,13 +85,13 @@ try {
         	color: [26, 178, 207],
         	author: {
         		name: `${manga.title.romaji}`,
-        		icon_url: `https://anilist.co/img/logo_al.png`,
-        		url: `https://anilist.co/manga/${manga.id}`
+        		icon_url: 'https://anilist.co/img/logo_al.png',
+        		url: `https://anilist.co/manga/${manga.id}`,
         	},
         	thumbnail: {
-        		url: `${manga.coverImage.extraLarge}`
+        		url: `${manga.coverImage.extraLarge}`,
         	},
-        	description: `${shorten(manga.description).replace(/[\r\n ]{2,}/gm, "\n").replace(/\\\\n/g, "\r\n")}`,
+        	description: `${shorten(manga.description).replace(/[\r\n ]{2,}/gm, '\n').replace(/\\\\n/g, '\r\n')}`,
         	footer: {
         		text: `${manga.seasonYear ? `Aired in: ${manga.seasonYear}` : '....'}`,
         	},
@@ -103,12 +99,12 @@ try {
         	{
         		name: 'Titles',
         		value: `${titles.join(', ')}`,
-        		inline: false
+        		inline: false,
         	},
         	{
         		name: 'Type',
         		value: `${capitalize(manga.type)}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Format',
@@ -118,22 +114,22 @@ try {
         	{
         		name: 'Status',
         		value: `${capitalize(manga.status)}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Ratings',
-        		value: `${manga.meanScore+'%' || '??'}`,
-        		inline: true
+        		value: `${manga.meanScore + '%' || '??'}`,
+        		inline: true,
         	},
         	{
         		name: 'Episodes',
         		value: `${manga.episodes || '??'}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Season',
         		value: `${capitalize(manga.season || '') || '??'}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Genres',
@@ -141,14 +137,14 @@ try {
         		inline: false,
         	},
         	],
-        	timestamp: new Date()
-        }
-        console.log(manga.isLicensed)
+        	timestamp: new Date(),
+        };
+        console.log(manga.isLicensed);
         try {
-        	return message.channel.send({embeds: [responseEmb]});
+        	return message.channel.send({ embeds: [responseEmb] });
         } catch (error) {
-        	return message.channel.send('Unexpected error occurred. Please try again later or report it to the mods.');
         	console.log(error);
+			return message.channel.send('Unexpected error occurred. Please try again later or report it to the mods.');
         }
-    }
-}
+    },
+};

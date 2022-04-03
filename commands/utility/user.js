@@ -8,15 +8,15 @@ module.exports = {
     guildOnly: true,
     category: 'utility',
     async execute(message, args) {
-        let member, id;
+        let member;
         if (args[0]) {
-            member = await getUser(args[0], message)//.catch(error => error);
+            member = await getUser(args[0], message);
         }
-        
-        if(!member || member == undefined) {
-            member = message.member
+
+        if (!member || member == undefined) {
+            member = message.member;
         }
-        
+
         try {
             const roles = [];
             await member.roles.cache.forEach(role => roles.push(`<@&${role.id}>`));
@@ -48,21 +48,21 @@ module.exports = {
                     text: `ID: ${member.id}`,
                 },
                 timestamp: new Date(),
-            }
-            if(roles.includes(`<@&${message.guild.roles.premiumSubscriberRole.id}>`)) {
-                embed.fields.splice(2, 0, { name: 'Server Booster!',value: `<@&${message.guild.roles.premiumSubscriberRole.id}>`, inline: true})
-            } else if(roles.includes(`<@&844136794977992705>`)) {
-                embed.fields.splice(2, 0, { name: 'Server Administrator!',value: `<@&844136794977992705>`, inline: true})
-            } else if(roles.includes(`<@&844233565310812190>`)) {
-                embed.fields.splice(2, 0, { name: 'Server Moderator!',value: `<@&844233565310812190>`, inline: true})
+            };
+            if (roles.includes(`<@&${message.guild.roles.premiumSubscriberRole.id}>`)) {
+                embed.fields.splice(2, 0, { name: 'Server Booster!', value: `<@&${message.guild.roles.premiumSubscriberRole.id}>`, inline: true });
+            } else if (roles.includes('<@&844136794977992705>')) {
+                embed.fields.splice(2, 0, { name: 'Server Administrator!', value: '<@&844136794977992705>', inline: true });
+            } else if (roles.includes('<@&844233565310812190>')) {
+                embed.fields.splice(2, 0, { name: 'Server Moderator!', value: '<@&844233565310812190>', inline: true });
             }
             return message.channel.send({ embeds: [embed] });
         } catch (error) {
             console.log(error);
             return message.channel.send('Some huge bombs busted and the command failed to ran. Pls report it to dev!');
-            
-        }
-        
 
-    }
-}
+        }
+
+
+    },
+};

@@ -5,11 +5,11 @@ turndown.addRule('spoiler', {
 	filter: ['span'],
 	replacement: function(text) {
 		return `|| ${text} ||`;
-	}
-})
+	},
+});
 
 function shorten(string, num = 1000) {
-	let str = turndown.turndown(string);
+	const str = turndown.turndown(string);
 	if (str.length > num) {
 		return str.substring(0, num + 1) + '...';
 	} else {

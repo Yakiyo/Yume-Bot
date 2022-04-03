@@ -1,19 +1,20 @@
+/* eslint-disable no-undef */
 const shorten = require('../../modules/shorten.js');
 // command guide : https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/examples/making-an-eval-command.md
 const clean = async (text) => {
-    if (text && text.constructor.name == "Promise") {
+    if (text && text.constructor.name == 'Promise') {
         text = await text;
     }
-    if (typeof text !== "string") {
-        text = require("util").inspect(text, { depth: 1 });
+    if (typeof text !== 'string') {
+        text = require('util').inspect(text, { depth: 1 });
     }
     text = text
-      .replace(/`/g, "`" + String.fromCharCode(8203))
-      .replace(/@/g, "@" + String.fromCharCode(8203));
+      .replace(/`/g, '`' + String.fromCharCode(8203))
+      .replace(/@/g, '@' + String.fromCharCode(8203));
 
     // Send off the cleaned up result
     return text;
-}
+};
 
 module.exports = {
     name: 'eval',
@@ -27,20 +28,20 @@ module.exports = {
 
         try {
             // Evaluate (execute) our input
-            const evaled = eval(args.join(" "));
-      
+            const evaled = eval(args.join(' '));
+
             // Put our eval result through the function
             // we defined above
             const cleaned = await clean(evaled);
-      
+
             // Reply in the channel with our result
             message.channel.send(`\`\`\`js\n${shorten(cleaned, 1900)}\n\`\`\``);
           } catch (err) {
             // Reply in the channel with our error
             message.channel.send(`\`ERROR\` \`\`\`xl\n${shorten(cleaned, 1900)}\n\`\`\``).catch(error => {
                 console.log(error);
-                message.channel.send('Something went wrong X')
+                message.channel.send('Something went wrong X');
             });
           }
-    }
-}
+    },
+};

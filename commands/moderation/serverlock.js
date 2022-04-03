@@ -4,7 +4,7 @@ module.exports = {
     category: 'moderation',
     aliases: ['lockdown'],
     perms: 'MANAGE_GUILD',
-    async execute(message, args) {
+    async execute(message) {
         return message.channel.send('This command isn\'t functional yet');
-    }
-}
+    },
+};

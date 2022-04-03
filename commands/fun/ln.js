@@ -2,7 +2,7 @@ const shorten = require('../../modules/shorten.js');
 const capitalize = require('../../modules/capitalize.js');
 const fetch = require('node-fetch');
 
-let query = `
+const query = `
 query ($search: String) {
   Media(search: $search, type: MANGA, format: NOVEL) {
     id
@@ -36,14 +36,15 @@ module.exports = {
     args: true,
     category: 'fun',
     usage: '[ln name to search]',
-    aliases: ['novel', 'light-novel','ranobe'],
+    aliases: ['novel', 'light-novel', 'ranobe'],
     async execute(message, args) {
-      	let url = 'https://graphql.anilist.co', novel,
+      	let novel;
+		const url = 'https://graphql.anilist.co',
       	variables = {
-      		search: args.join(" ")
-      	}
+      		search: args.join(' '),
+      	};
 
-      	let options = {
+      	const options = {
         	method: 'POST',
         	headers: {
             	'Content-Type': 'application/json',
@@ -51,8 +52,8 @@ module.exports = {
         	},
         	body: JSON.stringify({
             	query: query,
-            	variables: variables
-        	})
+            	variables: variables,
+        	}),
     	};
 
 
@@ -63,7 +64,7 @@ try {
 }
 
 		function handleResponse(response) {
-		    return response.json().then(function (json) {
+		    return response.json().then(function(json) {
 		        return response.ok ? json : Promise.reject(json);
 		    });
 		}
@@ -72,11 +73,6 @@ try {
 			novel = data.data.Media;
 		}
 
-		function handleError(error) {
-		    return message.channel.send(`Couldn't find any light novel with the name **${args.join(' ')}**`)
-		    console.error(error);
-		}
-        
 				const titles = [];
 				for (const name in novel.title) {
 					if (novel.title[name]) {
@@ -89,13 +85,13 @@ try {
         	color: [26, 178, 207],
         	author: {
         		name: `${novel.title.romaji}`,
-        		icon_url: `https://anilist.co/img/logo_al.png`,
-        		url: `https://anilist.co/manga/${novel.id}`
+        		icon_url: 'https://anilist.co/img/logo_al.png',
+        		url: `https://anilist.co/manga/${novel.id}`,
         	},
         	thumbnail: {
-        		url: `${novel.coverImage.extraLarge}`
+        		url: `${novel.coverImage.extraLarge}`,
         	},
-        	description: `${shorten(novel.description).replace(/[\r\n ]{2,}/gm, "\n").replace(/\\\\n/g, "\r\n")}`,
+        	description: `${shorten(novel.description).replace(/[\r\n ]{2,}/gm, '\n').replace(/\\\\n/g, '\r\n')}`,
         	footer: {
         		text: `Licensed: ${novel.isLicensed ? 'Yes' : 'No'}`,
         	},
@@ -103,12 +99,12 @@ try {
         	{
         		name: 'Titles',
         		value: `${titles.join(', ')}`,
-        		inline: false
+        		inline: false,
         	},
         	{
         		name: 'Type',
         		value: `${capitalize(novel.type)}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Format',
@@ -118,22 +114,22 @@ try {
         	{
         		name: 'Status',
         		value: `${capitalize(novel.status)}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Ratings',
-        		value: `${novel.meanScore+'%' || '??'}`,
-        		inline: true
+        		value: `${novel.meanScore + '%' || '??'}`,
+        		inline: true,
         	},
         	{
         		name: 'Volumes',
         		value: `${novel.volumes || '??'}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Chapters',
         		value: `${novel.chapters || '??'}`,
-        		inline: true
+        		inline: true,
         	},
         	{
         		name: 'Genres',
@@ -141,14 +137,14 @@ try {
         		inline: false,
         	},
         	],
-        	timestamp: new Date()
-        }
+        	timestamp: new Date(),
+        };
 
         try {
-        	return message.channel.send({embeds: [responseEmb]});
+        	return message.channel.send({ embeds: [responseEmb] });
         } catch (error) {
-        	return message.channel.send('Unexpected error occurred. Please try again later or report it to the mods.');
         	console.log(error);
+			return message.channel.send('Unexpected error occurred. Please try again later or report it to the mods.');
         }
-    }
-}
+    },
+};

@@ -8,15 +8,15 @@ module.exports = {
     category: 'utility',
     guildOnly: true,
     async execute(message, args) {
-        let taggedUser, id;
+        let taggedUser;
         if (args[0]) {
-            taggedUser = await getUser(args[0], message)//.catch(error => error);
+            taggedUser = await getUser(args[0], message);
         }
-        console.log(taggedUser)
-        if(!taggedUser || taggedUser == undefined) {
-            taggedUser = await getUser(`${message.author.id}`, message)
+        console.log(taggedUser);
+        if (!taggedUser || taggedUser == undefined) {
+            taggedUser = await getUser(`${message.author.id}`, message);
         }
-        console.log(taggedUser)
+        console.log(taggedUser);
         try {
             const avEmbed = {
                 color: 7506394,
@@ -24,8 +24,8 @@ module.exports = {
                 fields: [
                     {
                         name: 'Links as:',
-                        value: `[png](${taggedUser.user.avatarURL({ format: 'png', dynamic: false })}) | [jpg](${taggedUser.user.avatarURL({ format: 'jpg', dynamic: false })}) | [webp](${taggedUser.user.avatarURL({ format: 'webp', dynamic: false })})`
-                    }
+                        value: `[png](${taggedUser.user.avatarURL({ format: 'png', dynamic: false })}) | [jpg](${taggedUser.user.avatarURL({ format: 'jpg', dynamic: false })}) | [webp](${taggedUser.user.avatarURL({ format: 'webp', dynamic: false })})`,
+                    },
                 ],
                 image: {
                     url: `${taggedUser.user.avatarURL({ format: 'png', dynamic: true, size: 1024 })}`,
@@ -33,13 +33,13 @@ module.exports = {
                 timestamp: new Date(),
                 footer: {
                     text: 'Generated on',
-                }
-            }
+                },
+            };
             return message.channel.send({ embeds: [avEmbed] });
         } catch (error) {
             console.log(error);
-            return message.channel.send('Error')
+            return message.channel.send('Error');
         }
-        
-    }
-}
+
+    },
+};

@@ -1,4 +1,3 @@
-
 module.exports = {
     name: 'purge',
     description: 'Deletes a specified number of messages in the channel the command was used in. Can**not** delete messages older then 2 weeks due to discord limitations. Purging limit is between 2 to 100 inclusive.',
@@ -18,13 +17,13 @@ module.exports = {
 		}
 		try {
 			message.channel.bulkDelete(amount, true).then(
-				message.channel.send(`Successfully deleted ${amount - 1} number of messages.`).then(msg => msg.delete({ timeout: 15000 }))
-			)
-			
+				message.channel.send(`Successfully deleted ${amount - 1} number of messages.`).then(msg => msg.delete({ timeout: 15000 })),
+			);
+
 		} catch (error) {
 			console.log(error);
-			message.channel.send('There was an unexpected problem while deleting the messages.')
-			
+			message.channel.send('There was an unexpected problem while deleting the messages.');
+
 		}
-    }
-}
+    },
+};

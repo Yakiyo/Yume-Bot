@@ -13,6 +13,6 @@ module.exports = async (obj, msg) => {
 				})
 				.catch(error => {
 					console.log(error);
-					return msg.channel.send('Could not log to modlogs')
+					return msg.channel.send('Could not log to modlogs');
 				});
-}
+};

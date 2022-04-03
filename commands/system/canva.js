@@ -8,35 +8,35 @@ module.exports = {
     category: 'system',
     aliases: ['canvas', 'cnv'],
     async execute(message, args) {
-        if (message.author.id != '695307292815654963'){
+        if (message.author.id != '695307292815654963') {
             return message.channel.send('This command is only usable by the bot owner.');
         }
         let id;
         if (args[0]) {
-        	id = args[0].replace('<@','').replace('>','').replace('!','');
+        	id = args[0].replace('<@', '').replace('>', '').replace('!', '');
         } else {
         	id = message.author.id;
         }
         const member = await message.guild.members.fetch(`${id}`).then(dude => dude).catch(error => error);
 
-        //Creates the empty canvas
+        // Creates the empty canvas
         const canvas = Canvas.createCanvas(700, 500);
         const context = canvas.getContext('2d');
         const background = await Canvas.loadImage('./wallpaper.jpg');
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
-        console.log(context.measureText(member.displayName).width)
-        //Puts user name
+        console.log(context.measureText(member.displayName).width);
+        // Puts user name
         context.font = '50px sans-serif';
         context.fillStyle = '#00b9bd';
         context.fillText(member.user.tag, 85, 465, 300);
 
-        //Circle stand for avatar
+        // Circle stand for avatar
         context.beginPath();
         context.arc(213, 286, 125, 0, Math.PI * 2, true);
         context.closePath();
         context.clip();
 
-        //Puts the avatar in the stand
+        // Puts the avatar in the stand
         const avatar = await Canvas.loadImage(member.displayAvatarURL({ format: 'png', size: 4096 }));
         context.drawImage(avatar, 89, 150, 255, 255);
         context.strokeStyle = '#00b9bd';
@@ -44,9 +44,9 @@ module.exports = {
         context.stroke();
 
         const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-        
-        await message.channel.send({files: [attachment]});
+
+        await message.channel.send({ files: [attachment] });
         message.channel.send('Code execution complete!');
-        
-    }
-}
+
+    },
+};

@@ -1,3 +1,4 @@
+/* eslint-disable no-inline-comments */
 const { prefix } = require('../config.json');
 
 module.exports = {
@@ -5,12 +6,12 @@ module.exports = {
 	async execute(message, client) {
 		if (!message.content.startsWith(prefix) || message.author.bot) return; // Checking if message starts with prefix and it wasnt posted by a bot
 
-		const args = message.content.slice(prefix.length).trim().split(/ +/); 
+		const args = message.content.slice(prefix.length).trim().split(/ +/);
 		const commandName = args.shift().toLowerCase(); // Separating the command and argument from the user.
-		const command = client.commands.get(commandName) //giving command = command name 
+		const command = client.commands.get(commandName) // giving command = command name
 			|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)); // or the aliase
 
-		if (!command) return; 
+		if (!command) return;
 
 		if (command.guildOnly && message.channel.type === 'dm') {
 			return message.reply('That is a guild only command. Cannot execute in DMs!'); // guild only command

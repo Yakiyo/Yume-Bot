@@ -10,10 +10,9 @@ module.exports = {
     usage: '[user id/mention] <reason>',
     perms: 'BAN_MEMBERS',
     async execute(message, args) {
-        let taggedUser;
-        taggedUser = await getUser(args[0], message);
+        const taggedUser = await getUser(args[0], message);
         if (taggedUser == undefined) return message.channel.send('User is either not in this server or you gave an invalid argument.');
-        
+
         if (message.guild.me.permissions.has('BAN_MEMBERS') == false) return message.channel.send('I do not have the required permissions to ban a user.');
         if (taggedUser.user.id == message.author.id || taggedUser.user.id == message.client.user.id) return message.channel.send('Cannot execute ban on this user.');
         if (message.guild.roles.comparePositions(message.member.roles.highest, taggedUser.roles.highest) <= 0) return message.channel.send('This user is higher then you. You cannot ban him.');
@@ -26,19 +25,19 @@ module.exports = {
             timestamp: new Date(),
             footer: {
                 text: `Triggered by ${message.author.id}`,
-                icon_url: `${message.guild.iconURL({ format: 'png', dynamic: true })}`
-            }
-        }
+                icon_url: `${message.guild.iconURL({ format: 'png', dynamic: true })}`,
+            },
+        };
         const modlogEmb = {
             title: 'Ban Case',
             color: 'GOLD',
             description: `**Offender:** ${taggedUser.user.tag} | <@!${taggedUser.user.id}>\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason || 'No reason provided'}`,
             timestamp: new Date(),
             footer: {
-                text: `ID: ${taggedUser.user.id}`
-            }
-        }
-        
+                text: `ID: ${taggedUser.user.id}`,
+            },
+        };
+
         await taggedUser.send({ embeds: [dmEmb] }).catch(error => console.log(error));
         await message.guild.members.ban(taggedUser.user, { days: 3, reason: `${reason || 'No reason provided'}` }).catch(err => {
             console.log(err);
@@ -46,5 +45,5 @@ module.exports = {
         });
         modlog(modlogEmb, message).catch(error => error);
         message.channel.send(`Successfully banned ${taggedUser.user.tag}`);
-    }
-}
+    },
+};

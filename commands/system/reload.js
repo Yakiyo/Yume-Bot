@@ -8,8 +8,8 @@ module.exports = {
     category: 'system',
     usage: '<command>',
     async execute(message, args) {
-        if (message.author.id !== '695307292815654963'){
-            return message.channel.send('This command is only to be used by the bot owner.')
+        if (message.author.id !== '695307292815654963') {
+            return message.channel.send('This command is only to be used by the bot owner.');
         }
         const commandName = args[0].toLowerCase();
         const command = message.client.commands.get(commandName)
@@ -30,5 +30,5 @@ module.exports = {
             console.error(error);
             message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
         }
-    }
-}
+    },
+};
