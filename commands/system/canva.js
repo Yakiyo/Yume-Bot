@@ -19,16 +19,17 @@ module.exports = {
         }
         const member = await message.guild.members.fetch(`${id}`).then(dude => dude).catch(error => error);
 
+        Canvas.registerFont('./assets/Poppins-Bold.ttf', { family: 'Poppins' });
         // Creates the empty canvas
         const canvas = Canvas.createCanvas(700, 500);
         const context = canvas.getContext('2d');
-        const background = await Canvas.loadImage('./wallpaper.jpg');
+        const background = await Canvas.loadImage('./assets/welcome.jpg');
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
-        console.log(context.measureText(member.displayName).width);
-        // Puts user name
-        context.font = '50px sans-serif';
+        // console.log(context.measureText(member.displayName).width);
+        // Puts user name 50px sans-serif
+        context.font = '50px Poppins';
         context.fillStyle = '#00b9bd';
-        context.fillText(member.user.tag, 85, 465, 300);
+        context.fillText(member.user.tag, 76, 465, 300);
 
         // Circle stand for avatar
         context.beginPath();
@@ -38,7 +39,7 @@ module.exports = {
 
         // Puts the avatar in the stand
         const avatar = await Canvas.loadImage(member.displayAvatarURL({ format: 'png', size: 4096 }));
-        context.drawImage(avatar, 89, 150, 255, 255);
+        context.drawImage(avatar, 89, 152, 255, 255);
         context.strokeStyle = '#00b9bd';
         context.lineWidth = 10;
         context.stroke();
