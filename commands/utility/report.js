@@ -10,7 +10,7 @@ module.exports = {
     perms: undefined,
     category: 'utility',
     async execute(message, args) {
-        const chan = await message.client.channels.fetch('844632108831342679');
+        const chan = await message.client.channels.fetch('962044593342402650');
         const report = args.join(' ');
 
         const reportEmbed = {
