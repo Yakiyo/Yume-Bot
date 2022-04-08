@@ -1,3 +1,5 @@
+const sourcebin = require('sourcebin');
+
 module.exports = {
     name: 'embedsource',
     description: 'Fetches the json source of an embed.',
@@ -30,13 +32,28 @@ module.exports = {
             return message.channel.send('That message doesn\'t contain any embed');
         }
         Object.keys(embedObj).forEach((k) => embedObj[k] == null && delete embedObj[k]);
-        const sourceEmbed = {
-            title: 'Embed Source',
-            color: 3372252,
-            description: `\`\`\`${JSON.stringify(embedObj, null, 4)}\`\`\``,
-        };
-        message.channel.send({ embeds: [sourceEmbed] });
-
-
+        const json = JSON.stringify(embedObj, null, 4);
+        if (json.length <= 2000) {
+            const sourceEmbed = {
+                title: 'Embed Source',
+                color: 3372252,
+                description: `\`\`\`${json}\`\`\``,
+            };
+            return message.channel.send({ embeds: [sourceEmbed] });
+        } else if (json.length > 2000) {
+            const bin = await sourcebin.create(
+                [
+                    {
+                        content: `${json}`,
+                        language: 'JSON',
+                    },
+                ],
+                {
+                    title: 'Embed source',
+                    description: 'embed source for a discord embed',
+                },
+            );
+            return message.channel.send(`Embed source over 2k characters. ${bin.url}`);
+        }
     },
 };
