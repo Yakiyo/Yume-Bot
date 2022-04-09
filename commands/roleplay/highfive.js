@@ -6,7 +6,7 @@ module.exports = {
     description: 'Gives a highfive gif',
     usage: '<optional user id/mention>',
     category: 'roleplay',
-    guildOnly: true,
+    
     aliases: ['high5'],
     async execute(message, args) {
         let hug;

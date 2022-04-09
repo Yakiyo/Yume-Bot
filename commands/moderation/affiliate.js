@@ -3,7 +3,7 @@ const { blockQuote } = require('@discordjs/builders');
 module.exports = {
     name: 'affiliate',
     description: 'Adds a new affiliate with the server in <#844148747343757342>',
-    guildOnly: true,
+    
     args: true,
     category: 'moderation',
     aliases: ['partner', 'aff'],

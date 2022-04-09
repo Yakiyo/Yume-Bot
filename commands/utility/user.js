@@ -5,7 +5,7 @@ module.exports = {
     name: 'user',
     description: 'shows some infos about the user of the command',
     aliases: ['info', 'whois'],
-    guildOnly: true,
+    
     category: 'utility',
     async execute(message, args) {
         let member;

@@ -6,7 +6,7 @@ module.exports = {
     description: 'Gives a cuddle gif',
     usage: '<optional user id/mention>',
     category: 'roleplay',
-    guildOnly: true,
+    
     aliases: ['cuddles'],
     async execute(message, args) {
         let hug;

@@ -32,7 +32,7 @@ query ($search: String) {
 module.exports = {
     name: 'ln',
     description: 'Searches the anilist database for the novel with the provided name',
-    guildOnly: true,
+    
     args: true,
     category: 'fun',
     usage: '[ln name to search]',

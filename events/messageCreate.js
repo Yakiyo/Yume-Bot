@@ -89,10 +89,6 @@ module.exports = {
 
 			if (!command) return;
 
-			if (command.guildOnly === true && message.channel.type === 'DM') {
-				return message.reply('That is a guild only command. Cannot execute in DMs!'); // guild only command
-			}
-
 			if (command.perms) {
 			const authorPerms = message.channel.permissionsFor(message.author);
 			if (!authorPerms || !authorPerms.has(command.perms)) {

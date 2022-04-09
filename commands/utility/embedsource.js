@@ -3,7 +3,7 @@ const sourcebin = require('sourcebin');
 module.exports = {
     name: 'embedsource',
     description: 'Fetches the json source of an embed.',
-    guildOnly: true,
+    
     args: true,
     category: 'utility',
     aliases: ['esc'],

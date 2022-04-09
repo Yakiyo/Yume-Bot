@@ -4,7 +4,7 @@ const { fetchRandom } = require('nekos-best.js');
 module.exports = {
     name: 'waifu',
     description: 'Gives a waifu image',
-    guildOnly: true,
+    
     category: 'fun',
     aliases: ['cat'],
     async execute(message) {

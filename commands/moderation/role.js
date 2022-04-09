@@ -3,7 +3,7 @@ const getUser = require('../../modules/getUser.js');
 module.exports = {
     name: 'role',
     description: 'adds/removes a role from a user',
-    guildOnly: true,
+    
     category: 'moderation',
     args: true,
     perms: 'MANAGE_ROLES',

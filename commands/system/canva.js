@@ -4,7 +4,7 @@ const Canvas = require('canvas');
 module.exports = {
     name: 'canva',
     description: 'Why u wanna know this :eyes:',
-    guildOnly: true,
+    
     category: 'system',
     aliases: ['canvas', 'cnv'],
     async execute(message, args) {

@@ -6,7 +6,7 @@ module.exports = {
     description: 'Gives the command user\'s default discord avatar. ',
     usage: '[user mention]',
     category: 'utility',
-    guildOnly: true,
+    
     async execute(message, args) {
         let taggedUser;
         if (args[0]) {

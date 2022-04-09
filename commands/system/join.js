@@ -1,7 +1,7 @@
 module.exports = {
     name: 'join',
     description: 'testing greet message',
-    guildOnly: true,
+    
     aliases: ['testgreet'],
     category: 'system',
     async execute(message) {

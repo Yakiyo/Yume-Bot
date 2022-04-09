@@ -5,7 +5,7 @@ const getUser = require('../../modules/getUser.js');
 module.exports = {
     name: 'mute',
     description: 'Time\'s out a user. **Does** not assign a mute role. Uses discord\'s in built timeout feature',
-    guildOnly: true,
+    
     args: true,
     category: 'moderation',
     aliases: ['timeout'],
