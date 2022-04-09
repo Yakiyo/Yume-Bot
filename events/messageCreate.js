@@ -79,7 +79,7 @@ module.exports = {
 			});
 			return;
 
-		} else if (message.channel.type === 'GUILD_TEXT') {
+		} else {
 			if (!message.content.startsWith(prefix)) return; // Checking if message starts with prefix and it wasnt posted by a bot
 
 			const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -110,8 +110,6 @@ module.exports = {
 				console.error(error);
 				message.reply('There was an error trying to execute that command!'); // Error with the command handler itself
 			}
-		} else {
-			return;
-		}
+		} 
 	},
 };
