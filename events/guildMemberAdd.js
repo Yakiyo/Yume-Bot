@@ -52,5 +52,10 @@ module.exports = {
         	files: [attachment],
          });
 
+        if (member.user.bot && !member.roles.cache.has('844231726364753921')) {
+            await member.roles.add('844231726364753921');
+        }
+        return;
+
 	},
 };
