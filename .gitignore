@@ -1,4 +1,4 @@
 node_modules
-snippets.js
 .env
-./commands/system/test.js
+dev_stuff
+commands/system/demo.js
