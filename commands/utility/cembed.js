@@ -1,3 +1,5 @@
+const sourcebin = require('sourcebin');
+
 module.exports = {
     name: 'cembed',
     description: 'Creates an embed with JSON as arguments. Dont use this if u dont know what you\'re doing. ',
@@ -6,25 +8,37 @@ module.exports = {
     category: 'utility',
     usage: '<raw JSON>',
     async execute(message, args) {
-        /* try {
-            const embedObj = JSON.parse(args.join(' '));
-            message.channel.send({ embeds: [embedObj]});
-        } catch (error) {
-            message.channel.send('Could not parse that JSON :x:');
-        }*/
-        let trgtChannel = message.channel, content = args.slice(0);
-        await message.guild.channels.fetch(args[0].replace('<#', '').replace('>', ''))
-            .then(chan => {
-                trgtChannel = chan;
-                content = args.slice(1);
+        const channel = await message.guild.channels.fetch(args[0].replace('<#', '').replace('>', ''))
+            .then(res => {
+                args.shift();
+                return res;
             })
-            .catch(error => {
-                console.log(error);
-                trgtChannel = message.channel;
+            .catch(() => {
+                return message.channel;
             });
-        if (!content.length) return message.channel.send('Please provide required arguments');
 
-        const emb = JSON.parse(content.join(' '));
-        trgtChannel.send({ embeds: [emb] }).catch(err => console.log(err)).then(message.react('946452985368690749'));
+        if (!args.length) return message.channel.send('Please provide a JSON source or a sourcebin link');
+
+        let embed;
+
+        if (args[0].match(/https:\/\/sourceb\.in\/.*|https:\/\/srcb\.in\/.*/g)) {
+            embed = await sourcebin.get(`${args[0]}`)
+                .then(res => {
+                    return JSON.parse(res.files[0].content);
+                })
+                .catch(() => {
+                    return message.channel.send('Could not fetch the provided sourcebin file. Make sure it is a valid link.');
+                });
+            if (!embed) return message.channel.send('Could not fetch the provided sourcebin file. Make sure it is a valid link.');
+        } else {
+            embed = JSON.parse(args.join(' '));
+        }
+        await channel.send({ embeds: [embed] })
+            .then(() => {
+                return message.react('946452985368690749');
+            })
+            .catch(() => {
+                return message.channel.send('Unexpected error. Possible reasons: Invalid JSON format or embed limit exceeded');
+            });
     },
 };
