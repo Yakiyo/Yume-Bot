@@ -9,7 +9,7 @@ module.exports = async (obj, msg) => {
 						});
 	await channel.send({ embeds: [obj] })
 				.then(() => {
-					return console.log('Logging successful!');
+					return;
 				})
 				.catch(error => {
 					console.log(error);

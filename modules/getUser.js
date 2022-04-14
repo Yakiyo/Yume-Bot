@@ -5,7 +5,6 @@ module.exports = async (thingy, msg) => {
 	if (fetched) {
 		return fetched;
 	} else {
-		console.log(`Missed an args. Arg was ${thingy}`);
 		return undefined;
 	}
 };
