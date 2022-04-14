@@ -1,17 +1,45 @@
 const { time } = require('@discordjs/builders');
 const capitalize = require('../../modules/capitalize.js');
-const { args } = require('./cembed.js');
 
 module.exports = {
     name: 'server',
     description: 'Gives the server name, id, and owner',
     aliases: ['si', 'guild'],
-    usage: '[ info / icon / banner ]',
+    usage: '[ info / icon / pfp / banner ]',
     category: 'utility',
-    async execute(message) {
+    async execute(message, args) {
         const server = message.guild;
         let result;
-        if (!args || args[0] === 'info') {
+
+        if (args[0] === 'icon' || args[0] === 'pfp') {
+            result = {
+                title: `Server Icon for ${server.name}`,
+                color: 1141191,
+                image: {
+                    url: `${server.iconURL({ format: 'png', dynamic: true, size: 1024 })}`,
+                },
+                footer: {
+                    text: `Server id: ${server.id}`,
+                    icon_url: `${message.author.avatarURL({ format: 'png', dynamic: true })}`,
+                },
+                timestamp: new Date(),
+            };
+        } else if (args[0] === 'banner') {
+            if (!server.bannerURL()) return message.channel.send('This server doesn\'t have a banner.');
+
+            result = {
+                title: `Server banner for ${server.name}`,
+                color: 1141191,
+                image: {
+                    url: `${server.bannerURL({ format: 'png', dynamic: true, size: 1024 })}`,
+                },
+                footer: {
+                    text: `Server id: ${server.id}`,
+                    icon_url: `${message.author.avatarURL({ format: 'png', dynamic: true })}`,
+                },
+                timestamp: new Date(),
+            };
+        } else {
             const memCount = await server.members.fetch().then(stuff => stuff.size);
             const owner = await message.client.users.fetch(server.ownerId).then(dude => dude.tag);
             result = {
@@ -57,32 +85,6 @@ module.exports = {
             if (message.guild.bannerURL()) {
                 result.image.url = `${message.guild.bannerURL()}`;
             }
-        } else if (args[0] === 'icon') {
-            result = {
-                title: `Server Icon for ${server.name}`,
-                color: 1141191,
-                image: {
-                    url: `${server.iconURL({ format: 'png', dynamic: true })}`,
-                },
-                footer: {
-                    text: `Server id: ${server.id}`,
-                    icon_url: `${message.author.avatarURL({ format: 'png', dynamic: true })}`,
-                },
-            };
-        } else if (args[0] === 'banner') {
-            if (!server.bannerURL()) return message.channel.send('This server doesn\'t have a banner.');
-
-            result = {
-                title: `Server banner for ${server.name}`,
-                color: 1141191,
-                image: {
-                    url: `${server.bannerURL({ format: 'png', dynamic: true })}`,
-                },
-                footer: {
-                    text: `Server id: ${server.id}`,
-                    icon_url: `${message.author.avatarURL({ format: 'png', dynamic: true })}`,
-                },
-            };
         }
         return message.channel.send({ embeds: [result] });
     },
