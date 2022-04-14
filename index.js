@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { Client, Intents, Collection, Options, Util } = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 require('dotenv').config();
 
 const client = new Client({
@@ -16,25 +16,16 @@ const client = new Client({
 		'REACTION',
 		'GUILD_MEMBER',
 	],
-	makeCache: Options.cacheWithLimits({
-		ChannelManager: {
-			sweepInterval: 3600,
-			sweepFilter: Util.archivedThreadSweepFilter(),
-		},
-		GuildChannelManager: {
-			sweepInterval: 3600,
-			sweepFilter: Util.archivedThreadSweepFilter(),
-		},
-		MessageManager: 100,
-		StageInstanceManager: 10,
-		ThreadManager: {
-			sweepInterval: 3600,
-			sweepFilter: Util.archivedThreadSweepFilter(),
-		},
-		VoiceStateManager: 10,
-	}),
+	presence: {
+		status: 'online',
+		activities: [{
+			name: 'DMs to contact staff | .help',
+			type: 'WATCHING',
+		}],
+	},
 	allowedMentions: {
 		parse: ['users', 'roles'],
+		repliedUser: true,
 	},
 });
 
