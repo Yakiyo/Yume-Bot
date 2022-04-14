@@ -54,6 +54,8 @@ module.exports = {
 
         if (member.user.bot && !member.roles.cache.has('844231726364753921')) {
             await member.roles.add('844231726364753921');
+        } else if (!member.user.bot && !member.roles.cache.has('844228269871988818')) {
+            await member.roles.add('844228269871988818');
         }
         return;
 
