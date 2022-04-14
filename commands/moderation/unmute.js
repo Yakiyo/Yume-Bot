@@ -4,7 +4,7 @@ const getUser = require('../../modules/getUser.js');
 module.exports = {
     name: 'unmute',
     description: 'Un-time\'s out a user. **Does** not assign a mute role. Uses discord\'s in built timeout feature',
-    
+
     args: true,
     category: 'moderation',
     aliases: ['untimeout'],

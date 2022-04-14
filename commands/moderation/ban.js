@@ -5,7 +5,7 @@ module.exports = {
     name: 'ban',
     description: 'bans the user with the mention/id.',
     args: true,
-    
+
     category: 'moderation',
     usage: '[user id/mention] <reason>',
     perms: 'BAN_MEMBERS',

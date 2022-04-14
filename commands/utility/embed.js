@@ -4,7 +4,7 @@ module.exports = {
     args: true,
     category: 'utility',
     aliases: ['emb'],
-    
+
     usage: '[title] | [description]',
     async execute(message, args) {
         let trgtChannel = message.channel, content = args.slice(0);

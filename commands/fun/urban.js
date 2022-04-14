@@ -4,7 +4,7 @@ const querystring = require('querystring');
 module.exports = {
     name: 'urban',
     description: 'Returns a search from [Urban Dictionary](https://www.urbandictionary.com/)',
-    
+
     category: 'fun',
     args: true,
     aliases: [],

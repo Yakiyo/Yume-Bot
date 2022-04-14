@@ -19,7 +19,7 @@ const clean = async (text) => {
 module.exports = {
     name: 'eval',
     description: 'Super OP eval() command for bot dev only',
-    
+
     aliases: ['evaluate'],
     category: 'system',
     args: true,

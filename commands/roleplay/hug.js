@@ -6,7 +6,7 @@ module.exports = {
     description: 'Gives a hug gif',
     usage: '<optional user id/mention>',
     category: 'roleplay',
-    
+
     aliases: ['hugs'],
     async execute(message, args) {
         let hug;

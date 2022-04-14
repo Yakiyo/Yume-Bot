@@ -3,7 +3,6 @@ const sourcebin = require('sourcebin');
 module.exports = {
     name: 'cembed',
     description: 'Creates an embed with JSON as arguments. Dont use this if u dont know what you\'re doing. ',
-    
     args: true,
     category: 'utility',
     usage: '<raw JSON>',

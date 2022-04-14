@@ -5,7 +5,7 @@ module.exports = {
     name: 'serverinfo',
     description: 'Gives the server name, id, and owner',
     aliases: ['si', 'server'],
-    
+
     category: 'utility',
     async execute(message) {
         const server = message.guild; let memCount;

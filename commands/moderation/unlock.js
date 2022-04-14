@@ -5,7 +5,7 @@ module.exports = {
     usage: '[channel to unlock]',
     perms: 'MODERATE_MEMBERS',
     aliases: ['unlockdown'],
-    
+
     async execute(message, args) {
         let trgtChannel = message.channel;
         if (args[1]) {

@@ -110,6 +110,6 @@ module.exports = {
 				console.error(error);
 				message.reply('There was an error trying to execute that command!'); // Error with the command handler itself
 			}
-		} 
+		}
 	},
 };

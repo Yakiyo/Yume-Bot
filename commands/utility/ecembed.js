@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['ece', 'editcustomembed'],
     args: true,
     category: 'utility',
-    
+
     perms: 'MANAGE_MESSAGES',
     usage: '[message ID] <channel> [JSON]',
     async execute(message, args) {

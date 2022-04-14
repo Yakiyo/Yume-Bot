@@ -4,7 +4,7 @@ const { version } = require('../../package.json');
 module.exports = {
     name: 'about',
     description: 'A general description of the bot.',
-    
+
     args: false,
     category: 'misc',
     aliases: ['botinfo'],

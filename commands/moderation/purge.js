@@ -5,7 +5,7 @@ module.exports = {
 	category: 'moderation',
 	args: true,
 	usage: '<amount to delete>',
-	
+
 	perms: 'MANAGE_MESSAGES',
     async execute(message, args) {
         const amount = parseInt(args[0]) + 1;

@@ -4,7 +4,7 @@ const { fetchRandom } = require('nekos-best.js');
 module.exports = {
     name: 'neko',
     description: 'Gives a neko image',
-    
+
     category: 'fun',
     aliases: ['cat'],
     async execute(message) {

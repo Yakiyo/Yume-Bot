@@ -4,7 +4,7 @@ const { fetchRandom } = require('nekos-best.js');
 module.exports = {
     name: 'kitsune',
     description: 'Gives a kitsune/fox-girl image',
-    
+
     category: 'fun',
     aliases: ['fox'],
     async execute(message) {

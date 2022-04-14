@@ -32,7 +32,7 @@ query ($search: String) {
 module.exports = {
     name: 'manga',
     description: 'Searches the anilist database for the manga with the provided name',
-    
+
     args: true,
     category: 'fun',
     usage: '[manga name to search]',

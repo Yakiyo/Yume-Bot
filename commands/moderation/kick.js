@@ -5,7 +5,7 @@ module.exports = {
     name: 'kick',
     description: 'Kicks a mentioned user, duh',
     args: true,
-    
+
     usage: '[user mention/id] <reason>',
     perms: 'KICK_MEMBERS',
     category: 'moderation',

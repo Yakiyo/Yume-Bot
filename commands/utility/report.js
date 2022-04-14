@@ -3,7 +3,7 @@ const { time } = require('@discordjs/builders');
 module.exports = {
     name: 'report',
     description: 'Sends a report to the mod channel. The original message gets deleted. Can add an optional image attachement',
-    
+
     args: true,
     aliases: [],
     usage: '<report to make> [additional image attachement]',

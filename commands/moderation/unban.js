@@ -4,7 +4,7 @@ module.exports = {
     name: 'unban',
     description: '',
     args: true,
-    
+
     category: 'moderation',
     usage: '[user id]',
     pers: 'BAN_MEMBERS',
