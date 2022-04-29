@@ -49,7 +49,7 @@ module.exports = {
                 },
                 timestamp: new Date(),
             };
-            if (roles.includes(`<@&${message.guild.roles.premiumSubscriberRole.id}>`)) {
+            if (message.guild.roles.premiumSubscriberRole && roles.includes(`<@&${message.guild.roles.premiumSubscriberRole.id}>`)) {
                 embed.fields.splice(2, 0, { name: 'Server Booster!', value: `<@&${message.guild.roles.premiumSubscriberRole.id}>`, inline: true });
             } else if (roles.includes('<@&844136794977992705>')) {
                 embed.fields.splice(2, 0, { name: 'Server Administrator!', value: '<@&844136794977992705>', inline: true });
