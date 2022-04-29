@@ -7,9 +7,10 @@ module.exports = {
     category: 'utility',
     args: true,
     async execute(message, args) {
-        console.log(args);
         const name = args[0];
-        const url = args[1];
+        const url = args[1] || null;
+
+        if (!url) return message.channel.send('Please provide an image link.');
         if (!/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gmi.test(url)) return message.channel.send('Second argument does not seem to match a valid image link expression!');
 
         if (message.guild.me.permissions.has('MANAGE_EMOJIS_AND_STICKERS') == false) return message.channel.send('I do not have the required permissions to add emojis in this server.');
