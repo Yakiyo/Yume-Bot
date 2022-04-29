@@ -82,7 +82,7 @@ module.exports = {
 		} else {
 			if (!message.content.startsWith(prefix)) return; // Checking if message starts with prefix and it wasnt posted by a bot
 
-			const args = message.content.slice(prefix.length).trim().split(/ +/);
+			const args = message.content.slice(prefix.length).split(/ +/);
 			const commandName = args.shift().toLowerCase(); // Separating the command and argument from the user.
 			const command = client.commands.get(commandName) // giving command = command name
 				|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)); // or the aliase
