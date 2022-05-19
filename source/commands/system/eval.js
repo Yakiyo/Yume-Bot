@@ -29,7 +29,6 @@ module.exports = {
                 .setDescription('the code to be executed')
                 .setRequired(true),
         ),
-    private: true,
 	async execute(interaction) {
 		await interaction.deferReply();
 
