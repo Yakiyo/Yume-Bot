@@ -2,7 +2,7 @@
   "name": "yume-bot",
   "version": "2.0.0",
   "description": "A multi-purpose discord bot made for the tsurekano discord server.",
-  "main": "index.js",
+  "main": "source/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
@@ -19,7 +19,7 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
-    "canvas": "^2.9.0",
+    "canvas": "^2.9.1",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.7.0",
     "dotenv": "^16.0.0",
@@ -29,6 +29,7 @@
     "turndown": "^7.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.12.0"
+    "eslint": "^8.12.0",
+    "nodemon": "^2.0.16"
   }
 }
