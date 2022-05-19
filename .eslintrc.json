@@ -8,7 +8,6 @@
 		"ecmaVersion": 2021
 	},
 	"rules": {
-		"no-mixed-spaces-and-tabs": 0,
 		"arrow-spacing": ["warn", { "before": true, "after": true }],
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",

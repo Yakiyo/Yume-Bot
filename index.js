@@ -29,19 +29,6 @@ const client = new Client({
 	},
 });
 
-client.commands = new Collection();
-
-const commandFolders = fs.readdirSync('./commands');
-console.log('Initializing commands loading......');
-for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-	for (const file of commandFiles) {
-		const command = require(`./commands/${folder}/${file}`);
-		client.commands.set(command.name, command);
-	}
-}
-console.log('All commands loaded.');
-
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
