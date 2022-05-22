@@ -86,7 +86,7 @@ try {
         	author: {
         		name: `${manga.title.romaji}`,
         		icon_url: 'https://anilist.co/img/logo_al.png',
-        		url: `https://anilist.co/manga/${manga.id}`,
+        		url: `https://anilist.co/anime/${manga.id}`,
         	},
         	thumbnail: {
         		url: `${manga.coverImage.extraLarge}`,
