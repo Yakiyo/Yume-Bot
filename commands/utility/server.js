@@ -49,6 +49,7 @@ module.exports = {
                     url: `${server.iconURL({ format: 'png', dynamic: true })}`,
                 },
                 description: `**Server id:** ${server.id}\n\n**Description:** ${server.description || '.......'}`,
+                image: {},
                 fields: [
                 {
                     name: 'Owner',
