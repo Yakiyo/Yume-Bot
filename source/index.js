@@ -32,7 +32,8 @@ const client = new Client({
 		repliedUser: true,
 	},
 });
-const botId = process.env.NODE_ENV === 'production' ? clientId : '964798451261014026';
+// This uses a secondary bot account to use for development instead of the original one.
+const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
 
 const commands = [];
 client.commands = new Collection();
