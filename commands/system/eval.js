@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const shorten = require('../../modules/shorten.js');
 // command guide : https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/examples/making-an-eval-command.md
 const clean = async (text) => {
@@ -8,9 +7,11 @@ const clean = async (text) => {
     if (typeof text !== 'string') {
         text = require('util').inspect(text, { depth: 1 });
     }
+    const tokenRegex = new RegExp(process.env.TOKEN, 'g');
     text = text
       .replace(/`/g, '`' + String.fromCharCode(8203))
-      .replace(/@/g, '@' + String.fromCharCode(8203));
+      .replace(/@/g, '@' + String.fromCharCode(8203))
+      .replace(tokenRegex, '[Bot-Token]');
 
     // Send off the cleaned up result
     return text;
@@ -26,13 +27,14 @@ module.exports = {
     async execute(message, args) {
         if (message.author.id !== '695307292815654963') return message.channel.send('Inaccessible command. <:redCross:946453057053544449>');
 
+        let cleaned;
         try {
             // Evaluate (execute) our input
             const evaled = eval(args.join(' '));
 
             // Put our eval result through the function
             // we defined above
-            const cleaned = await clean(evaled);
+            cleaned = await clean(evaled);
 
             // Reply in the channel with our result
             message.channel.send(`\`\`\`js\n${shorten(cleaned, 1900)}\n\`\`\``);
