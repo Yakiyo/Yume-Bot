@@ -80,6 +80,10 @@ module.exports = {
 			return;
 
 		} else {
+			if (message.channel.id === '844291476049494026' && message.mentions.roles.size !== 0) {
+				const channel = await client.channels.fetch('844632108831342679').then(chan => chan).catch(() => null);
+				await channel.send(`Hey <@!${message.author.id}>!.\nIf you just uploaded a release or something, then make sure to post it on the subreddit too, if it's applicable. This is an automatic trigger by the bot when any role is mentioned in <#844291476049494026>. If you think this doesn't apply, then ignore this message.\nSubreddit link: https://www.reddit.com/r/MamahahaTsurego/`);
+			}
 			if (!message.content.startsWith(prefix)) return; // Checking if message starts with prefix and it wasnt posted by a bot
 
 			const args = message.content.slice(prefix.length).split(/ +/);
@@ -110,6 +114,7 @@ module.exports = {
 				console.error(error);
 				message.reply('There was an error trying to execute that command!'); // Error with the command handler itself
 			}
+
 		}
 	},
 };
