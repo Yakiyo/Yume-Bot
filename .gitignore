@@ -1,4 +1,4 @@
 node_modules
 .env
 dev_stuff
-commands/system/demo.js
+source/commands/system/test.js
