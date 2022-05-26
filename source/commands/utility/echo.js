@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, quote } = require('@discordjs/builders');
-const { serverlogs } = require('../../config.json');
+const { channels } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -28,7 +28,7 @@ module.exports = {
 
         const message = await channel.send(`${sentence}`).then(sent => sent);
         await interaction.reply({ content: 'Message Successfully sent!', ephemeral: true });
-        const logChannel = await interaction.client.channels.fetch(serverlogs).then(chan => chan);
+        const logChannel = await interaction.client.channels.fetch(channels.serverlogs).then(chan => chan);
         const logEmbed = {
             author: {
                 name: interaction.user.tag,
