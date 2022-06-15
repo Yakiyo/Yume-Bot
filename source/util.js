@@ -1,3 +1,4 @@
+const { modlogs } = require('./config.json').channels;
 const turndownService = require('turndown');
 const turndown = new turndownService;
 // converts the span element spoilers (for anilist) to discord spoiler markdown
@@ -25,6 +26,14 @@ const util = {
         } else {
             return 'null';
         }
+    },
+    async modlog(client, embed) {
+        const channel = await client.channels.fetch(modlogs).catch(() => null);
+        if (!channel) {
+            console.log('Could not fetch modlogs channel.');
+            return null;
+        }
+        return await channel.send({ embeds: [embed] }).catch((error) => console.log(error));
     },
 };
 
