@@ -5,6 +5,7 @@ const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId } = require('./config.json');
 const path = require('node:path');
 require('dotenv').config();
+const Mongo = require('./database/db.js');
 
 const client = new Client({
 	intents: [
@@ -32,6 +33,8 @@ const client = new Client({
 		repliedUser: true,
 	},
 });
+
+client.mongo = new Mongo(process.env.MONGO);
 // This uses a secondary bot account to use for development instead of the original one.
 const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
 
