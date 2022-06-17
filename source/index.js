@@ -39,8 +39,15 @@ client.mongo = new Mongo(process.env.MONGO);
 const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
 
 const commands = [];
+client.textCommands = new Collection();
 client.commands = new Collection();
 const commandFolders = fs.readdirSync('./source/commands');
+const textCommandFiles = fs.readdirSync('./source/textCommands');
+
+for (const file of textCommandFiles) {
+	const command = require(path.resolve(process.cwd(), `./source/textCommands/${file}`));
+	client.textCommands.set(command.name, command);
+}
 
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./source/commands/${folder}`).filter(file => file.endsWith('.js'));

@@ -1,6 +1,7 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
-const { channels } = require('../config.json');
+const { channels, owners } = require('../config.json');
 const { time } = require('@discordjs/builders');
+const prefix = ';';
 
 module.exports = {
 	name: 'messageCreate',
@@ -77,6 +78,20 @@ module.exports = {
 				}
 			});
             return;
-        }
+        } else if (message.guild) {
+			if (message.content.startsWith(prefix) && owners.includes(message.author.id)) {
+				const args = message.content.slice(prefix.length).split(/ +/);
+				const command = args.shift().toLowerCase();
+				if (client.commands.has(command)) {
+					try {
+						client.textCommands.get(command).execute(message, args);
+					} catch (error) {
+						console.error(error);
+						message.reply('there was an error trying to execute that command!');
+					}
+				}
+
+			}
+		}
 	},
 };
