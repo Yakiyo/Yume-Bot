@@ -6,15 +6,15 @@ const prefix = ';';
 module.exports = {
 	name: 'messageCreate',
 	async execute(message, client) {
-        if (message.author.bot) return;
+		if (message.author.bot) return;
 
-        if (message.channel.type === 'DM') {
-            if (!channels.modmail === 'Disabled') return;
-            if (message.content.startsWith('!')) return;
-            const modmailChannel = await client.channels.fetch(channels.modmail).then(chan => chan).catch(() => null);
+		if (message.channel.type === 'DM') {
+			if (!channels.modmail === 'Disabled') return;
+			if (message.content.startsWith('!')) return;
+			const modmailChannel = await client.channels.fetch(channels.modmail).then(chan => chan).catch(() => null);
 
-            if (!modmailChannel) return message.reply('Internal error when fetching modmail channel. Modmail channel not set or invalid argument provided. Please report this issue to the staff!');
-            const embed = {
+			if (!modmailChannel) return message.reply('Internal error when fetching modmail channel. Modmail channel not set or invalid argument provided. Please report this issue to the staff!');
+			const embed = {
 				title: 'Confirmation',
 				color: '#e91e63',
 				description: 'Are you sure you want to send this message to the staff\'s in **Tsurekano** (ID: 844103224528076801)?\nReact to the buttons to proceed or cancel ',
@@ -22,7 +22,7 @@ module.exports = {
 					text: 'Tip: Messages in dms starting with ! are ignored.',
 				},
 			};
-            const row = new MessageActionRow()
+			const row = new MessageActionRow()
 				.addComponents(new MessageButton()
 					.setLabel('Proceed')
 					.setStyle('PRIMARY')
@@ -33,10 +33,10 @@ module.exports = {
 					.setStyle('DANGER')
 					.setCustomId('mail_no')
 					.setEmoji('946453057053544449'));
-            const responded = await message.channel.send({ embeds: [embed], components: [row] }).then(sent => sent);
-            const collector = responded.createMessageComponentCollector({ componentType: 'BUTTON', time: 10 * 1000, max: 1 });
+			const responded = await message.channel.send({ embeds: [embed], components: [row] }).then(sent => sent);
+			const collector = responded.createMessageComponentCollector({ componentType: 'BUTTON', time: 10 * 1000, max: 1 });
 
-            collector.on('collect', async button => {
+			collector.on('collect', async button => {
 				if (button.customId === 'mail_yes') {
 					await responded.edit({ embeds: [{ title: 'Sending message <a:loading:962047754543181975>', color: '#e91e63' }], components: [] });
 					const mailEmbed = {
@@ -49,8 +49,8 @@ module.exports = {
 						description: `${message.content}`,
 						fields: [
 							{
-							name: 'User Info',
-							value: `**Name**: ${message.author.tag}\n**Created at**: ${time(message.author.createdTimestamp)}\n**Sent on:** ${time(message.createdTimestamp)}`,
+								name: 'User Info',
+								value: `**Name**: ${message.author.tag}\n**Created at**: ${time(message.author.createdTimestamp)}\n**Sent on:** ${time(message.createdTimestamp)}`,
 							},
 						],
 						image: {},
@@ -77,14 +77,18 @@ module.exports = {
 					responded.edit({ embeds: [{ title: 'Time ended. Interaction cancelled', color: '#e91e63' }], components: [] });
 				}
 			});
-            return;
-        } else if (message.guild) {
+			return;
+		} else if (message.guild) {
 			if (message.content.startsWith(prefix) && owners.includes(message.author.id)) {
 				const args = message.content.slice(prefix.length).split(/ +/);
-				const command = args.shift().toLowerCase();
-				if (client.commands.has(command)) {
+				const commandName = args.shift().toLowerCase();
+				if (client.textCommands.has(commandName)) {
+					const command = client.textCommands.get(commandName);
+					if (command.args && !args.length) {
+						return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+					}
 					try {
-						client.textCommands.get(command).execute(message, args);
+						command.execute(message, args);
 					} catch (error) {
 						console.error(error);
 						message.reply('there was an error trying to execute that command!');
