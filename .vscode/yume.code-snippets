@@ -1,0 +1,25 @@
+{
+	"event": {
+		"prefix": ["event"],
+		"body": ["module.exports = {" ,
+			"\tname: '${1:name}',",
+			"\tasync execute(${2:args},client) {",
+				"\t\t$0//Code Here",
+			"\t},",
+		"};"],
+		"description": "Creates the setup for a client event"
+	},
+	"command": {
+		"prefix": ["comm", "slash"],
+		"body": ["const { SlashCommandBuilder } = require('@discordjs/builders');",
+		"\nmodule.exports = {",
+			"\tdata: new SlashCommandBuilder()",
+				"\t\t.setName('${1:name}')",
+				"\t\t.setDescription('${2:description}'),",
+			"\tasync execute(interaction) {",
+				"\t\tawait interaction.reply('done');",
+			"\t},",
+		"};"],
+		"description": "Creates setup for a slash command"
+	}
+}
