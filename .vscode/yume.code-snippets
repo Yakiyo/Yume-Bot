@@ -21,5 +21,16 @@
 			"\t},",
 		"};"],
 		"description": "Creates setup for a slash command"
+	},
+	"textCommand": {
+		"prefix": ["tc", "textCom"],
+		"body": ["module.exports = {",
+			"\tname: '${1:name}',",
+			"\tdescription: '${2:description}',",
+			"\tasync execute(message) {",
+				"\t\t${0:return await message.channel.send('done');}",
+			"\t},",
+		"};"],
+		"description": "Creates a prefix based command setup"
 	}
 }
