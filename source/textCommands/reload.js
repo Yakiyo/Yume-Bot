@@ -1,4 +1,4 @@
-const path = require('node:path');
+// const path = require('node:path');
 module.exports = {
     name: 'reload',
     description: 'Reloads ur code to detect changes for commands. **Bot Owner** Only.',
@@ -10,11 +10,10 @@ module.exports = {
             return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
         }
 
-        delete require.cache[require.resolve(path.resolve(process.cwd(), `./source/textCommands/${command.name}.js`))];
-
+        delete require.cache[require.resolve(`./${command.name}`)];
         try {
             const newCommand = require(`./${command.name}.js`);
-            message.client.commands.set(newCommand.name, newCommand);
+            message.client.textCommands.set(newCommand.name, newCommand);
             message.channel.send(`Command \`${newCommand.name}\` was reloaded!`);
         } catch (error) {
             console.error(error);
