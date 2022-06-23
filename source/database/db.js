@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose');
 const Profile = require('./profile.js');
+const History = require('./history.js');
 
 class Mongo {
     /**
@@ -13,18 +14,8 @@ class Mongo {
         });
         this.mongoose = Mongoose;
         this.profile = new Profile(Mongoose);
+        this.history = new History(Mongoose);
     }
 }
-/*
 
-const history = {
-    model: model('history', new Schema({
-        _id: String,
-        bans: Number,
-        warns: Number,
-        mutes: Number,
-        kicks: Number,
-    })),
-};
-*/
 module.exports = Mongo;

@@ -60,6 +60,7 @@ module.exports = {
                     days: 3,
                     reason: interaction.options.getString('reason') || 'No reason provided',
                 });
+                await interaction.client.history.update(user.user.id, 'ban');
                 await modlog(interaction.client, {
                     title: 'Ban Case',
                     color: 14507859,

@@ -28,8 +28,7 @@ class Profile {
      * @param {string} id
      */
     async fetch(id) {
-        const profile = await this.model.findById(id).exec() || null;
-        return profile;
+        return await this.model.findById(id).exec() || null;
     }
     /**
      * Updates a user profile xp
