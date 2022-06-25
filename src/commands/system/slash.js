@@ -24,13 +24,13 @@ module.exports = {
 
         if (!option) {
             const clientCommands = new Collection();
-            const commandFolders = fs.readdirSync('./source/commands');
+            const commandFolders = fs.readdirSync('./src/commands');
 
             for (const folder of commandFolders) {
-                const commandFiles = fs.readdirSync(`./source/commands/${folder}`).filter(file => file.endsWith('.js'));
+                const commandFiles = fs.readdirSync(`./src/commands/${folder}`).filter(file => file.endsWith('.js'));
 
                 for (const file of commandFiles) {
-                    const command = require(path.resolve(process.cwd(), `./source/commands/${folder}/${file}`));
+                    const command = require(path.resolve(process.cwd(), `./src/commands/${folder}/${file}`));
                     command.category = `${folder}`;
                     clientCommands.set(command.data.name, command);
                     commands.push(command.data.toJSON());

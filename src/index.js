@@ -41,19 +41,19 @@ const botId = process.env.NODE_ENV !== 'development' ? clientId : '9647984512610
 const commands = [];
 client.textCommands = new Collection();
 client.commands = new Collection();
-const commandFolders = fs.readdirSync('./source/commands');
-const textCommandFiles = fs.readdirSync('./source/textCommands');
+const commandFolders = fs.readdirSync('./src/commands');
+const textCommandFiles = fs.readdirSync('./src/textCommands');
 
 for (const file of textCommandFiles) {
-	const command = require(path.resolve(process.cwd(), `./source/textCommands/${file}`));
+	const command = require(path.resolve(process.cwd(), `./src/textCommands/${file}`));
 	client.textCommands.set(command.name, command);
 }
 
 for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./source/commands/${folder}`).filter(file => file.endsWith('.js'));
+	const commandFiles = fs.readdirSync(`./src/commands/${folder}`).filter(file => file.endsWith('.js'));
 
 	for (const file of commandFiles) {
-		const command = require(path.resolve(process.cwd(), `./source/commands/${folder}/${file}`));
+		const command = require(path.resolve(process.cwd(), `./src/commands/${folder}/${file}`));
 		command.category = `${folder}`;
 		client.commands.set(command.data.name, command);
 		commands.push(command.data.toJSON());
@@ -77,10 +77,10 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 	}
 })();
 
-const eventFiles = fs.readdirSync('./source/events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-	const event = require(path.resolve(process.cwd(), `./source/events/${file}`));
+	const event = require(path.resolve(process.cwd(), `./src/events/${file}`));
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client));
 	} else {

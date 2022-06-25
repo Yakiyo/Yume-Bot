@@ -6,8 +6,8 @@ const { request } = require('undici');
 const { guildId, channels, roles } = require('../config.json');
 
 module.exports = {
-	name: 'guildMemberAdd',
-	async execute(member, client) {
+    name: 'guildMemberAdd',
+    async execute(member, client) {
         if (member.guild.id !== guildId || process.env.NODE_ENV !== 'production') return;
         const user = member.user;
 
@@ -29,11 +29,11 @@ module.exports = {
             const canvas = Canvas.createCanvas(700, 500);
             const context = canvas.getContext('2d');
             // Load Background
-            const backgroundFile = await readFile(resolve(process.cwd(), './source/assets/welcome.jpg'));
+            const backgroundFile = await readFile(resolve(process.cwd(), './src/assets/welcome.jpg'));
             const background = new Canvas.Image();
             background.src = backgroundFile;
             // Load fonts
-            Canvas.GlobalFonts.registerFromPath(resolve(process.cwd(), './source/assets/Poppins-Bold.ttf'), 'Poppins');
+            Canvas.GlobalFonts.registerFromPath(resolve(process.cwd(), './src/assets/Poppins-Bold.ttf'), 'Poppins');
             // Place the background
             context.drawImage(background, 0, 0, canvas.width, canvas.height);
             const { body } = await request(user.avatarURL({ format: 'png', size: 1024 }));
@@ -59,12 +59,12 @@ module.exports = {
 
             const memberCount = await member.guild.members.fetch().then(stuff => stuff.size);
             const embed = new MessageEmbed()
-                            .setTitle(`Welcome ${member.user.tag}!`)
-                            .setColor('#e91e63')
-                            .setThumbnail(`${member.displayAvatarURL({ format: 'png', dynamic: true })}`)
-                            .setImage(`attachment://${attachment.name}`)
-                            .setDescription('Thanks for joining Tsurekano!\nPlease read rules-and-info and get some roles as a basic start. Feel free to ask <@&844136794977992705> or <@&844233565310812190> for any questions!\nDont forget to join our subreddit at:\n[https://www.reddit.com/r/MamahahaTsurego/](https://www.reddit.com/r/MamahahaTsurego/)')
-                            .setFooter({ text: `Member count: ${memberCount}` });
+                .setTitle(`Welcome ${member.user.tag}!`)
+                .setColor('#e91e63')
+                .setThumbnail(`${member.displayAvatarURL({ format: 'png', dynamic: true })}`)
+                .setImage(`attachment://${attachment.name}`)
+                .setDescription('Thanks for joining Tsurekano!\nPlease read rules-and-info and get some roles as a basic start. Feel free to ask <@&844136794977992705> or <@&844233565310812190> for any questions!\nDont forget to join our subreddit at:\n[https://www.reddit.com/r/MamahahaTsurego/](https://www.reddit.com/r/MamahahaTsurego/)')
+                .setFooter({ text: `Member count: ${memberCount}` });
 
             try {
                 await channel.send({ embeds: [embed], files: [attachment] });
