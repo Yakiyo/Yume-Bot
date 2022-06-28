@@ -1,4 +1,4 @@
-<div align="center"><a href="https://discord.gg/q2zDU5bGnh"><img alt="Discord" src="https://img.shields.io/discord/844103224528076801?color=blue&label=Tsurekano%20Discord&logo=discord&logoColor=white&style=plastic"></a> <a href="https://www.reddit.com/r/MamahahaTsurego/"><img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/MamahahaTsurego?color=orange&label=r%2FMamahahaTsurego&logo=reddit&logoColor=orange&style=plastic"></a></div>
+<div align="center"><a href="https://discord.gg/q2zDU5bGnh"><img alt="Discord" src="https://img.shields.io/discord/844103224528076801?color=blue&label=Tsurekano%20Discord&logo=discord&logoColor=white&style=plastic"></a> <a href="https://www.reddit.com/r/MamahahaTsurego/"><img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/MamahahaTsurego?color=orange&label=r%2FMamahahaTsurego&logo=reddit&logoColor=orange&style=plastic"></a> <a href="https://deepscan.io/dashboard#view=project&tid=18158&pid=21489&bid=618590"><img src="https://deepscan.io/api/teams/18158/projects/21489/branches/618590/badge/grade.svg" alt="DeepScan grade"></a></div>
 
 # Yume Bot
 
