@@ -1,7 +1,6 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
-const { channels, owners } = require('../config.json');
+const { channels, owners, prefix } = require('../config.json');
 const { time } = require('@discordjs/builders');
-const prefix = ';';
 
 module.exports = {
 	name: 'messageCreate',
