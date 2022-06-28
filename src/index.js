@@ -42,10 +42,10 @@ const commands = [];
 client.textCommands = new Collection();
 client.commands = new Collection();
 const commandFolders = fs.readdirSync('./src/commands');
-const textCommandFiles = fs.readdirSync('./src/textCommands');
+const textCommandFiles = fs.readdirSync('./src/legacy');
 
 for (const file of textCommandFiles) {
-	const command = require(path.resolve(process.cwd(), `./src/textCommands/${file}`));
+	const command = require(path.resolve(process.cwd(), `./src/legacy/${file}`));
 	client.textCommands.set(command.name, command);
 }
 
