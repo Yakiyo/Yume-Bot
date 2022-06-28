@@ -16,7 +16,6 @@ module.exports = {
         }
         await interaction.deferReply({ ephemeral: true });
         const command = interaction.client.commands.get(interaction.options.getString('command'));
-        console.log(command);
         if (!command) return await interaction.editReply('Could not find any command with that name.');
         let folder;
         if (command.category) {
