@@ -1,4 +1,5 @@
 const { modlogs } = require('./config.json').channels;
+const fetch = require('node-fetch');
 const turndownService = require('turndown');
 const turndown = new turndownService;
 // converts the span element spoilers (for anilist) to discord spoiler markdown
@@ -54,6 +55,18 @@ class Util {
             return null;
         }
         return await channel.send({ embeds: [embed] }).catch((error) => console.log(error));
+    }
+    /**
+     * Fetch images from nekos best
+     * @param {string} endpoint the image endpoint which to fetch
+     */
+    async nekos(endpoint) {
+        if (!endpoint) throw new Error('No endpoint specified');
+        const url = 'https://nekos.best/api/v2/';
+        return await fetch(url + endpoint)
+            .then(res => res.json())
+            .then(json => json.results[0])
+            .catch(() => null);
     }
 }
 
