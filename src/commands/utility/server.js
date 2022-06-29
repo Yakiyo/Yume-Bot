@@ -11,7 +11,6 @@ module.exports = {
                 .addChoice('info', 'info')
                 .addChoice('icon', 'icon')
                 .addChoice('banner', 'banner')),
-    private: false,
     async execute(interaction) {
         const option = interaction.options.getString('option') || 'info';
         const server = await interaction.guild;

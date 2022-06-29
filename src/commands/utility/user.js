@@ -7,7 +7,6 @@ module.exports = {
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('The user whose info to show')),
-	private: false,
 	async execute(interaction) {
 		const member = await interaction.guild.members.fetch(interaction.options.getUser('user') || interaction.user);
         let roles = member.roles.cache.filter(role => role.id !== interaction.guild.id).map(val => `<@&${val.id}>`);
