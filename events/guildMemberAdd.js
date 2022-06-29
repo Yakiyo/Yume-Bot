@@ -7,7 +7,7 @@ module.exports = {
 	async execute(member, client) {
         if (member.guild.id !== '844103224528076801') return;
 
-		if (!member.bot) {
+		if (!member.user.bot) {
             const wchan = await client.channels.fetch(`${welcomeChannel}`).then(chan => chan);
 
             // Load a font
