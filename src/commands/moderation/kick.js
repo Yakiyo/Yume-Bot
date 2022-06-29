@@ -20,6 +20,7 @@ module.exports = {
         if (!member.kickable) return await interaction.editReply('This user is higher then me in hierarchy. Cannot kick them');
 
         try {
+            await member.user.send(`**Kick Notice**\n\nYou have been kicked from ${interaction.guild.name} \n**Reason:** ${interaction.options.getString('reason') || 'No reason provided'}`).catch(console.log);
             await interaction.guild.members.kick(member.user, interaction.options.getString('reason') || 'No Reason Provided');
             return await interaction.editReply(`Successfully kicked **${member.user.tag}** from the server.`);
         } catch (error) {
