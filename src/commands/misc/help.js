@@ -7,28 +7,18 @@ module.exports = {
         .setDescription('Help command for the bot')
         .addStringOption(option =>
             option.setName('command')
-                .setDescription('Name of command to get details about'))
-        .addStringOption(option =>
-            option.setName('subcommand')
-                .setDescription('Sub command of the command chosen, if any')),
+                .setDescription('Name of command to get details about')),
     async execute(interaction) {
-        const commandName = interaction.options.getString('command') || null, subCommandName = interaction.options.getString('subcommand') || null;
+        const commandName = interaction.options.getString('command') || null;
 
-        if (subCommandName && !commandName) {
-            return await interaction.reply('You cannot choose a subcommand without choosing a command');
-        } else if (commandName) {
+        if (commandName) {
             const commands = await interaction.guild.commands.fetch();
             const command = commands.find(com => com.name === commandName.toLowerCase());
             if (!command) return await interaction.reply('No command with that name found.');
             const options = [];
 
-            if (subCommandName) {
-                const val = command.options.find(subCommand => subCommand.name === subCommandName);
-                val ? options.push({ name: `/${command.name} ${val.name}`, value: `${val.description}` }) : null;
-            } else {
-                options.push(command.options.filter(option => option.type === 'SUB_COMMAND').map(subCommand => ({ name: `/${command.name} ${subCommand.name}`, value: `${subCommand.description}` })));
-            }
-            console.log(command.options);
+            options.push(command.options.filter(option => option.type === 'SUB_COMMAND').map(subCommand => ({ name: `/${command.name} ${subCommand.name}`, value: `${subCommand.description}` })));
+
             const embed = {
                 color: 15277667,
                 title: `Help menu for ${command.name}`,
