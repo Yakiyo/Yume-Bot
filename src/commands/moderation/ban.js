@@ -45,22 +45,14 @@ module.exports = {
 
             if (interaction.guild.roles.comparePositions(interaction.member.roles.highest, user.roles.highest) <= 0) return await interaction.editReply('This user is higher then you. You cannot ban him.');
             if (!user.moderatable) return await interaction.editReply('This user is higher then me in hierarchy. Cannot ban them');
-            const dmEmbed = {
-                color: '#303136',
-                title: 'Ban Notice',
-                description: `You have been banned from ${interaction.guild.name} \n**Reason:** ${interaction.options.getString('reason') || 'No reason provided'}\n**Ban Appeal:** [Click here](https://forms.gle/MC5i6iqAfFrbGu6Y9) *(One time only form)*`,
-                footer: {
-                    text: `Triggered by ${interaction.user.id}`,
-                    icon_url: `${interaction.guild.iconURL({ format: 'png', dynamic: true })}`,
-                },
-            };
-            await user.user.send({ embed: [dmEmbed] }).catch(error => console.log(error));
+
+            await user.user.send({ content: `**Ban Notice**\n\nYou have been banned from ${interaction.guild.name} \n**Reason:** ${interaction.options.getString('reason') || 'No reason provided'}\n**Ban Appeal:** https://forms.gle/MC5i6iqAfFrbGu6Y9 *[One time use only form]*` }).catch(error => console.log(error));
             try {
                 await interaction.guild.members.ban(user.user, {
                     days: 3,
                     reason: interaction.options.getString('reason') || 'No reason provided',
                 });
-                await interaction.client.history.update(user.user.id, 'ban');
+
                 await modlog(interaction.client, {
                     title: 'Ban Case',
                     color: 14507859,
