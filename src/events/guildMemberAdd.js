@@ -24,7 +24,7 @@ module.exports = {
          * Welcome embed settings
          */
         const channel = await client.channels.fetch(channels.welcome).then(response => response).catch(() => null);
-        if (channel) {
+        if (channel && !user.bot) {
             // Initiate canvas and context
             const canvas = Canvas.createCanvas(700, 500);
             const context = canvas.getContext('2d');
