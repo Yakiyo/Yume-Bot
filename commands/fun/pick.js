@@ -14,6 +14,10 @@ module.exports = {
 
         const chosen = options[Math.floor(Math.random() * options.length)];
 
-        return message.channel.send(`**Option picked:** ${chosen}`);
+        const embed = {
+            color: '#e91e63',
+            description: `**Option picked:** ${chosen}`,
+        };
+        return message.channel.send({ embeds: [embed] });
     },
 };
