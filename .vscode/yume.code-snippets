@@ -3,7 +3,7 @@
 		"prefix": ["event"],
 		"body": ["module.exports = {" ,
 			"\tname: '${1:name}',",
-			"\tasync execute(${2:args},client) {",
+			"\tasync execute(${2:args}, client) {",
 				"\t\t$0//Code Here",
 			"\t},",
 		"};"],
