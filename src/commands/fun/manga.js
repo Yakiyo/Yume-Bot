@@ -5,18 +5,18 @@ const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('anime')
-		.setDescription('Gets info about an anime from Anilist')
+		.setName('manga')
+		.setDescription('Gets information about a manga from anilist')
 		.addStringOption(option =>
             option.setName('term')
                 .setDescription('the manga to search for')
-                .setRequired(true)
-				.setAutocomplete(true)),
+				.setRequired(true)
+                .setAutocomplete(true)),
 	async options(interaction) {
 		async function getVals(search) {
 			const query = `query ($search: String) {
 				Page (page: 1, perPage: 10) {
-					media (search: $search, type: ANIME) {
+					media (search: $search, type: MANGA) {
 						id
 						title {
 							romaji
@@ -27,7 +27,6 @@ module.exports = {
 					}
 				}
 			}`;
-
 			const options = {
 				method: 'POST',
 				headers: {
@@ -64,15 +63,9 @@ module.exports = {
 
 		const term = await interaction.options.getString('term');
 
-		let variables;
-		if (term.match(/^[0-9]*$/g)) {
-			variables = { id: Number(term) };
-		} else {
-			variables = { search: `${term}` };
-		}
 
-		const query = `query ($search: String, $id: Int) { Media (search: $search, id: $id, type: ANIME) { id idMal title { romaji english native userPreferred }
-		description type format status startDate { year month day } endDate { year month day } episodes season countryOfOrigin isLicensed updatedAt
+		const query = `query ($search: String, $id: Int) { Media (search: $search, id: $id, type: MANGA) { id idMal title { romaji english native userPreferred }
+		description type format status startDate { year month day } endDate { year month day } chapters volumes countryOfOrigin isLicensed updatedAt
 		coverImage { large:extraLarge medium:large small:medium color } bannerImage genres synonyms averageScore meanScore siteUrl autoCreateForumThread modNotes
 		popularity trending tags { name isMediaSpoiler } relations { nodes { id title { english native romaji userPreferred } type } }
 		characters { nodes { id name { english: full } } } staff { nodes { id name { english: full } } } isFavourite isAdult isLocked
@@ -81,6 +74,14 @@ module.exports = {
 		stats { scoreDistribution { score amount } statusDistribution { status amount } } favourites
 		isRecommendationBlocked recommendations { nodes { mediaRecommendation { id title { romaji english native userPreferred } type } } } } }`;
 
+
+		let variables;
+		if (term.match(/^[0-9]*$/g)) {
+			variables = { id: Number(term) };
+		} else {
+			variables = { search: `${term}` };
+		}
+
 		const options = {
 			method: 'POST',
 			headers: {
@@ -88,8 +89,8 @@ module.exports = {
 				'Accept': 'application/json',
 			},
 			body: JSON.stringify({
-			query: query,
-			variables: variables,
+				query: query,
+				variables: variables,
 			}),
 		};
 
@@ -106,11 +107,10 @@ module.exports = {
 			await fetch('https://graphql.anilist.co', options).then(response => handleResponse(response)).then(data => handleData(data));
 		} catch (error) {
 			console.log(error);
-			return interaction.editReply('Error while making API request');
+			return interaction.editReply('No manga with that search term found');
 		}
-
 		if (!value) {
-				return await interaction.editReply('No anime with that search term found');
+			return await interaction.editReply('No manga with that search term found');
 		}
 		if (value.isAdult && !interaction.channel.nsfw) {
 			return await interaction.editReply(`The search result **${value.title.romaji}** cannot be showed outside of nsfw channels :x:`);
@@ -123,7 +123,7 @@ module.exports = {
 			}
 		}
 
-		function convertFuzzyDate(fuzzyDate) {
+        function convertFuzzyDate(fuzzyDate) {
 			if (Object.values(fuzzyDate).some((d) => d === null)) return null;
 			return new Date(fuzzyDate.year, fuzzyDate.month - 1, fuzzyDate.day);
 		}
@@ -166,13 +166,13 @@ module.exports = {
 					inline: true,
 				},
 				{
-					name: 'Episodes',
-					value: `${value.episodes || '??'}`,
+					name: 'Volumes',
+					value: `${value.volumes || '??'}`,
 					inline: true,
 				},
 				{
-					name: 'Season',
-					value: `${casify(value.season || '') || '??'}`,
+					name: 'Chapters',
+					value: `${value.chapters || '??'}`,
 					inline: true,
 				},
 				{
@@ -182,7 +182,7 @@ module.exports = {
 				},
 			],
 			footer: {
-				text: `${value.seasonYear ? `Aired in: ${value.seasonYear}` : `Favourites: ${value.favourites || '??'}`}. Airing Date:`,
+				text: `Favourites: ${value.favourites || '??'}. Starting Date:`,
 			},
 			timestamp: startDate,
 		};
@@ -193,12 +193,11 @@ module.exports = {
 		const alLink = new MessageActionRow()
 						.addComponents(
 							new MessageButton()
-								.setURL(`https://anilist.co/anime/${value.id}`)
+								.setURL(`https://anilist.co/manga/${value.id}`)
 								.setLabel('Anilist')
 								.setStyle('LINK')
 								.setEmoji('976107829037498418'),
 						);
-
 		return await interaction.editReply({ embeds: [embed], components: [alLink] });
 	},
 };
