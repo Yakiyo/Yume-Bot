@@ -15,6 +15,13 @@ module.exports = {
                     return await interaction.reply({ content: 'Internal error when executing the command!', ephemeral: true });
                 }
             }
+        } else if (interaction.isAutocomplete()) {
+            const command = client.commands.get(interaction.commandName);
+            if (!command) return;
+            const options = await command.options(interaction) || [];
+            interaction.respond(options)
+                .then(() => null)
+                .catch(() => null);
         }
     },
 };
