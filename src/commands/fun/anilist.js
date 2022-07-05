@@ -116,13 +116,15 @@ module.exports = {
           console.log(error);
           activities = null;
         }
-        activities = activities.filter(element => {
-          if (typeof element === 'object' && Object.keys(element).length !== 0) {
-            return true;
-          } else {
-            return false;
-          }
-        });
+        if (activities) {
+          activities = activities.filter(element => {
+            if (typeof element === 'object' && Object.keys(element).length !== 0) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+        }
 
         function stat(stats) {
             function findCompleted(type) {
