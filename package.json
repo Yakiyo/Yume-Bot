@@ -25,6 +25,7 @@
     "dotenv": "^16.0.0",
     "mongoose": "^6.3.4",
     "nekos-best.js": "^5.0.0",
+    "node-fetch": "2.6.7",
     "parse-duration": "^1.0.2",
     "sourcebin": "^4.3.5",
     "turndown": "^7.1.1",
