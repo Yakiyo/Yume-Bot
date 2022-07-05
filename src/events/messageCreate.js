@@ -8,7 +8,7 @@ module.exports = {
 		if (message.author.bot) return;
 
 		if (message.channel.type === 'DM') {
-			if (!channels.modmail === 'Disabled') return;
+			if (channels.modmail === 'Disabled') return;
 			if (message.content.startsWith('!')) return;
 			const modmailChannel = await client.channels.fetch(channels.modmail).then(chan => chan).catch(() => null);
 
