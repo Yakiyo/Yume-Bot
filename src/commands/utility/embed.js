@@ -80,7 +80,7 @@ module.exports = {
             const message = await channel.messages.fetch(`${msgid}`).then(res => res).catch(() => undefined);
             if (!message) return await interaction.editReply(`Could not find any message with that id in <#${channel.id}>`);
 
-            if (message.embeds && !message.embeds.length) return await interaction.editReply('The target message does not contain any embed');
+            if (!message.embeds || !message.embeds?.length) return await interaction.editReply('The target message does not contain any embed');
 
             if (num > message.embeds.length) {
                 num = 1;
