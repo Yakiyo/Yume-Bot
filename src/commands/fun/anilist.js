@@ -191,11 +191,10 @@ module.exports = {
         // }
         function moment(seconds) {
               const days = Math.floor(seconds / (24 * 60 * 60));
-                  seconds -= days * (24 * 60 * 60);
+              seconds -= days * (24 * 60 * 60);
               const hours = Math.floor(seconds / (60 * 60));
-                  seconds -= hours * (60 * 60);
+              seconds -= hours * (60 * 60);
               const minutes = Math.floor(seconds / (60));
-                  seconds -= minutes * (60);
               return ((days > 0) ? (days + ' day, ') : '') + hours + 'h and ' + minutes + 'm';
             }
         const favAnime = user.favourites.anime.nodes.length ? `[${user.favourites.anime.nodes[0].title.english || user.favourites.anime.nodes[0].title.romaji}](${user.favourites.anime.nodes[0].siteUrl})` : 'No Favourite anime';
