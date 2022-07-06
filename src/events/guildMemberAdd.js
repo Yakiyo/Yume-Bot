@@ -63,7 +63,7 @@ module.exports = {
                 .setColor('#e91e63')
                 .setThumbnail(`${member.displayAvatarURL({ format: 'png', dynamic: true })}`)
                 .setImage(`attachment://${attachment.name}`)
-                .setDescription('Thanks for joining Tsurekano!\nPlease read rules-and-info and get some roles as a basic start. Feel free to ask <@&844136794977992705> or <@&844233565310812190> for any questions!\nDont forget to join our subreddit at:\n[https://www.reddit.com/r/MamahahaTsurego/](https://www.reddit.com/r/MamahahaTsurego/)')
+                .setDescription('Thanks for joining Tsurekano!\nPlease read <#844137177042518026> and get some roles as a basic start. Feel free to ask <@&844136794977992705> or <@&844233565310812190> for any questions!\nDont forget to join our subreddit at:\n[https://www.reddit.com/r/MamahahaTsurego/](https://www.reddit.com/r/MamahahaTsurego/)')
                 .setFooter({ text: `Member count: ${memberCount}` });
 
             try {
