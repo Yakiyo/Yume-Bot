@@ -48,7 +48,7 @@ $ npm install
 ```
 To start, create a file named `.env` and put the following in it.
 ```env
-TOKEN=You're bot token goes here 
+TOKEN=Bot token goes here 
 MONGO=A mongodb URI
 ```
 After that edit the [config](src/config.json) file to you're needs and then run the code
