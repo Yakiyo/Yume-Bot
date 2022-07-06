@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { Collection } = require('discord.js');
+const { casify } = require('../../util.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -45,7 +46,7 @@ module.exports = {
 
             const fields = categories.map(cat => {
                 return {
-                    name: cat.first().category,
+                    name: casify(cat.first().category),
                     value: cat.map(com => `\`${com.data.name}\``).join(', '),
                 };
             });
