@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('addemoji')
-        .setDescription('Adds an emoji to the server from an image link')
+        .setName('emoji')
+        .setDescription('Emoji management commands for the server')
         .addSubcommand(sub =>
             sub.setName('add')
                 .setDescription('Adds an emoji to the server')
@@ -53,14 +53,35 @@ module.exports = {
 
             }
             case 'remove': {
-                const emoji = await interaction.guild.emojis.resolve(interaction.option.getString('emoji')) || null;
+                let name;
+                if (interaction.options.getString('emoji').startsWith('<:') && interaction.options.getString('emoji').endsWith('>')) {
+                    name = interaction.options.getString('emoji').replace('<:', '').replace('>', '');
+                    name = name.slice(name.indexOf(':') + 1);
+                } else {
+                    name = interaction.options.getString('emoji');
+                }
+                const emoji = await interaction.guild.emojis.fetch(name).catch(() => null);
                 if (!emoji) return await interaction.reply({ content: 'Invalid emoji argument. Could not resolve to an emoji. Please make sure to either use the emoji itself or the emoji id \n https://i.imgur.com/iVUe5o0.gif', epehemeral: true });
-                interaction.deferReply();
-                await interaction.emojis.delete(emoji);
+                await interaction.deferReply();
+                await interaction.guild.emojis.delete(emoji);
                 return await interaction.editReply('Successfully deleted the emoji.');
             }
+            case 'rename': {
+                let name;
+                if (interaction.options.getString('emoji').startsWith('<:') && interaction.options.getString('emoji').endsWith('>')) {
+                    name = interaction.options.getString('emoji').replace('<:', '').replace('>', '');
+                    name = name.slice(name.indexOf(':') + 1);
+                } else {
+                    name = interaction.options.getString('emoji');
+                }
+                const emoji = await interaction.guild.emojis.fetch(name).catch(() => null);
+                if (!emoji) return await interaction.reply({ content: 'Invalid emoji argument. Could not resolve to an emoji. Please make sure to either use the emoji itself or the emoji id \n https://i.imgur.com/iVUe5o0.gif', epehemeral: true });
+                await interaction.deferReply();
+                const edited = await interaction.guild.emojis.edit(emoji, { name: interaction.options.getString('name').replace(/ +/, '_') });
+                return await interaction.editReply(`Renamed emoji to ${edited.name}`);
+            }
             default:
-                return;
+                return await interaction.reply({ content: 'Unknown subcommand encountered. Please report this issue to bot dev', ephemeral: true });
         }
     },
 };
