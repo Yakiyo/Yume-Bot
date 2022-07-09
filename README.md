@@ -17,7 +17,7 @@ The bot is fully based on slash commands. To use a slash command, type `/` in th
 
 **Fandom:** [MotoKano Fandom](https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki)
 
-> Yume bot isn't available to servers other then the tsurekano discord and cannot be invited anywhere else. The code is open source thought so anyone can feel free to fork and host their own version of the bot. For some directions on self hosting please see the self hosting section [here](#self-hosting)
+> Yume bot isn't available to servers other then the tsurekano discord and cannot be invited anywhere else. The code is open source though so anyone can feel free to fork and host their own version of the bot. For some directions on self hosting please see the self hosting section [here](#self-hosting)
 
 ## Bot Information
 + Language: [Javascript](https://www.javascript.com)
