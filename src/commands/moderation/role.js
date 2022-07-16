@@ -60,5 +60,12 @@ module.exports = {
                         .setRequired(true))),
     async execute(interaction) {
         await interaction.reply('done');
+        switch (interaction.options.getSubcommand()) {
+            case 'assign': {
+                return;
+            }
+            default:
+                break;
+        }
     },
 };
