@@ -59,10 +59,26 @@ module.exports = {
                         .setDescription('The role whose information to show')
                         .setRequired(true))),
     async execute(interaction) {
-        await interaction.reply('done');
+        await interaction.deferReply();
         switch (interaction.options.getSubcommand()) {
             case 'assign': {
-                return;
+                const user = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
+                const role = interaction.options.getRole('role');
+
+                if (role.id === interaction.guild.id) return await interaction.editReply('Provided role argument is the everyone role. Everyone role cannot be assigned or removed. Please use a regular role.');
+                else if (role.managed) return await interaction.editReply('Provided role argument is a managed role. Please use a role that is not managed by a bot or discord.');
+                // else if (role.editable) return await interaction.editReply('Provided role argument cannot be edited by the bot. Please give me a higher position than the role.');
+                else if (role.comparePositionTo(interaction.client) < 0) return await interaction.editReply('Argument role is higher then the bot\'s highest role. Please give me a higher role');
+                try {
+                    if (!user.roles.cache.has(role.id)) {
+                        await user.roles.add(role.id);
+                    } else {
+                        await user.roles.remove(role.id);
+                    }
+                } catch (error) {
+                    return await interaction.editReply('Unexpected error while trying to assign role from user.');
+                }
+                return await interaction.editReply(`Successfully assigned role **${role.name}** to/from **${user.user.tag}**`);
             }
             default:
                 break;
