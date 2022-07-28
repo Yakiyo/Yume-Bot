@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+// const util = require('../../util.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -59,11 +60,14 @@ module.exports = {
                         .setDescription('The role whose information to show')
                         .setRequired(true))),
     async execute(interaction) {
+        if (interaction.options.getSubcommand() !== 'info') {
+            if (!hasPerm(interaction, 'MANAGE_ROLES')) return await interaction.editReply('You do not have the required permissions to use this subcommand.');
+        }
         await interaction.deferReply();
         switch (interaction.options.getSubcommand()) {
             case 'assign': {
                 const user = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
-                const role = interaction.options.getRole('role');
+                const role = interaction.options.getRole('role'); console.log(interaction.channel.permissionsFor(interaction.member));
 
                 if (!interaction.guild.me.permissions.has('MANAGE_ROLES')) return await interaction.editReply('I do not have the required permissions to add a role to a user.');
                 if (role.id === interaction.guild.id) return await interaction.editReply('Provided role argument is the everyone role. Everyone role cannot be assigned or removed. Please use a regular role.');
@@ -85,8 +89,37 @@ module.exports = {
                 }
 
             }
+            case 'info': {
+                const role = await interaction.guild.roles.fetch(interaction.options.getRole('role')?.id, { force: true });
+
+                const embed = {
+                    title: 'Role Info',
+                    color: role.color,
+                    description: `**Name:** ${role.name}\n**Members:** ${role.members.size}\n**Color:** ${role.hexColor}\n**Position:** ${role.position}`,
+                    footer: {
+                        text: `ID: ${role.id} | Created on`,
+                    },
+                    timestamp: role.createdAt,
+                };
+                if (role.icon) {
+                    embed.thumbnail = { url: role.iconURL({ size: 1024 }) };
+                }
+                return await interaction.editReply({ embeds: [embed] });
+            }
             default:
-                break;
+                return await interaction.editReply('Unknown subcommand. Please report this issue to bot developer.');
         }
     },
 };
+
+/**
+     * Checks for permission of a interaction member
+     * @param {Interaction} interaction
+     * @param {string} perm
+     * @returns boolean
+     */
+function hasPerm(interaction, perm) {
+    const authorPerms = interaction.channel.permissionsFor(interaction.member);
+            if (!authorPerms || !authorPerms.has(perm)) return false;
+            else return true;
+}
