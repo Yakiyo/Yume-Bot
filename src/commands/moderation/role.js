@@ -117,6 +117,7 @@ module.exports = {
             case 'delete': {
                 const role = interaction.options.getRole('role');
                 if (role.comparePositionTo(interaction.guild.me.roles.highest) > 0) return await interaction.editReply('Argument role is higher then the bot\'s highest role. Please give me a higher role');
+                else if (role.comparePositionTo(interaction.member.roles.highest) > 0) return await interaction.editReply('Argument role is higher then the user\'s highest role. You cannot delete this role.');
                 try {
                     await role.delete(`${interaction.options.getString('reason') || 'No reason provided'} - ${interaction.user.id}`);
                     return await interaction.editReply(`Deleted role **${role.name}**`);
@@ -126,7 +127,24 @@ module.exports = {
                 }
             }
             case 'edit': {
-                return;
+                const role = interaction.options.getRole('role');
+                if (role.comparePositionTo(interaction.guild.me.roles.highest) > 0) return await interaction.editReply('Argument role is higher then the bot\'s highest role. Please give me a higher role');
+                else if (role.comparePositionTo(interaction.member.roles.highest) > 0) return await interaction.editReply('Argument role is higher then the user\'s highest role. You cannot edit this role.');
+                const data = {};
+                if (interaction.options.getString('name')) {
+                    data.name = interaction.options.getString('name');
+                }
+                if (interaction.options.getString('color')) {
+                    data.color = interaction.options.getString('color');
+                }
+                if (Object.keys(data).length === 0) return await interaction.editReply('Please provide a new name or a color or both.');
+                try {
+                    const updated = await role.edit(data).then(val => val);
+                    return await interaction.editReply(`Edited role ${updated.name}`);
+                } catch (error) {
+                    console.error(error);
+                    return await interaction.editReply('Unexpected error while editing role. Possible reasons: Lacking permissions or higher role then bot\'s highest role.');
+                }
             }
             case 'info': {
                 const role = await interaction.guild.roles.fetch(interaction.options.getRole('role')?.id, { force: true });
