@@ -37,7 +37,10 @@ module.exports = {
                 .addRoleOption(option =>
                     option.setName('role')
                         .setDescription('The role to delete')
-                        .setRequired(true)))
+                        .setRequired(true))
+                .addStringOption(option =>
+                    option.setName('reason')
+                        .setDescription('Reason for deleting the role')))
         .addSubcommand(sub =>
             sub.setName('edit')
                 .setDescription('Edits a role\'s name or color or both')
@@ -107,11 +110,20 @@ module.exports = {
                         },
                     }] });
                 } catch (error) {
+                    console.error(error);
                     return await interaction.editReply('Unexpected error while creating role. Possible reasons: lacking permissions or internal error.');
                 }
             }
             case 'delete': {
-                return;
+                const role = interaction.options.getRole('role');
+                if (role.comparePositionTo(interaction.guild.me.roles.highest) > 0) return await interaction.editReply('Argument role is higher then the bot\'s highest role. Please give me a higher role');
+                try {
+                    await role.delete(`${interaction.options.getString('reason') || 'No reason provided'} - ${interaction.user.id}`);
+                    return await interaction.editReply(`Deleted role **${role.name}**`);
+                } catch (error) {
+                    console.error(error);
+                    return await interaction.editReply('Unexpected error while trying to delete role. Possible reasons: lacking permissions or role higher then the bot\'s highest role.');
+                }
             }
             case 'edit': {
                 return;
