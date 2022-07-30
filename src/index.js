@@ -36,16 +36,18 @@ const client = new Client({
 // This uses a secondary bot account to use for development instead of the original one.
 const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
 
-const commands = [];
 client.textCommands = new Collection();
-client.commands = new Collection();
-const commandFolders = fs.readdirSync('./src/commands');
 const textCommandFiles = fs.readdirSync('./src/legacy');
 
 for (const file of textCommandFiles) {
 	const command = require(path.resolve(process.cwd(), `./src/legacy/${file}`));
 	client.textCommands.set(command.name, command);
 }
+console.log('Loaded text commands');
+
+const commands = [];
+client.commands = new Collection();
+const commandFolders = fs.readdirSync('./src/commands');
 
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./src/commands/${folder}`).filter(file => file.endsWith('.js'));
@@ -57,6 +59,7 @@ for (const folder of commandFolders) {
 		commands.push(command.data.toJSON());
 	}
 }
+console.log('Loaded slash commands');
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
@@ -74,6 +77,7 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 		console.error(error);
 	}
 })();
+console.log('Registered slash commands to guild');
 
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
