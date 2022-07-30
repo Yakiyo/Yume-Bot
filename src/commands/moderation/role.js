@@ -98,7 +98,14 @@ module.exports = {
                         mentionable: interaction.options.getBoolean('mentionable') || false,
                         hoist: interaction.options.getBoolean('hoisted') || false,
                     }).then(val => val);
-                    return await interaction.editReply(`Successfully created role **${role.name}**`);
+                    return await interaction.editReply({ embeds: [{
+                        title: 'Successfully created role!',
+                        color: role.color,
+                        description: `Created role **${role.name}** <@&${role.id}>\n\n**Color:** ${role.hexColor}\n**Mentionable:** ${role.mentionable}\n**Hoisted:** ${role.hoist}`,
+                        footer: {
+                            text: `ID: ${role.id}`,
+                        },
+                    }] });
                 } catch (error) {
                     return await interaction.editReply('Unexpected error while creating role. Possible reasons: lacking permissions or internal error.');
                 }
