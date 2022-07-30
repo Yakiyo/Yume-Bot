@@ -8,10 +8,15 @@ module.exports = {
             option.setName('user')
                 .setDescription('The user whose info to show')),
 	async execute(interaction) {
-		const member = await interaction.guild.members.fetch(interaction.options.getUser('user') || interaction.user);
-        let roles = member.roles.cache.filter(role => role.id !== interaction.guild.id).map(val => `<@&${val.id}>`);
-        if (roles.length > 15) {
-            roles = roles.slice(0, 15);
+        const member = await interaction.guild.members.fetch(interaction.options.getUser('user') || interaction.user);
+        let roles = member.roles.cache
+            .filter(role => role.id !== interaction.guild.id)
+            .sort((a, b) => {
+                return a.rawPosition < b.rawPosition ? 1 : -1;
+            })
+            .map(val => `<@&${val.id}>`);
+        if (roles.length > 20) {
+            roles = roles.slice(0, 20);
         }
         const embed = {
             author: {
