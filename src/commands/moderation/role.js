@@ -88,6 +88,15 @@ module.exports = {
                 }
 
             }
+            case 'create': {
+                return;
+            }
+            case 'delete': {
+                return;
+            }
+            case 'edit': {
+                return;
+            }
             case 'info': {
                 const role = await interaction.guild.roles.fetch(interaction.options.getRole('role')?.id, { force: true });
 
