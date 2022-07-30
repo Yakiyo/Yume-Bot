@@ -89,7 +89,19 @@ module.exports = {
 
             }
             case 'create': {
-                return;
+                const color = interaction.options.getString('color') || '#000000';
+                if (!/^#([0-9a-f]{3}){1,2}$/i.test(color)) return await interaction.editReply('Provided color does not seem to be a valid hexcode. Please use a valid hex or leave it empty for default color.');
+                try {
+                    const role = await interaction.guild.roles.create({
+                        name: interaction.options.getString('name'),
+                        color: color,
+                        mentionable: interaction.options.getBoolean('mentionable') || false,
+                        hoist: interaction.options.getBoolean('hoisted') || false,
+                    }).then(val => val);
+                    return await interaction.editReply(`Successfully created role **${role.name}**`);
+                } catch (error) {
+                    return await interaction.editReply('Unexpected error while creating role. Possible reasons: lacking permissions or internal error.');
+                }
             }
             case 'delete': {
                 return;
