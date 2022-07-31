@@ -7,7 +7,7 @@ module.exports = {
 		console.log(`Ready and logged in as ${client.user.tag}`);
 		// Fetch guild members on ready
 		client.guilds.fetch(guildId).then(guild => {
-			guild.members.fetch().then(() => console.log('Fetched guild members.'));
+			guild.members.fetch();
 		});
 	},
 };

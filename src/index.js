@@ -43,7 +43,6 @@ for (const file of textCommandFiles) {
 	const command = require(path.resolve(process.cwd(), `./src/legacy/${file}`));
 	client.textCommands.set(command.name, command);
 }
-console.log('Loaded text commands');
 
 const commands = [];
 client.commands = new Collection();
@@ -59,7 +58,6 @@ for (const folder of commandFolders) {
 		commands.push(command.data.toJSON());
 	}
 }
-console.log('Loaded slash commands');
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
@@ -77,7 +75,6 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 		console.error(error);
 	}
 })();
-console.log('Registered slash commands to guild');
 
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
