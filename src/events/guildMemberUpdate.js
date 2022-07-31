@@ -4,6 +4,8 @@ const { readFile } = require('fs/promises');
 const { request } = require('undici');
 const { channels, guildId } = require('../config.json');
 const { MessageAttachment, MessageEmbed } = require('discord.js');
+// The channel to send the unboost message to.
+const staffChannel = '844632108831342679';
 
 module.exports = {
     name: 'guildMemberUpdate',
@@ -11,6 +13,7 @@ module.exports = {
         const guild = newMember.guild;
         if (!guild.available || guild.id !== guildId || process.env.NODE_ENV !== 'production') return;
 
+        // Checks if old member wasnt boosting and new member is boosting
         if (!oldMember.premiumSince && newMember.premiumSince) {
             const channel = await guild.channels.fetch(channels.announcement);
             const member = newMember;
@@ -54,6 +57,19 @@ module.exports = {
                 .setImage(`attachment://${attachment.name}`)
                 .setFooter({ text: `Server Boost Count: ${guild.premiumSubscriptionCount}` });
             await channel.send({ embeds: [embed], files: [attachment] });
+        } else if (oldMember.premiumSince && !newMember.premiumSince) {
+            // Checks if old member was boosting but new member isnt boosting
+            await guild.channels.fetch(staffChannel)
+                .then(chan => {
+                    chan.send({ embeds: [{
+                        title: 'Boost withdrawal',
+                        description: `${newMember.user.tag} withdrew boosts. <@${newMember.user.id}>`,
+                        footer: {
+                            text: `ID: ${newMember.user.id}`,
+                        },
+                        timestamp: new Date(),
+                    }] });
+                });
         }
 
         return;
