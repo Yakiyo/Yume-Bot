@@ -10,8 +10,7 @@ module.exports = {
         .addStringOption(option =>
             option.setName('type')
                 .setDescription('Default or server avatar to show')
-                .addChoice('Default', 'DEFAULT')
-                .addChoice('Server', 'SERVER')),
+                .addChoices({ name: 'Default', value: 'DEFAULT' }, { name: 'Server', value: 'SERVER' })),
     async execute(interaction) {
         const member = await interaction.guild.members.fetch(interaction.options.getUser('user') || interaction.user);
         const type = interaction.options.getString('type') || 'DEFAULT';
