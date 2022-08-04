@@ -17,22 +17,21 @@
   "author": "Yakiyo#1206",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/builders": "^0.12.0",
+    "@discordjs/builders": "^1.1.0",
     "@discordjs/rest": "^0.3.0",
-    "@napi-rs/canvas": "^0.1.21",
+    "@napi-rs/canvas": "^0.1.25",
     "discord-api-types": "^0.26.1",
-    "discord.js": "^13.7.0",
-    "dotenv": "^16.0.0",
-    "mongoose": "^6.3.4",
-    "nekos-best.js": "^5.0.0",
+    "discord.js": "^13.8.1",
+    "dotenv": "^16.0.1",
+    "nekos-best.js": "^5.1.0",
     "node-fetch": "2.6.7",
     "parse-duration": "^1.0.2",
     "sourcebin": "^4.3.5",
     "turndown": "^7.1.1",
-    "undici": "^5.3.0"
+    "undici": "^5.6.0"
   },
   "devDependencies": {
-    "eslint": "^8.12.0",
-    "nodemon": "^2.0.16"
+    "eslint": "^8.19.0",
+    "nodemon": "^2.0.18"
   }
 }
