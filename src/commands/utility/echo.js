@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, quote } = require('@discordjs/builders');
 const { channels } = require('../../config.json');
+const { ChannelType: CT } = require('discord-api-types/v9');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,11 +14,7 @@ module.exports = {
         .addChannelOption(option =>
             option.setName('channel')
             .setDescription('Select a channel to send the message in (optional)')
-            .addChannelType(0)
-            .addChannelType(5)
-            .addChannelType(10)
-            .addChannelType(11)
-            .addChannelType(12),
+            .addChannelTypes(CT.GuildText, CT.GuildNews, CT.GuildNewsThread, CT.GuildPublicThread, CT.GuildPrivateThread),
         ),
 	async execute(interaction) {
 		const sentence = interaction.options.getString('message');
