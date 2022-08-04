@@ -8,9 +8,7 @@ module.exports = {
         .addStringOption(option =>
             option.setName('option')
                 .setDescription('Server information or icon or banner')
-                .addChoice('info', 'info')
-                .addChoice('icon', 'icon')
-                .addChoice('banner', 'banner')),
+                .addChoices({ name: 'info', value: 'info' }, { name: 'icon', value: 'icon' }, { name: 'banner', value: 'banner' })),
     async execute(interaction) {
         const option = interaction.options.getString('option') || 'info';
         const server = await interaction.guild;
