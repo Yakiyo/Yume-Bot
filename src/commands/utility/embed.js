@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const sourcebin = require('sourcebin');
+const { ChannelType: CT } = require('discord-api-types/v9');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,11 +16,7 @@ module.exports = {
                 .addChannelOption(option =>
                     option.setName('channel')
                         .setDescription('channel where the message is situated')
-                        .addChannelType(0)
-                        .addChannelType(5)
-                        .addChannelType(10)
-                        .addChannelType(11)
-                        .addChannelType(12))
+                        .addChannelTypes(CT.GuildText, CT.GuildNews, CT.GuildNewsThread, CT.GuildPublicThread, CT.GuildPrivateThread))
                 .addIntegerOption(option =>
                     option.setName('number')
                         .setDescription('the number of the embed to fetch from the message')
@@ -41,7 +38,7 @@ module.exports = {
                 .addChannelOption(option =>
                     option.setName('channel')
                         .setDescription('the channel to send the embed to')
-                        .addChannelTypes([0, 5, 10, 11, 12])))
+                        .addChannelTypes(CT.GuildText, CT.GuildNews, CT.GuildNewsThread, CT.GuildPublicThread, CT.GuildPrivateThread)))
         .addSubcommand(sub =>
             sub.setName('custom')
                 .setDescription('create a discord embed using JSON')
@@ -52,7 +49,7 @@ module.exports = {
                 .addChannelOption(option =>
                     option.setName('channel')
                         .setDescription('the channel to send the embed to')
-                        .addChannelTypes([0, 5, 10, 11, 12])))
+                        .addChannelTypes(CT.GuildText, CT.GuildNews, CT.GuildNewsThread, CT.GuildPublicThread, CT.GuildPrivateThread)))
         .addSubcommand(sub =>
             sub.setName('edit')
                 .setDescription('edits an already sent embed by the bot using provided JSON')
@@ -67,7 +64,7 @@ module.exports = {
                 .addChannelOption(option =>
                     option.setName('channel')
                         .setDescription('the channel where the message is situated in')
-                        .addChannelTypes([0, 5, 10, 11, 12]))),
+                        .addChannelTypes(CT.GuildText, CT.GuildNews, CT.GuildNewsThread, CT.GuildPublicThread, CT.GuildPrivateThread))),
 	private: false,
 	async execute(interaction) {
 		const subCommand = interaction.options.getSubcommand();
