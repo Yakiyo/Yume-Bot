@@ -20,7 +20,6 @@ module.exports = {
                 .addChannelOption(option =>
                     option.setName('channel')
                         .setDescription('The channel to return info of.')
-                        .setRequired(true)
                         .addChannelTypes(CT.GuildText, CT.GuildVoice, CT.GuildNews))),
     async execute(interaction) {
         await interaction.deferReply();
@@ -28,7 +27,7 @@ module.exports = {
 
         switch (sub) {
             case 'info': {
-                const channel = interaction.options.getChannel('channel');
+                const channel = interaction.options.getChannel('channel') || interaction.channel;
                 const embed = {
                     color: 15277667,
                     title: 'Channel Info',
