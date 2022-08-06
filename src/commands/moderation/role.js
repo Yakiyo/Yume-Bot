@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { hasPerm } = require('../../util.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -168,15 +169,3 @@ module.exports = {
         }
     },
 };
-
-/**
-     * Checks for permission of a interaction member
-     * @param {Interaction} interaction
-     * @param {string} perm
-     * @returns boolean
-     */
-function hasPerm(interaction, perm) {
-    const authorPerms = interaction.channel.permissionsFor(interaction.member);
-            if (!authorPerms || !authorPerms.has(perm)) return false;
-            else return true;
-}
