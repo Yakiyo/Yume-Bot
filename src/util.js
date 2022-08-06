@@ -10,6 +10,10 @@ turndown.addRule('spoiler', {
     },
 });
 /**
+ * @typedef {import('discord.js')} Discord
+ */
+
+/**
  * Utility class with some functions for making life easier
  */
 class Util {
@@ -43,8 +47,19 @@ class Util {
         }
     }
     /**
+     * Checks for permission of a interaction member
+     * @param {Discord.Interaction} interaction
+     * @param {string} perm
+     * @returns boolean
+     */
+    hasPerm(interaction, perm) {
+        const authorPerms = interaction.channel.permissionsFor(interaction.member);
+        if (!authorPerms || !authorPerms.has(perm)) return false;
+        else return true;
+    }
+    /**
      * Sends an embed to the modlogs channel
-     * @param {Client} client
+     * @param {Discord.Client} client
      * @param {MessageEmbed} embed
      * @returns Message
      */
