@@ -4,6 +4,7 @@ specifiers:
   '@discordjs/builders': ^1.1.0
   '@discordjs/rest': ^0.3.0
   '@napi-rs/canvas': ^0.1.25
+  '@prisma/client': ^4.1.1
   discord-api-types: ^0.26.1
   discord.js: ^13.8.1
   dotenv: ^16.0.1
@@ -12,6 +13,7 @@ specifiers:
   node-fetch: 2.6.7
   nodemon: ^2.0.18
   parse-duration: ^1.0.2
+  prisma: ^4.1.1
   sourcebin: ^4.3.5
   turndown: ^7.1.1
   undici: ^5.6.0
@@ -20,6 +22,7 @@ dependencies:
   '@discordjs/builders': 1.1.0
   '@discordjs/rest': 0.3.0
   '@napi-rs/canvas': 0.1.25
+  '@prisma/client': 4.1.1_prisma@4.1.1
   discord-api-types: 0.26.1
   discord.js: 13.8.1
   dotenv: 16.0.1
@@ -33,6 +36,7 @@ dependencies:
 devDependencies:
   eslint: 8.19.0
   nodemon: 2.0.18
+  prisma: 4.1.1
 
 packages:
 
@@ -212,6 +216,28 @@ packages:
       '@napi-rs/canvas-linux-x64-musl': 0.1.25
       '@napi-rs/canvas-win32-x64-msvc': 0.1.25
     dev: false
+
+  /@prisma/client/4.1.1_prisma@4.1.1:
+    resolution: {integrity: sha512-2pXuIUYxHv5H9o6QTa1VIsl4yMgsAjKQOitlo8WVTB+vo73rmMJITBPavdGUZSWUc7adMkFzEV3y5rVTUQr77Q==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8
+      prisma: 4.1.1
+    dev: false
+
+  /@prisma/engines-version/4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8:
+    resolution: {integrity: sha512-cRRJwpHFGFJZvtHbY3GZjMffNBEjjZk68ztn+S2hDgPCGB4H66IK26roK94GJxBodSehwRJ0wGyebC2GoIH1JQ==}
+    dev: false
+
+  /@prisma/engines/4.1.1:
+    resolution: {integrity: sha512-DCw8L/SS0IXqmj5IW/fMxOXiifnsfjBzDfRhf0j3NFWqvMCh9OtfjmXQZxVgI2mwvJLc/5jzXhkiWT39qS09dA==}
+    requiresBuild: true
 
   /@sapphire/async-queue/1.3.1:
     resolution: {integrity: sha512-FFTlPOWZX1kDj9xCAsRzH5xEJfawg1lNoYAA+ecOWJMHOfiZYb1uXOI3ne9U4UILSEPwfE68p3T9wUHwIQfR0g==}
@@ -1346,6 +1372,14 @@ packages:
     resolution: {integrity: sha512-ravE6m9Atw9Z/jjttRUZ+clIXogdghyZAuWJ3qEzjT+jI/dL1ifAqhZeC5VHzQp1MSt1+jxKkFNemj/iO7tVUA==}
     engines: {node: '>=4'}
     dev: true
+
+  /prisma/4.1.1:
+    resolution: {integrity: sha512-yw50J8If2dKP4wYIi695zthsCASQFHiogGvUHHWd3falx/rpsD6Sb1LMLRV9nO3iGG3lozxNJ2PSINxK7xwdpg==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 4.1.1
 
   /pstree.remy/1.1.8:
     resolution: {integrity: sha512-77DZwxQmxKnu3aR542U+X8FypNzbfJ+C5XQDk3uWjWxn6151aIMGthWYRXTqT1E5oJvg+ljaa2OJi+VfvCOQ8w==}
