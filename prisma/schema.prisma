@@ -8,8 +8,8 @@ datasource db {
 }
 
 model User {
-  id String @id @db.ObjectId @map("_id")
-  xp Int @default(1)
-  tagline String?
+  id        String   @id @map("_id") @db.ObjectId
+  xp        Int      @default(1)
+  tagline   String?
   updatedAt DateTime @updatedAt
 }
