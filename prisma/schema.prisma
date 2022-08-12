@@ -13,3 +13,11 @@ model User {
   tagline   String?
   updatedAt DateTime @updatedAt
 }
+
+model Mail {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  threadId  String
+  createdAt DateTime  @default(now())
+  closedAt  DateTime?
+  open      Boolean   @default(true)
+}
