@@ -8,14 +8,17 @@
     "start": "node .",
     "lint": "eslint ."
   },
+  "engines": {
+		"node": ">=16.6.0"
+	},
   "keywords": [
     "discord-bot",
     "tsurekano",
     "moderation",
     "utility"
   ],
-  "author": "Yakiyo#1206",
-  "license": "ISC",
+  "author": "Yakiyo",
+  "license": "GPL-3.0",
   "dependencies": {
     "@discordjs/builders": "^1.1.0",
     "@discordjs/rest": "^0.3.0",
