@@ -1,5 +1,5 @@
 {
-    "channels": { // Self explanatory channel ids
+    "channels": {
         "modlogs": "853524796213690369",
         "serverlogs": "844221960271691836",
         "welcome": "844148804835475467",
@@ -16,8 +16,8 @@
     "owners": ["695307292815654963", "801334784629800974"],
     "prefix": ";",
     "xp": {
-        "min": 2, // Minimum value of random xp
-        "max": 10, // Maximum value of random xp
-        "rate": 3 // Cooldown for xp giving in number of minutes
+        "min": 2,
+        "max": 10,
+        "rate": 3
     }
 }
