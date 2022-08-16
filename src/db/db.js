@@ -73,7 +73,7 @@ class Profile {
      * @param {string} id
      * @returns User
      */
-    async increm(id) {
+    async increment(id) {
         return await prisma.user.upsert({
             where: {
                 userId: id
