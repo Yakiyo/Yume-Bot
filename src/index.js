@@ -7,6 +7,11 @@ const path = require('node:path');
 require('dotenv').config();
 const Database = require('./db/db.js');
 
+if (!process.env.TOKEN) {
+	console.error('No bot token specified. Cancelling process.');
+	process.exit(0);
+}
+
 const client = new Client({
 	intents: [
 		Intents.FLAGS.GUILDS,
@@ -37,7 +42,9 @@ const client = new Client({
 // This uses a secondary bot account to use for development instead of the original one.
 const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
 
-client.db = new Database();
+if (process.env.MONGO) {
+	client.db = new Database();
+}
 client.textCommands = new Collection();
 const textCommandFiles = fs.readdirSync('./src/legacy');
 
