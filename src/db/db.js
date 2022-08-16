@@ -16,6 +16,7 @@ class Database {
         this._connected = false;
         this.connect();
         this.prisma = prisma;
+        this.profile = new Profile();
     }
     /**
      * Connects to the database
@@ -33,6 +34,13 @@ class Database {
             return;
         }
     }
+}
+
+class Profile {
+    constructor() {
+        return;
+    }
+
     /**
      * Create's a new User instance
      * @param {string} id
@@ -42,10 +50,11 @@ class Database {
         if (!id || typeof id !== 'string') throw new Error('Param id is either missing or is not a string');
         return await prisma.user.create({
             data: {
-                id: id,
+                userId: id,
             },
         });
     }
+
     /**
      * Find's a User object
      * @param {string} id
@@ -53,28 +62,31 @@ class Database {
      */
     async find(id) {
         return await prisma.user.findUnique({
-            where: id,
+            where: {
+                userId: id,
+            },
         }) || null;
     }
+
     /**
      * Increment's a user's xp
      * @param {string} id
      * @returns User
      */
     async increm(id) {
-        const profile = await this.find(id);
-        if (profile) {
-            return await prisma.user.update({
-                where: {
-                    id: profile.id,
-                },
-                data: {
-                    id: {
-                        increment: Math.random() * (xp.max - xp.min) + xp.min,
-                    },
-                },
-            });
-        }
+        return await prisma.user.upsert({
+            where: {
+                userId: id
+            },
+            update: {
+                xp: {
+                    increment: Math.floor(Math.random() * (xp.max - xp.min) + xp.min),
+                }
+            },
+            create: {
+                userId: id,
+            }
+        });
     }
 }
 
