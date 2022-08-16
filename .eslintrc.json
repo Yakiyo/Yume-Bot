@@ -9,7 +9,6 @@
     },
     "rules": {
         "arrow-spacing": ["warn", { "before": true, "after": true }],
-        "comma-dangle": ["error", "always-multiline"],
         "comma-spacing": "error",
         "comma-style": "error",
         "curly": ["error", "multi-line", "consistent"],

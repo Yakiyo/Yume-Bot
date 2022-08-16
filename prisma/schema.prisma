@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @unique
+  xp        Int      @default(1)
+  tagline   String?
+  updatedAt DateTime @updatedAt
+}
+
+model Mail {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String    @unique
+  threadId  String
+  createdAt DateTime  @default(now())
+  closedAt  DateTime?
+  open      Boolean   @default(true)
+}

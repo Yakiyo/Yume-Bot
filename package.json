@@ -8,30 +8,34 @@
     "start": "node .",
     "lint": "eslint ."
   },
+  "engines": {
+    "node": ">=16.6.0"
+  },
   "keywords": [
     "discord-bot",
     "tsurekano",
     "moderation",
     "utility"
   ],
-  "author": "Yakiyo#1206",
-  "license": "ISC",
+  "author": "Yakiyo",
+  "license": "GPL-3.0",
   "dependencies": {
     "@discordjs/builders": "^1.1.0",
     "@discordjs/rest": "^0.3.0",
     "@napi-rs/canvas": "^0.1.25",
+    "@prisma/client": "4.2.1",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
     "nekos-best.js": "^5.1.0",
     "node-fetch": "2.6.7",
     "parse-duration": "^1.0.2",
+    "prisma": "^4.2.1",
     "sourcebin": "^4.3.5",
     "turndown": "^7.1.1",
     "undici": "^5.6.0"
   },
   "devDependencies": {
-    "eslint": "^8.19.0",
-    "nodemon": "^2.0.18"
+    "eslint": "^8.19.0"
   }
 }
