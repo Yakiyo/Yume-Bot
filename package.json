@@ -9,8 +9,8 @@
     "lint": "eslint ."
   },
   "engines": {
-		"node": ">=16.6.0"
-	},
+    "node": ">=16.6.0"
+  },
   "keywords": [
     "discord-bot",
     "tsurekano",
@@ -23,7 +23,7 @@
     "@discordjs/builders": "^1.1.0",
     "@discordjs/rest": "^0.3.0",
     "@napi-rs/canvas": "^0.1.25",
-    "@prisma/client": "^4.1.1",
+    "@prisma/client": "4.2.1",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
