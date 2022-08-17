@@ -5,7 +5,6 @@ const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId } = require('./config.json');
 const path = require('node:path');
 require('dotenv').config();
-const Database = require('./db/db.js');
 
 if (!process.env.TOKEN) {
 	console.error('No bot token specified. Cancelling process.');
@@ -42,9 +41,6 @@ const client = new Client({
 // This uses a secondary bot account to use for development instead of the original one.
 const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
 
-if (process.env.MONGO) {
-	client.db = new Database();
-}
 client.textCommands = new Collection();
 const textCommandFiles = fs.readdirSync('./src/legacy');
 
