@@ -1,8 +1,9 @@
 const { xp } = require('../config.json');
+const db = require('../db/db.js');
 
 module.exports = {
 	name: 'messageCreate',
-	async execute(message, client) {
+	async execute(message) {
 		if (message.author.bot) return;
 
 		if (message.channel.type === 'DM') {
@@ -10,7 +11,7 @@ module.exports = {
 			return;
 		} else if (message.guild) {
 			// Section for incrementing user ranks
-			const { profile } = client.db;
+			const { profile } = db;
 			const member = message.member;
 			const user = await profile.find(member.id);
 			if (user) {
