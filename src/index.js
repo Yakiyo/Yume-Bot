@@ -92,5 +92,6 @@ for (const file of eventFiles) {
 	}
 }
 
+process.on('SIGTERM', () => client.emit('kill'));
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);
