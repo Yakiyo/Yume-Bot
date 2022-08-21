@@ -17,9 +17,6 @@
     "moderation",
     "utility"
   ],
-  "imports": {
-    "#structs/": "./src/structs/*.js"
-  },
   "author": "Yakiyo",
   "license": "GPL-3.0",
   "dependencies": {
