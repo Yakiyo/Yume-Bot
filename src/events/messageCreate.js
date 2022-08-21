@@ -1,5 +1,5 @@
 const { xp } = require('../config.json');
-const db = require('../db/db.js');
+const db = require('../structs/db.js');
 
 module.exports = {
 	name: 'messageCreate',
