@@ -34,16 +34,14 @@ class CommandHandler {
      * @public
      */
     async registerCommands() {
-        const map = this.commands.size === 0 ? this.loadCommands() : this.commands;
+        const commands = this.commands.size === 0 ? this.loadCommands() : this.commands;
         const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
         try {
             console.log('Started refreshing application (/) commands.');
-    
             await rest.put(
                 Routes.applicationGuildCommands(botId, guildId),
-                { body: commands },
+                { body: Array.from(commands.values()).map(val => val.data.toJSON()) },
             );
-    
             console.log('Successfully reloaded application (/) commands.');
         } catch (error) {
             console.error(error);
