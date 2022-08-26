@@ -44,7 +44,14 @@ for (const file of textCommandFiles) {
 	client.textCommands.set(command.name, command);
 }
 client.commands = commandHandler.commands;
-commandHandler.registerCommands();
+
+// Only register slash commands while on
+// development as it can spam discord api.
+// Don't load on production. Manually register
+// slash commands using the `dev` interaction
+if (process.env.NODE_ENV === 'development') {
+	commandHandler.registerCommands();
+}
 
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
