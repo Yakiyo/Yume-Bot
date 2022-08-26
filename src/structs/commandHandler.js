@@ -5,10 +5,6 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId } = require('../config.json');
 
-
-// This uses a secondary bot account to use for development instead of the original one.
-const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
-
 /**
  * Command Handler class
  */
@@ -39,7 +35,7 @@ class CommandHandler {
         try {
             console.log('Started refreshing application (/) commands.');
             await rest.put(
-                Routes.applicationGuildCommands(botId, guildId),
+                Routes.applicationGuildCommands(clientId, guildId),
                 { body: Array.from(commands.values()).map(val => val.data.toJSON()) },
             );
             console.log('Successfully reloaded application (/) commands.');

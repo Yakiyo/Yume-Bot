@@ -1,9 +1,7 @@
 const fs = require('node:fs');
 const { Client, Intents, Collection } = require('discord.js');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId } = require('./config.json');
 const path = require('node:path');
+const commandHandler = require('./structs/commandHandler.js');
 require('dotenv').config();
 
 if (!process.env.TOKEN) {
@@ -38,9 +36,6 @@ const client = new Client({
 	},
 });
 
-// This uses a secondary bot account to use for development instead of the original one.
-const botId = process.env.NODE_ENV !== 'development' ? clientId : '964798451261014026';
-
 client.textCommands = new Collection();
 const textCommandFiles = fs.readdirSync('./src/legacy');
 
@@ -48,38 +43,8 @@ for (const file of textCommandFiles) {
 	const command = require(path.resolve(process.cwd(), `./src/legacy/${file}`));
 	client.textCommands.set(command.name, command);
 }
-
-const commands = [];
-client.commands = new Collection();
-const commandFolders = fs.readdirSync('./src/commands');
-
-for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./src/commands/${folder}`).filter(file => file.endsWith('.js'));
-
-	for (const file of commandFiles) {
-		const command = require(path.resolve(process.cwd(), `./src/commands/${folder}/${file}`));
-		command.category = `${folder}`;
-		client.commands.set(command.data.name, command);
-		commands.push(command.data.toJSON());
-	}
-}
-
-const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
-
-(async () => {
-	try {
-		console.log('Started refreshing application (/) commands.');
-
-		await rest.put(
-			Routes.applicationGuildCommands(botId, guildId),
-			{ body: commands },
-		);
-
-		console.log('Successfully reloaded application (/) commands.');
-	} catch (error) {
-		console.error(error);
-	}
-})();
+client.commands = commandHandler.commands;
+commandHandler.registerCommands();
 
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
@@ -93,5 +58,6 @@ for (const file of eventFiles) {
 }
 
 process.on('SIGTERM', () => client.emit('kill'));
+
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);
