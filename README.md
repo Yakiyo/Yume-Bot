@@ -37,6 +37,14 @@ For new feature requests, you can make an issue and i'll see what can be done.
 Any and all contributions are welcome. Please make sure you're code passes the lint tests. ✌
 
 ## Self Hosting
+<a href="https://heroku.com/deploy?template=https://github.com/Yakiyo/Yume-Bot">
+    <img 
+    src="https://www.herokucdn.com/deploy/button.svg" 
+    width="200px"
+    alt="Deploy Yume Bot to Heroku with 1-Click" 
+    />
+</a>
+
 Requirements:
 + [Nodejs](https://nodejs.org) v16.6.0 or higher.
 + A Discord [Bot application](https://discordjs.guide/preparations/setting-up-a-bot-application.html)
