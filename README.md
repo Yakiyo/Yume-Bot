@@ -1,48 +1,62 @@
-<div align="center"><a href="https://discord.gg/q2zDU5bGnh"><img alt="Discord" src="https://img.shields.io/discord/844103224528076801?color=blue&label=Tsurekano%20Discord&logo=discord&logoColor=white&style=plastic"></a> <a href="https://www.reddit.com/r/MamahahaTsurego/"><img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/MamahahaTsurego?color=orange&label=r%2FMamahahaTsurego&logo=reddit&logoColor=orange&style=plastic"></a></div>
+#  <div align="center">Yume Bot</div>
 
-# Yume Bot
+<div align="center"><a href="https://discord.gg/q2zDU5bGnh"><img alt="Discord" src="https://img.shields.io/discord/844103224528076801?color=blue&label=Tsurekano%20Discord&logo=discord&logoColor=white&style=plastic"></a> <a href="https://www.reddit.com/r/MamahahaTsurego/"><img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/MamahahaTsurego?color=orange&label=r%2FMamahahaTsurego&logo=reddit&logoColor=orange&style=plastic"></a> <a href="https://deepscan.io/dashboard#view=project&tid=18158&pid=21489&bid=619222"><img src="https://deepscan.io/api/teams/18158/projects/21489/branches/619222/badge/grade.svg" alt="DeepScan grade"></a> <a href="https://github.com/Yakiyo/Yume-Bot/actions/workflows/eslint.yml"><img src="https://github.com/Yakiyo/Yume-Bot/actions/workflows/eslint.yml/badge.svg"></a></div>
+<div align="center">
+<a href="https://gitpod.io/from-referrer/"><img src="./src/assets/logos/gitpod.svg" alt="Open on gitpod https://gitpod.io/from-referrer/"></a>
+</div>
 
-Yume bot is a discord bot dedicated to the Tsurekano discord server. Made by Yakiyo#1206. Thanks to [Tenknown](https://github.com/Tenknown) & [Rim](https://github.com/R-Rim) for the help in making the bot.
+## About
+Yume bot is a discord bot created for the Tsurekano Discord server. Created by Yakiyo#1206.
 
-My prefix is ```.``` For a list of commands do ```.help```.
+The bot is fully based on slash commands. To use a slash command, type `/` in the message box. For a list of all commands, use `/help`
 
-**Discord:** [https://discord.gg/q2zDU5bGnh](https://discord.gg/q2zDU5bGnh) 
+### Links
+**Discord:** [Tsurekano](https://discord.gg/q2zDU5bGnh) 
 
 **Subreddit:** [r/MamahahaTsurego](https://www.reddit.com/r/MamahahaTsurego/)
 
-**Fandom:** [https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki](https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki)
+**Fandom:** [MotoKano Fandom](https://motokano.fandom.com/wiki/My_Stepsister_is_My_Ex_Wiki)
 
-**Note:** This bot isnt available for guilds other then Tsurekano but the code is free for use in case anyone wants to use it and host their own bot. 
+> Yume bot isn't available to servers other then the tsurekano discord and cannot be invited anywhere else. The code is open source though so anyone can feel free to fork and host their own version of the bot. For some directions on self hosting please see the self hosting section [here](#self-hosting)
 
 ## Bot Information
-
-+ Language: [Javascript](https://www.javascript.com/) 
-+ Framework: [Discord.js](https://discord.js.org/)
-+ Made with help from [Discord.js V12 guide](https://v12.discordjs.guide/), [Discord.js Guide]() & [An Idiot's Guide](https://anidiots.guide/)
++ Language: [Javascript](https://www.javascript.com)
++ Library: [Discord.js](https://discord.js.org)
 
 
-## Contribution
-Any and all contributions are welcome too. Pull requests are welcome. 
-You can also give suggestions by joining the server and pinging me.
+## Contribution 
 
-Please make sure to update tests as appropriate.
+For new feature requests, you can make an issue and i'll see what can be done.
 
+1) [Fork it](https://github.com/Yakiyo/Yume-bot/fork)
+2) Create new branch `git checkout -b my-new-feature`
+3) Commit changes `git commit -m "Add cool feature`
+3) Push changes to it `git push <remote> <branch>`
+4) Create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
-## Self-Hosting
-I myself am dumb when it comes to making bots so i can just point out the basic steps below.
-### Requirements:
-+ Node.js v16 or higher
-+ A discord developers application 
+Any and all contributions are welcome. Please make sure you're code passes the lint tests. ✌
 
-First clone the repository 
+## Self Hosting
+Requirements:
++ [Nodejs](https://nodejs.org) v16.6.0 or higher.
++ A Discord [Bot application](https://discordjs.guide/preparations/setting-up-a-bot-application.html)
+
+Clone the repo and install packages
+```bash
+$ git clone https://github.com/Yakiyo/Yume-Bot
+$ npm install
 ```
-git clone https://github.com/Yakiyo/Yume-Bot
-cd Yume-Bot
-npm install
+To start, create a file named `.env` and put the following in it.
+```env
+TOKEN=Bot token goes here 
+MONGO=A mongodb URI
 ```
-Edit the `.env.example` file with your token and then rename the file to `.env`. After that run `npm run start` or `node .` and youll have your bot started. 
-Optionally you can change the default prefix to ur preference from `config.json`. For a detailed guide on how to make a bot using discordjs please refer to their official guide. You can host the bot for free on [Heroku](https://www.heroku.com/). You can see this [video](https://youtu.be/OFearuMjI4s) for the steps.
+After that edit the [config](src/config.json) file to you're needs and then run the code
 
-You'd have to change some minor spots over the project in some places too. Like system commands being restricted to bot owner had the owner id hardcoded in them so change them.
-## License
-[GPL-3.0 License](https://fsf.org/)
+```bash
+$ npm run start
+```
+## Author
+**Yume Bot** © [Yakiyo](https://github.com/Yakiyo). Authored and maintained by Yakiyo.
+
+Released under [GPL-3.0 License](https://fsf.org/).
