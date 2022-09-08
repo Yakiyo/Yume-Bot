@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const { Client, Intents, Collection } = require('discord.js');
 const path = require('node:path');
+const http = require('http');
 const commandHandler = require('./structs/commandHandler.js');
 require('dotenv').config();
 
@@ -65,6 +66,12 @@ for (const file of eventFiles) {
 }
 
 process.on('SIGTERM', () => client.emit('kill'));
+
+// Run a http server to keep the bot alive with uptime robot or the likes
+http.createServer(function (req, res) {
+	res.write('Alive and kicking!');
+	res.end();
+}).listen(8080);
 
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);
