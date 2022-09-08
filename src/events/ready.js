@@ -17,5 +17,16 @@ module.exports = {
 		} else {
 			console.log(`Ready and logged in as ${client.user.tag}`);
 		}
+		let i = 0;
+		async function getMemberCount() {
+			return await client.guilds.fetch(guildId)
+				.then(server => {
+					`${server.members.cache.size} members`;
+				});
+		}
+		const activities = ['DMs to contact staff | /help', 'Yume and Mizuto in the bath', 'Isana in the bath', getMemberCount()];
+		setInterval(() => {
+			client.user.setActivity(activities[i++ % activities.length]);
+		}, 10 * 1000);
 	},
 };
