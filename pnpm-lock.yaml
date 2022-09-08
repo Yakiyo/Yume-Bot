@@ -10,6 +10,7 @@ specifiers:
   dotenv: ^16.0.1
   eslint: ^8.19.0
   nekos-best.js: ^5.1.0
+  node: '16'
   node-fetch: 2.6.7
   parse-duration: ^1.0.2
   prisma: ^4.2.1
@@ -35,6 +36,7 @@ dependencies:
 
 devDependencies:
   eslint: 8.19.0
+  node: 16.17.0
 
 packages:
 
@@ -902,6 +904,10 @@ packages:
       petitio: 1.4.0
     dev: false
 
+  /node-bin-setup/1.1.0:
+    resolution: {integrity: sha512-pTeU6NgUrexiLNtd+AKwvg6cngHMvj5FZ5e2bbv2ogBSIc9yhkXSSaTScfSRZnwHIh5YFmYSYlemLWkiKD7rog==}
+    dev: true
+
   /node-fetch/2.6.7:
     resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
@@ -913,6 +919,15 @@ packages:
     dependencies:
       whatwg-url: 5.0.0
     dev: false
+
+  /node/16.17.0:
+    resolution: {integrity: sha512-cyEAIiYkXkEX4cDr6h35SkLVWavJt4EKzP4XFw1u8Uh6m1F+ZWtZ0puu6kmuBYJYU8L25AcXLhplSi3tbfX3Yw==}
+    engines: {npm: '>=5.0.0'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      node-bin-setup: 1.1.0
+    dev: true
 
   /normalize-url/6.1.0:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}

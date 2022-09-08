@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "set": "npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH"
   },
   "engines": {
     "node": ">=16.6.0"
@@ -36,6 +37,7 @@
     "undici": "^5.6.0"
   },
   "devDependencies": {
-    "eslint": "^8.19.0"
+    "eslint": "^8.19.0",
+    "node": "16"
   }
 }
