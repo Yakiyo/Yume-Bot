@@ -27,7 +27,7 @@ const client = new Client({
 	presence: {
 		status: 'online',
 		activities: [{
-			name: 'DMs to contact staff | .help',
+			name: 'DMs to contact staff | /help',
 			type: 'WATCHING',
 		}],
 	},
