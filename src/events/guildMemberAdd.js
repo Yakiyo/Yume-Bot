@@ -67,7 +67,7 @@ module.exports = {
                 .setFooter({ text: `Member count: ${memberCount}` });
 
             try {
-                await channel.send({ content: `Welcome <@${user.id}>`,embeds: [embed], files: [attachment] });
+                await channel.send({ content: `Welcome <@${user.id}>`, embeds: [embed], files: [attachment] });
             } catch (error) {
                 console.log(error);
                 await client.channels.fetch(channels.serverlogs)

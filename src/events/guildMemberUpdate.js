@@ -56,7 +56,7 @@ module.exports = {
                 .setThumbnail(`${member.displayAvatarURL({ format: 'png', dynamic: true })}`)
                 .setImage(`attachment://${attachment.name}`)
                 .setFooter({ text: `Server Boost Count: ${guild.premiumSubscriptionCount}` });
-            await channel.send({ content: `Server boosted by <@${member.user.id}>`,embeds: [embed], files: [attachment] });
+            await channel.send({ content: `Server boosted by <@${member.user.id}>`, embeds: [embed], files: [attachment] });
         } else if (oldMember.premiumSince && !newMember.premiumSince) {
             // Checks if old member was boosting but new member isnt boosting
             await guild.channels.fetch(staffChannel)
