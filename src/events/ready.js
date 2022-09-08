@@ -21,7 +21,7 @@ module.exports = {
 		async function getMemberCount() {
 			return await client.guilds.fetch(guildId)
 				.then(server => {
-					`${server.members.cache.size} members`;
+					return `${server.members.cache.size} members`;
 				});
 		}
 		const activities = ['DMs to contact staff | /help', 'Yume and Mizuto in the bath', 'Isana in the bath', getMemberCount()];
