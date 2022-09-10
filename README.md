@@ -59,7 +59,7 @@ To start, create a file named `.env` and put the following in it.
 TOKEN=Bot token goes here 
 MONGO=A mongodb URI
 ```
-After that edit the [config](src/config.json) file to you're needs and then run the code
+After that edit the [config](src/config.json) file to your needs and then run the code
 
 ```bash
 $ npm run start
