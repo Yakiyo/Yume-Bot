@@ -2,6 +2,7 @@ const { guildId } = require('../config.json');
 const { time } = require('@discordjs/builders');
 const { version } = require('../../package.json');
 const staffBot = '844253443510239262';
+const fetch = require('node-fetch');
 
 module.exports = {
 	name: 'ready',
@@ -18,15 +19,16 @@ module.exports = {
 			console.log(`Ready and logged in as ${client.user.tag}`);
 		}
 		let i = 0;
-		async function getMemberCount() {
-			return await client.guilds.fetch(guildId)
-				.then(server => {
-					return `${server.members.cache.size} members`;
-				});
-		}
-		const activities = ['DMs to contact staff | /help', 'Yume and Mizuto in the bath', 'Isana in the bath', getMemberCount()];
+		// async function getMemberCount() {
+		// 	return await client.guilds.fetch(guildId)
+		// 		.then(server => {
+		// 			return `${server.members.cache.size} members`;
+		// 		});
+		// }
+		const activities = ['DMs to contact staff | /help', 'Yume and Mizuto in the bath', 'Isana in the bath'];
 		setInterval(() => {
 			client.user.setActivity(activities[i++ % activities.length]);
+      fetch('https://Yume-Bot.yakiyo1.repl.co');
 		}, 10 * 1000);
 	},
 };
