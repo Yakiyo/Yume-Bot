@@ -20,7 +20,7 @@ module.exports = {
 
         if (!invite) return await interaction.editReply('Invalid invite link. Please provide a valid invite link');
         if (invite.expiresTimestamp) return await interaction.editReply('Provided invite is not a permanent invite. Please provide an invite that will not expire');
-        const channel = await interaction.client.channels.fetch('844632108831342679');
+        const channel = await interaction.client.channels.fetch(affiliate);
 
         await channel.send(`:small_blue_diamond: **${invite.guild.name}** \n\nhttps://discord.gg/${invite.code} \n\n${blockQuote(interaction.options.getString('description') + '\n')}`);
 
