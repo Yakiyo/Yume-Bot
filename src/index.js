@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const fs = require('node:fs');
 const { Client, Intents, Collection } = require('discord.js');
 const { REST } = require('@discordjs/rest');
@@ -59,22 +60,22 @@ for (const folder of commandFolders) {
 	}
 }
 
-const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+// const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
-(async () => {
-	try {
-		console.log('Started refreshing application (/) commands.');
+// (async () => {
+// 	try {
+// 		console.log('Started refreshing application (/) commands.');
 
-		await rest.put(
-			Routes.applicationGuildCommands(botId, guildId),
-			{ body: commands },
-		);
+// 		await rest.put(
+// 			Routes.applicationGuildCommands(botId, guildId),
+// 			{ body: commands },
+// 		);
 
-		console.log('Successfully reloaded application (/) commands.');
-	} catch (error) {
-		console.error(error);
-	}
-})();
+// 		console.log('Successfully reloaded application (/) commands.');
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// })();
 
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
