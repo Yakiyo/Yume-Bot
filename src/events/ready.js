@@ -17,6 +17,11 @@ module.exports = {
 		if (process.env.NODE_ENV === 'production') {
 			await channel.send(`${client.user.username} on!\nReady at ${time(client.readyAt)}\nGuilds: ${client.guilds.cache.size}, Channels: ${client.channels.cache.size}, Version: ${version}`);
 		}
+		setInterval(() => {
+			client.user.setActivity(activities[i++ % activities.length]);
+	        fetch('https://Yume-Bot.yakiyo1.repl.co');
+				}, 10 * 1000);
+		
 		setInterval(async () => {
 			await channel.send('Running kill 1');
 			execSync('kill 1');

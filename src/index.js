@@ -88,5 +88,11 @@ for (const file of eventFiles) {
 	}
 }
 
+// Run a http server to keep the bot alive with uptime robot or the likes
+http.createServer(function (req, res) {
+	res.write('Alive and kicking!');
+	res.end();
+}).listen(8080);
+
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);
