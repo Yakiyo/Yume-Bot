@@ -5,6 +5,9 @@
 <a href="https://gitpod.io/from-referrer/"><img src="./src/assets/logos/gitpod.svg" alt="Open on gitpod https://gitpod.io/from-referrer/"></a>
 </div>
 
+> **Note**
+> Yume bot is now deprecated. The bot was being hosted on heroku as they provide a very reliable service in their free tier. But they have announced that all heroku free tier applications will be removed on November 28, 2022 (refer to this [post](https://blog.heroku.com/next-chapter)) and they will be shutting down the free tier. I have tried looking for other free alternatives like [replit](https://replit.com) but none of them are usable, as such the bot is being taken down. I'm a high school student and i dont either make money or have any means for online payment as such paid services are not an option for me. The source code still remains open for all in the hopes that it will be of benefit to someone.
+
 ## About
 Yume bot is a discord bot created for the Tsurekano Discord server. Created by Yakiyo#1206.
 
